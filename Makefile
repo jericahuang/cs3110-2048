@@ -11,4 +11,4 @@ clean:
 	ocamlbuild -clean
 	
 zip:
-	zip a4src.zip *.ml{,i,y,l}
+	zip interfaces.zip *.mli
