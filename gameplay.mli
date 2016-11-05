@@ -79,8 +79,4 @@ val is_valid_move : move -> board -> bool
     in an empty spot. *)
 val insert_square : square -> board -> board
 
-(** [shift_board move board] is the board resulting from shifting
-    [board] in direction [move]. *)
-val shift_board : move -> board -> board
-
 
