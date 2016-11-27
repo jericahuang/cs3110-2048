@@ -45,3 +45,10 @@ let init_board size =
 (* [check_2048_sqaure s] returns if 2048 square has been formed. *)
 let check_2048_square (s : square) =
   square_value s.value = 2048
+
+let check_winning_board (b : board) =
+  let win = ref false in
+  for i = 0 to (Array.length b) - 1 do
+    if Array.exists check_2048_square b.(i) then win := true
+  done;
+  !win

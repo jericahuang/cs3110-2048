@@ -15,4 +15,12 @@ let public_tests = [
   "Check if non 2048 square is 2048 square" >:: (fun _ -> assert_equal
     false
     (check_2048_square {value = (Some 4)}));
+  "Check init" >:: (fun _ -> assert_equal
+    [|[|{value = None}; {value = None}; {value = None}; {value = None}|];
+    [|{value = None}; {value = None}; {value = None}; {value = None}|];
+    [|{value = None}; {value = None}; {value = None}; {value = None}|];
+    [|{value = None}; {value = None}; {value = None}; {value = Some 2}|]|]
+    (init_board  4));
+
+
 ]
