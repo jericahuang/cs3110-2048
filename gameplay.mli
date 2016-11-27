@@ -53,7 +53,7 @@ val t1024 : square
 val t2048 : square
 
 (** [square_value t] is [t]'s value (if any). *)
-val square_value : square -> int option
+val square_value : square -> int 
 
 
 
@@ -63,7 +63,7 @@ val square_value : square -> int option
 val keyup : move -> unit
 
 (** [create_board ()] is a new board. *)
-val create_board : unit -> board
+val create_board : int -> board
 
 (** [is_game_over board] is [true] if there are no valid moves. *)
 val is_game_over : board -> bool

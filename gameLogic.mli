@@ -12,4 +12,4 @@ val combine_tiles : int -> 'a list -> ('a -> 'a) -> 'a list
 (* [replace_tile row f] replaces the first element in [row] with an element.
  * Note, this will be used for random tile insert, hence the new insert will
  * never be None. *)
-val replace_tile : 'a list -> ('a -> 'a option) -> 'a opton list
+val replace_tile : 'a list -> ('a -> 'a option) -> 'a option list
