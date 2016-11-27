@@ -1,7 +1,11 @@
 (* Types *)
 
 (** The type for game moves corresponding to arrow keys (left, right, up, down). *)
-type move = L | R | U | D
+type move =
+  | Left
+  | Right
+  | Up
+  | Down
 
 (** The type for squares. *)
 type square = int option
@@ -16,7 +20,7 @@ type board = row list
 
 (* Square Values *)
 
-(** [empty] is an empty square. *)
+(* (** [empty] is an empty square. *)
 val empty : square
 
 (** [t2] is a square tile with value 2. *)
@@ -34,7 +38,7 @@ val t16 : square
 (** [t32] is a square tile with value 32. *)
 val t32 : square
 
-(** [t64] is a square tile with value 64. *)
+* [t64] is a square tile with value 64.
 val t64 : square
 
 (** [t128] is a square tile with value 128. *)
@@ -51,9 +55,9 @@ val t1024 : square
 
 (** [t2048] is a square tile with value 2048. *)
 val t2048 : square
-
+ *)
 (** [square_value t] is [t]'s value (if any). *)
-val square_value : square -> int 
+val square_value : square -> int
 
 
 
@@ -62,8 +66,8 @@ val square_value : square -> int
 (* Keyup event handler function *)
 val keyup : move -> unit
 
-(** [create_board ()] is a new board. *)
-val create_board : int -> board
+(** [create_board ()] is a new board. Defaults to 4. *)
+val init_board : int -> board
 
 (** [is_game_over board] is [true] if there are no valid moves. *)
 val is_game_over : board -> bool
