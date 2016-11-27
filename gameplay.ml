@@ -20,22 +20,3 @@ let square_value v =
 	match v with
 	| None -> 0
 	| Some i -> i
-
-let create_board l = 
-	Array.make_matrix l l empty
-
-let rec full_board b l = 
-	if l = 0 then true else
-	if Array.mem empty b.(l-1) then false else full_board b (l-1)
-	
-let is_game_over b = 
-	if full_board b (Array.length b) then 
-
-let winning_board b l = 
-	if l = 0 then false else
-	if Array.mem t2048 b.(l-1) then true else winning_board b (l-1)
-
-let is_game_won b =
-	winning_board b (Array.length b)
-
-	(* remember to ask about array *)
