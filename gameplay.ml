@@ -33,12 +33,15 @@ let square_value v =
 	| None -> 0
 	| Some i -> i
 
+(* [init_board size] initializes the board with [size].
+ * Starts with square of 2 in bottom left corner.
+ * requires: size >= 1 *)
 let init_board size =
   if size < 1 then failwith "Invalid matrix size"
   else
     let b = Array.make_matrix 4 4 {value = None} in
     b.(3).(3) <- {value = (Some 2)}; b
 
-(* [check_2048_sqaure s] che *)
-let check_2048_sqaure (s : square) =
-
+(* [check_2048_sqaure s] returns if 2048 square has been formed. *)
+let check_2048_square (s : square) =
+  square_value s.value = 2048
