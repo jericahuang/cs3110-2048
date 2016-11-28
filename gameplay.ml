@@ -126,8 +126,10 @@ let rec shift_left b row s1 s2 =
 
 let rec fix_row b row size = 
   if size = 0 then () else
-  (if b.(row).(size-1) = None then shift_left b row (size-1) size  
-  else (); 
+  (if b.(row).(size-1) = None && b.(row).(size) <> None 
+  then shift_left b row (size-1) size else ();
+  if size <> 3 && b.(row).(size) = None && b.(row).(size+1) <> None 
+  then fix_row b row (size+1) else (); 
   fix_row b row (size-1))
 
 let rec process_row b row col size = 
