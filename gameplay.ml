@@ -60,7 +60,8 @@ let check_winning_board (b : board) =
   done;
   !win
 
-(* ASSUMING FUNCTIONALITY *)
+(* ASSUMING FUNCTIONALITY - may be bad bc array is mutable.. make copy first?
+Array.copy array *)
 let check_end_game (b : board) =
   let lboard = move_left b in
   let rboard = move_right b in
