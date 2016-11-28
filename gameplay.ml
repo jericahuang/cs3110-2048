@@ -113,10 +113,29 @@ let is_valid_move m b =
   | Up -> is_valid_move_up b (Array.length b) (Array.length b)
   | Down -> is_valid_move_down b (Array.length b) (Array.length b)
 
-let rec move_left b row col = 
+let rec shift_left b row s1 s2 = 
+  b.(row).(s1) <- b.(row).(s2);
+  b.(row).(s2) <- None
+
+let rec fix_row b row size = 
+  if size = 0 then () else
+  if b.(row).(size-1) = None then shift_left b row (size-1) size  
+  else (); 
+  fix_row b row (size-1)
+
+let rec process_row b row col size = 
+  fix_row b row (size-1);
+  if col > 3 then () else 
+  if is_valid_merge_horizontal b row col (col+1) && col <> 3
+  then combine_tiles b row col (col+1) Left else ();
+  process_row b row (col+1) size
+
+let rec move_left b row col size = 
   if row = 0 then () else
-  if is_empty_line b (row-1) col then move_left b (row-1) col else
-  if b.(row-1).(0) = None then if is_valid_merge_horizontal b (row-1) 1 2 
+  if is_empty_row b (row-1) col then () else
+  process_row b (row-1) col size;
+  move_left b (row-1) col size 
+  (*if b.(row-1).(0) = None then if is_valid_merge_horizontal b (row-1) 1 2 
   then combine_tiles b (row-1) 1 2 Left; b.(row-1).(0) <- b.(row-1).(1); 
   b.(row-1).(1) <- b.(row-1).(3); b.(row-1).(3) <- None; move_left b (row-1) col 
   else if is_valid_merge_horizontal b (row-1) 2 3 then if b.(row-1).(1) = None 
@@ -151,11 +170,11 @@ let rec move_left b row col =
   move_left b (row-1) col else
   if b.(row-1).(0) <> None && b.(row-1).(1) <> None && is_valid_merge_horizontal b (row-1) 2 3
   then combine_tiles b (row-1) 2 3 Left; move_left b (row-1) col else
-  b.(row-1).(2) <- b.(row-1).(3); b.(row-1).(3) <- None
+  b.(row-1).(2) <- b.(row-1).(3); b.(row-1).(3) <- None*)
 
 let move m b = 
   match m with 
-  | Left -> move_left b (Array.length b) (Array.length b)
+  | Left -> move_left b (Array.length b) (Array.length b) (Array.length b)
 
 let keyup m b = 
   if is_valid_move m b then move m b else ()
