@@ -166,6 +166,37 @@ let check_winning_board (b : board) =
     if Array.exists check_2048_square b.(i) then win := true
   done;
   !win
+  
+
+(* Random square insertion *)
+
+(* Returns a random member of list [l] *)
+let random_nth_list (l : List) =
+  let len = List.length l in
+  List.nth l (Random.int len)
+
+let (>>=) (l : list) f = List.concat (List.map f l)
+
+let list_index = [0;1;2;3]
+
+(* Returns a tuple (i,j) of a random open position in [b] in row i, column j*)
+let random_avail b =
+  let all_indicies =
+    list_index >>= fun i ->
+    list_index >>= fun j ->
+    [(i, j)]
+  in
+  let avail = List.filter (fun (i, j) -> b.(i).(j) = None) all_indicies in
+  if avail = [] then
+    raise exception (*full board*)
+  else
+    random_nth_list avail 
+
+(* Inserts pre-determined square [sq] into board [b] *)
+let insert_square (sq : square) (b : board) : board =
+  let (i, j) = random_avail b in
+  b.(i).(j) <- sq
+
 
 (* ASSUMING FUNCTIONALITY *)
 let check_end_game (b : board) =
