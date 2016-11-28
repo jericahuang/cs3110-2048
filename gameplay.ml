@@ -1,5 +1,7 @@
 open Gamelogic
 
+exception End_game
+
 type move =
   | Left
   | Right
@@ -35,9 +37,14 @@ let square_value v =
 	| None -> 0
 	| Some i -> i
 
+(* [is_empty_square s] checks if [s] is an empty square. *)
+let is_empty_square (s : square) =
+  square_value s.value = 0
+
 (* [init_board size] initializes the board with [size].
  * Starts with square of 2 in bottom left corner.
  * requires: size >= 1 *)
+ (* right now deafult to 4. Change to size and size - 1 *)
 let init_board size =
   if size < 1 then failwith "Invalid matrix size"
   else
@@ -152,3 +159,20 @@ let move m b =
 
 let keyup m b = 
   if is_valid_move m b then move m b else ()
+
+let check_winning_board (b : board) =
+  let win = ref false in
+  for i = 0 to (Array.length b) - 1 do
+    if Array.exists check_2048_square b.(i) then win := true
+  done;
+  !win
+
+(* ASSUMING FUNCTIONALITY *)
+let check_end_game (b : board) =
+  let lboard = move_left b in
+  let rboard = move_right b in
+  let uboard = move_up b in
+  let dboard = move_down b in
+  let same_b = (b = lboard && b = rboard && b = uboard && b = dboard) in
+  if same_b then raise End_game
+  else b
