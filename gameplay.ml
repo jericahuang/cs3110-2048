@@ -171,11 +171,11 @@ let check_winning_board (b : board) =
 (* Random square insertion *)
 
 (* Returns a random member of list [l] *)
-let random_nth_list (l : List) =
+let random_nth_list l  =
   let len = List.length l in
   List.nth l (Random.int len)
 
-let (>>=) (l : list) f = List.concat (List.map f l)
+let (>>=) l f = List.concat (List.map f l)
 
 let list_index = [0;1;2;3]
 
@@ -187,10 +187,10 @@ let random_avail b =
     [(i, j)]
   in
   let avail = List.filter (fun (i, j) -> b.(i).(j) = None) all_indicies in
-  if avail = [] then
-    raise exception (*full board*)
-  else
+  if avail <> [] then
     random_nth_list avail 
+  else
+    raise (Failure "full board")
 
 (* Inserts pre-determined square [sq] into board [b] *)
 let insert_square (sq : square) (b : board) : board =
