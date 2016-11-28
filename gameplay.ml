@@ -1,4 +1,3 @@
-open Gamelogic
 
 exception End_game
 
@@ -71,39 +70,39 @@ let is_valid_merge_vertical b col r1 r2 =
 
 let rec is_valid_move_left b row col =
   if row = 0 then false else
-  if is_empty_row b (row-1) col then is_valid_move_horizontal b (row-1) col else
+  if is_empty_row b (row-1) col then is_valid_move_left b (row-1) col else
   if b.(row-1).(0) = None then true else
   if b.(row-1).(0) <> None && b.(row-1).(1) = None && b.(row-1).(2) <> None then true else
   if b.(row-1).(0) <> None && b.(row-1).(1) <> None && b.(row-1).(2) = None && b.(row-1).(3) <> None then true else
   if is_valid_merge_horizontal b (row-1) 0 1 || is_valid_merge_horizontal b (row-1) 1 2 || is_valid_merge_horizontal b (row-1) 2 3 
-  then true else is_valid_move_horizontal b (row-1) col
+  then true else is_valid_move_left b (row-1) col
 
 let rec is_valid_move_right b row col =
   if row = 0 then false else
-  if is_empty_row b (row-1) col then is_valid_move_horizontal b (row-1) col else
+  if is_empty_row b (row-1) col then is_valid_move_right b (row-1) col else
   if b.(row-1).(3) = None then true else
   if b.(row-1).(3) <> None && b.(row-1).(2) = None && b.(row-1).(1) <> None then true else
   if b.(row-1).(3) <> None && b.(row-1).(2) <> None && b.(row-1).(1) = None && b.(row-1).(0) <> None then true else
   if is_valid_merge_horizontal b (row-1) 0 1 || is_valid_merge_horizontal b (row-1) 1 2 || is_valid_merge_horizontal b (row-1) 2 3 
-  then true else is_valid_move_horizontal b (row-1) col
+  then true else is_valid_move_right b (row-1) col
 
 let rec is_valid_move_up b row col = 
   if col = 0 then false else
-  if is_empty_col b (col-1) row then is_valid_move_vertical b row (col-1) else
+  if is_empty_col b (col-1) row then is_valid_move_up b row (col-1) else
   if b.(0).(col-1) = None then true else 
   if b.(0).(col-1) <> None && b.(1).(col-1) = None && b.(2).(col-1) <> None then true else
-  if b.(0).(col-1) <> None && b.(1).(col-1) <> None && b.(2).(col-1) = None && b.(3).(col-1) then true else
+  if b.(0).(col-1) <> None && b.(1).(col-1) <> None && b.(2).(col-1) = None && b.(3).(col-1) <> None then true else
   if is_valid_merge_vertical b (col-1) 0 1 || is_valid_merge_vertical b (col-1) 1 2 || is_valid_merge_vertical b (col-1) 2 3
-  then true else is_valid_move_vertical b row (col-1)
+  then true else is_valid_move_up b row (col-1)
 
 let rec is_valid_move_down b row col = 
   if col = 0 then false else
-  if is_empty_col b (col-1) row then is_valid_move_vertical b row (col-1) else
+  if is_empty_col b (col-1) row then is_valid_move_down b row (col-1) else
   if b.(3).(col-1) = None then true else 
   if b.(3).(col-1) <> None && b.(2).(col-1) = None && b.(1).(col-1) <> None then true else
-  if b.(3).(col-1) <> None && b.(2).(col-1) <> None && b.(1).(col-1) = None && b.(0).(col-1) then true else
+  if b.(3).(col-1) <> None && b.(2).(col-1) <> None && b.(1).(col-1) = None && b.(0).(col-1) <> None then true else
   if is_valid_merge_vertical b (col-1) 0 1 || is_valid_merge_vertical b (col-1) 1 2 || is_valid_merge_vertical b (col-1) 2 3
-  then true else is_valid_move_vertical b row (col-1)
+  then true else is_valid_move_down b row (col-1)
 
 
 let is_valid_move m b = 
@@ -113,28 +112,36 @@ let is_valid_move m b =
   | Up -> is_valid_move_up b (Array.length b) (Array.length b)
   | Down -> is_valid_move_down b (Array.length b) (Array.length b)
 
+let combine_left b row s1 s2 =
+  let left = (square_value (b.(row).(s1))) + (square_value (b.(row).(s2))) in
+  b.(row).(s1) <- Some left;
+  b.(row).(s2) <- None
+
+let combine_tiles b line s1 s2 =
+  combine_left b line s1 s2
+
 let rec shift_left b row s1 s2 = 
   b.(row).(s1) <- b.(row).(s2);
   b.(row).(s2) <- None
 
 let rec fix_row b row size = 
   if size = 0 then () else
-  if b.(row).(size-1) = None then shift_left b row (size-1) size  
+  (if b.(row).(size-1) = None then shift_left b row (size-1) size  
   else (); 
-  fix_row b row (size-1)
+  fix_row b row (size-1))
 
 let rec process_row b row col size = 
   fix_row b row (size-1);
   if col > 3 then () else 
-  if is_valid_merge_horizontal b row col (col+1) && col <> 3
-  then combine_tiles b row col (col+1) Left else ();
-  process_row b row (col+1) size
+  (if col <> 3 && is_valid_merge_horizontal b row col (col+1)
+  then combine_tiles b row col (col+1) else ();
+  process_row b row (col+1) size)
 
 let rec move_left b row col size = 
   if row = 0 then () else
-  if is_empty_row b (row-1) col then () else
-  process_row b (row-1) col size;
-  move_left b (row-1) col size 
+  (if is_empty_row b (row-1) size then () else
+  process_row b (row-1) 0 size;
+  move_left b (row-1) col size) 
   (*if b.(row-1).(0) = None then if is_valid_merge_horizontal b (row-1) 1 2 
   then combine_tiles b (row-1) 1 2 Left; b.(row-1).(0) <- b.(row-1).(1); 
   b.(row-1).(1) <- b.(row-1).(3); b.(row-1).(3) <- None; move_left b (row-1) col 
@@ -179,7 +186,7 @@ let move m b =
 let keyup m b = 
   if is_valid_move m b then move m b else ()
 
-let check_winning_board (b : board) =
+(*let check_winning_board (b : board) =
   let win = ref false in
   for i = 0 to (Array.length b) - 1 do
     if Array.exists check_2048_square b.(i) then win := true
@@ -225,4 +232,4 @@ let check_end_game (b : board) =
   let dboard = move_down b in
   let same_b = (b = lboard && b = rboard && b = uboard && b = dboard) in
   if same_b then raise End_game
-  else b
+  else b*)
