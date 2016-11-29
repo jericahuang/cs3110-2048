@@ -131,6 +131,10 @@ let rec to_lst b size =
   if size = 4 then [] else
   Array.to_list b.(size) :: to_lst b (size+1)
 
+let rec to_lst_rev b size = 
+  if size = 4 then [] else
+  (List.rev (Array.to_list b.(size))) :: to_lst_rev b (size+1)
+
 let rec to_arr lst arr size = 
   match lst with
   | [] -> ()
@@ -156,10 +160,7 @@ let rotate_up b =
   to_arr (rotate (to_lst b 0)) b 0
 
 let rotate_right b = 
-  to_arr (rotate (rotate (to_lst b 0))) b 0
-
-let rotate_down b = 
-  to_arr (rotate (rotate (rotate (to_lst b 0)))) b 0
+  to_arr (to_lst_rev b 0) b 0
 
 let move m b = 
   match m with 
@@ -169,10 +170,10 @@ let move m b =
              rotate_right b
   | Up -> rotate_up b;
           move_left b (Array.length b) (Array.length b) (Array.length b);
-          rotate_down b
-  | Down -> rotate_down b;
+          rotate_up b
+  | Down -> rotate_up b; rotate_right b;
             move_left b (Array.length b) (Array.length b) (Array.length b);
-            rotate_up b
+            rotate_right b; rotate_up b
 
 let keyup m b = 
   if is_valid_move m b then move m b else ()
@@ -204,7 +205,7 @@ let random_avail b =
   else
     raise (Failure "full board")
 (* Inserts pre-determined square [sq] into board [b] *)
-(*let insert_square (sq : square) (b : board) : board =
+let insert_square (sq : square) (b : board) : board =
   let (i, j) = random_avail b in
   b.(i).(j) <- sq
 
@@ -216,4 +217,4 @@ let check_end_game (b : board) =
   let dboard = move_down b in
   let same_b = (b = lboard && b = rboard && b = uboard && b = dboard) in
   if same_b then raise End_game
-  else b*)
+  else b
