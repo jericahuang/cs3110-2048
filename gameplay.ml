@@ -34,7 +34,7 @@ let init_board size =
 let check_2048_square (s : square) =
   square_value s = 2048
 
-let rec is_empty_row (b:board) row size =
+let rec is_empty_row b row size =
   if size = 0 then true else
   if b.(row).(size-1) = None then is_empty_row b row (size-1) else false
 
@@ -119,15 +119,59 @@ let rec process_row b row col size =
   then combine_tiles b row col (col+1) else ();
   process_row b row (col+1) size)
 
-let rec move_left (b:board) row col size =
+let rec move_left b row col size =
   if row = 0 then () else
   (if is_empty_row b (row-1) size then () else
   process_row b (row-1) 0 size;
   move_left b (row-1) col size)
 
-let move m (b:board) =
+let rec to_lst b size =
+  if size = 4 then [] else
+  Array.to_list b.(size) :: to_lst b (size+1)
+
+let rec to_lst_rev b size =
+  if size = 4 then [] else
+  (List.rev (Array.to_list b.(size))) :: to_lst_rev b (size+1)
+
+let rec to_arr lst arr size =
+  match lst with
+  | [] -> ()
+  | h::t -> arr.(size) <- (Array.of_list h); to_arr t arr (size+1)
+
+let rec get_head lst =
+  match lst with
+  | [] -> []
+  | (h::t) :: t' -> h :: get_head t'
+
+let rec get_tail lst =
+  match lst with
+  | [] -> []
+  | (h::t) :: t' -> t :: get_tail t'
+
+let rec rotate lst =
+  match lst with
+  | [] -> []
+  | []::_ -> []
+  | (h::t) :: t' -> (h :: get_head t') :: rotate (t :: get_tail t')
+
+let rotate_up b =
+  to_arr (rotate (to_lst b 0)) b 0
+
+let rotate_right b =
+  to_arr (to_lst_rev b 0) b 0
+
+let move m b =
   match m with
   | Left -> move_left b (Array.length b) (Array.length b) (Array.length b)
+  | Right -> rotate_right b;
+             move_left b (Array.length b) (Array.length b) (Array.length b);
+             rotate_right b
+  | Up -> rotate_up b;
+          move_left b (Array.length b) (Array.length b) (Array.length b);
+          rotate_up b
+  | Down -> rotate_up b; rotate_right b;
+            move_left b (Array.length b) (Array.length b) (Array.length b);
+            rotate_right b; rotate_up b
 
 let keyup m b =
   if is_valid_move m b then move m b else ()
@@ -141,7 +185,7 @@ let check_winning_board (b : board) =
 
 (* Random square insertion *)
 (* Returns a random member of list [l] *)
-(* let random_nth_list l  =
+let random_nth_list l  =
   let len = List.length l in
   List.nth l (Random.int len)
 let (>>=) l f = List.concat (List.map f l)
@@ -161,14 +205,19 @@ let random_avail b =
 (* Inserts pre-determined square [sq] into board [b] *)
 let insert_square (sq : square) (b : board) : board =
   let (i, j) = random_avail b in
-  b.(i).(j) <- sq
+  b.(i).(j) <- sq; b
 
 (* ASSUMING FUNCTIONALITY use is_valid_move*)
 let check_end_game (b : board) =
+  if is_valid_move Left b && is_valid_move Right b &&
+  is_valid_move Up b && is_valid_move Down b then b
+  else raise End_game
+
+(*let check_end_game (b : board) =
   let lboard = move_left b in
   let rboard = move_right b in
   let uboard = move_up b in
   let dboard = move_down b in
   let same_b = (b = lboard && b = rboard && b = uboard && b = dboard) in
   if same_b then raise End_game
-  else b *)
+  else b*)
