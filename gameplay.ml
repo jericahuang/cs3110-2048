@@ -201,12 +201,7 @@ let random_avail b =
   in
   let avail = List.filter (fun (i, j) -> b.(i).(j) = None) all_indicies in
   random_nth_list avail
-<<<<<<< HEAD
   
-=======
-
-
->>>>>>> 654225453a9b030fa4acbcf6bd1b5cc48b8971bc
 (* Inserts pre-determined square [sq] into board [b] *)
 let insert_square (sq : square) (b : board) : unit =
   let (i, j) = random_avail b in
