@@ -57,20 +57,20 @@ val t1024 : square
 val t2048 : square
  *)
 (** [square_value t] is [t]'s value (if any). *)
-val square_value : int option -> int
+val square_value : square -> int
 
 
 
 (* Board and move logic *)
 
 (* Keyup event handler function *)
-(* val keyup : move -> unit *)
+val keyup : move -> board -> unit
 
 (** [create_board ()] is a new board. Defaults to 4. *)
 val init_board : int -> board
 
 (** [is_game_over board] is [true] if there are no valid moves. *)
-(* val check_end_game : board -> bool *)
+val check_end_game : board -> board
 
 (** Whether a square is occupied by a winning tile (2048). *)
 val check_2048_square: square -> bool

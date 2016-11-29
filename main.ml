@@ -2,6 +2,7 @@ open Gameplay
 open Gamelogic
 open Render
 
+let start () = init_board 4
 (*
 let _ = Html.addEventListener Html.document Html.Event.keydown (Html.handler Director.keydown) Js._true in
   let _ = Html.addEventListener Html.document Html.Event.keyup (Html.handler Director.keyup) Js._true in
@@ -48,5 +49,3 @@ let main () =
   play_game ctx
 
 let _ = main ()
-
-let start () = ()

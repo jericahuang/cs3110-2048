@@ -10,3 +10,6 @@ let combine_left b row s1 s2 =
 
 let combine_tiles b line s1 s2 =
 	combine_left b line s1 s2
+
+(*let replace_tile b row col val = 
+	b.(row).(col) <- val*)
