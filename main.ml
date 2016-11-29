@@ -36,9 +36,7 @@ let square_dim i j =
 *****************************************************************************
 *)
 
-let board_lines_color = (73, 68, 62)
-
-let c2 = 0xF5CCBEl
+let board_lines_color = (73,68,62)
 
 (*
 *****************************************************************************
@@ -46,15 +44,8 @@ let c2 = 0xF5CCBEl
 *****************************************************************************
 *)
 
-let redof x = (Int32.to_int x land 0xff0000) lsr 16
-let greenof x = (Int32.to_int x land 0xff00) lsr 8
-let blueof x = (Int32.to_int x land 0xff)
-
 let convert_color (r,g,b) =
   js(Printf.sprintf "rgb(%d,%d,%d)" r g b)
-
-let color c =
-  js(Printf.sprintf "rgb(%d,%d,%d)" (redof c) (greenof c) (blueof c))
 
 (*
 *****************************************************************************
@@ -85,29 +76,28 @@ let map_tile_colors v =
 let draw_empty_sq ctx i j =
   let (x, y, w, h) = square_dim i j in
   let empty_color = fst (map_tile_colors 0) in
-  (* ctx##fillStyle <- convert_color empty_color; *)
-  ctx##fillStyle <- color c2;
+  ctx##fillStyle <- convert_color empty_color;
   ctx##fillRect (float x, float y, float w, float h)
 
-let draw_sq ctx i j sq =
+let draw_sq ctx i j sq_v =
   let (x, y, w, h) = square_dim i j in
-  let sq_colors = map_tile_colors (square_value sq) in
-  let sq_val_str = string_of_int (square_value sq) in
+  let sq_colors = map_tile_colors sq_v in
+  let sq_val_str = string_of_int sq_v in
   ctx##fillRect (float x, float y, float w, float h);
-  ctx##fillStyle (convert_color (fst sq_colors));
-  ctx##fillStyle (js"black");
+  ctx##fillStyle <- convert_color (fst sq_colors);
+  (* ctx##fillStyle (js"black"); *)
   ctx##fillText (js(sq_val_str),
                 float x +. float sq_w /. 2.0,
                 float y +. float sq_h /. 2.0 )
 
 let draw_board ctx b =
-  ctx##fillStyle (convert_color board_lines_color);
   ctx##fillRect (0.0, 0.0, float wind_w, float wind_h);
+  ctx##fillStyle <- (convert_color board_lines_color);
   for i = 0 to 3 do
     for j = 0 to 3 do
-      match b.(i).(j) with
+      (match b.(i).(j) with
       | None -> draw_empty_sq ctx i j
-      | sq -> draw_sq ctx i j sq
+      | (Some v) -> draw_sq ctx i j v)
     done
   done
 
@@ -118,9 +108,9 @@ let draw_board ctx b =
 *)
 
 let rec play_game ctx =
-  (* let b = Gameplay.init_board 4 in
-  draw_board ctx b *)
-  draw_empty_sq ctx 0 0
+  let b = Gameplay.init_board 4 in
+  draw_board ctx b
+  (* draw_empty_sq ctx 0 0 *)
 
 let main () =
   let game =
