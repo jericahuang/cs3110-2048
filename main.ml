@@ -2,6 +2,11 @@ open Gameplay
 open Gamelogic
 open Render
 
+(*
+let _ = Html.addEventListener Html.document Html.Event.keydown (Html.handler Director.keydown) Js._true in
+  let _ = Html.addEventListener Html.document Html.Event.keyup (Html.handler Director.keyup) Js._true in
+ *)
+
 module H = Dom_html
 
 let js = Js.string
