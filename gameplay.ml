@@ -7,9 +7,7 @@ type move =
   | Down
 
 (* We may be able to add more to this *)
-type square = {
-  mutable value: int option;
-}
+type square = int option
 
 type board = square array array
 
@@ -20,7 +18,7 @@ let square_value v =
 
 (* [is_empty_square s] checks if [s] is an empty square. *)
 let is_empty_square (s : square) =
-  square_value s.value = 0
+  square_value s = 0
 
 (* [init_board size] initializes the board with [size].
  * Starts with square of 2 in bottom left corner.
@@ -29,14 +27,14 @@ let is_empty_square (s : square) =
 let init_board size =
   if size < 1 then failwith "Invalid matrix size"
   else
-    let b = Array.make_matrix 4 4 {value = None} in
-    b.(3).(3) <- {value = (Some 2)}; b
+    let b = Array.make_matrix 4 4 None in
+    b.(3).(3) <- Some 2; b
 
 (* [check_2048_sqaure s] returns if 2048 square has been formed. *)
 let check_2048_square (s : square) =
-  square_value s.value = 2048
+  square_value s = 2048
 
-let rec is_empty_row b row size =
+let rec is_empty_row (b:board) row size =
   if size = 0 then true else
   if b.(row).(size-1) = None then is_empty_row b row (size-1) else false
 
@@ -121,13 +119,13 @@ let rec process_row b row col size =
   then combine_tiles b row col (col+1) else ();
   process_row b row (col+1) size)
 
-let rec move_left b row col size =
+let rec move_left (b:board) row col size =
   if row = 0 then () else
   (if is_empty_row b (row-1) size then () else
   process_row b (row-1) 0 size;
   move_left b (row-1) col size)
 
-let move m b =
+let move m (b:board) =
   match m with
   | Left -> move_left b (Array.length b) (Array.length b) (Array.length b)
 
@@ -143,7 +141,7 @@ let check_winning_board (b : board) =
 
 (* Random square insertion *)
 (* Returns a random member of list [l] *)
-let random_nth_list l  =
+(* let random_nth_list l  =
   let len = List.length l in
   List.nth l (Random.int len)
 let (>>=) l f = List.concat (List.map f l)
@@ -173,4 +171,4 @@ let check_end_game (b : board) =
   let dboard = move_down b in
   let same_b = (b = lboard && b = rboard && b = uboard && b = dboard) in
   if same_b then raise End_game
-  else b
+  else b *)

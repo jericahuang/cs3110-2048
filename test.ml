@@ -17,10 +17,20 @@ let public_tests = [
     (check_2048_square {value = (Some 4)}));
   "Check init" >:: (fun _ -> assert_equal
     [|[|{value = None}; {value = None}; {value = None}; {value = None}|];
-    [|{value = None}; {value = None}; {value = None}; {value = None}|];
+    [|`; {value = None}; {value = None}; {value = None}|];
     [|{value = None}; {value = None}; {value = None}; {value = None}|];
     [|{value = None}; {value = None}; {value = None}; {value = Some 2}|]|]
     (init_board  4));
+
+(*   [|[|Some 4; None; None; Some 4|];
+    [|Some 2; None; None; None|];
+    [|None; Some 2; Some 4; None|];
+    [|None; None; Some 2; Some 2|]|]
+
+    [|[|Some 8; None; None; None|];
+      [|Some 2; None; None; None|];
+      [|Some 2; Some 4; None; None|];
+      [|Some 4; None; None; None|]|]  *)
 
 
 ]

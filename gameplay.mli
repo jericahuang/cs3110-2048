@@ -8,7 +8,7 @@ type move =
   | Down
 
 (** The type for squares. *)
-type square = { mutable value : int option; }
+type square = int option
 
 (* * The type for board rows.
 type row = square list *)
@@ -64,13 +64,13 @@ val square_value : int option -> int
 (* Board and move logic *)
 
 (* Keyup event handler function *)
-val keyup : move -> unit
+(* val keyup : move -> unit *)
 
 (** [create_board ()] is a new board. Defaults to 4. *)
 val init_board : int -> board
 
 (** [is_game_over board] is [true] if there are no valid moves. *)
-val check_end_game : board -> bool
+(* val check_end_game : board -> bool *)
 
 (** Whether a square is occupied by a winning tile (2048). *)
 val check_2048_square: square -> bool
@@ -81,6 +81,6 @@ val is_valid_move : move -> board -> bool
 
 (** [insert_square square board] is [board] with [square] inserted
     in a random empty spot. *)
-val insert_square : square -> board -> board
+(* val insert_square : square -> board -> board *)
 
 
