@@ -24,3 +24,8 @@ let public_tests = [
 
 
 ]
+let my_tests = [
+  (* put any tests you like here; they will not be graded *)
+]
+
+let _ = run_test_tt_main ("suite" >::: public_tests @ my_tests)
