@@ -8,13 +8,13 @@ type move =
   | Down
 
 (** The type for squares. *)
-type square = int option
+type square = { mutable value : int option; }
 
-(** The type for board rows. *)
-type row = square list
+(* * The type for board rows.
+type row = square list *)
 
 (** The type for boards. *)
-type board = row list
+type board = square array array
 
 
 
@@ -57,7 +57,7 @@ val t1024 : square
 val t2048 : square
  *)
 (** [square_value t] is [t]'s value (if any). *)
-val square_value : square -> int
+val square_value : int option -> int
 
 
 
@@ -70,10 +70,10 @@ val keyup : move -> unit
 val init_board : int -> board
 
 (** [is_game_over board] is [true] if there are no valid moves. *)
-val is_game_over : board -> bool
+val check_end_game : board -> bool
 
 (** Whether a square is occupied by a winning tile (2048). *)
-val is_game_won: square -> bool
+val check_2048_square: square -> bool
 
 (** [is_valid_move move board] is [true] if shifting [board] in the direction
     [move] results in a change in the game board. *)
