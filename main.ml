@@ -83,16 +83,17 @@ let draw_sq ctx i j sq_v =
   let (x, y, w, h) = square_dim i j in
   let sq_colors = map_tile_colors sq_v in
   let sq_val_str = string_of_int sq_v in
-  ctx##fillRect (float x, float y, float w, float h);
   ctx##fillStyle <- convert_color (fst sq_colors);
-  (* ctx##fillStyle (js"black"); *)
+  ctx##fillRect (float x, float y, float w, float h);
+  ctx##font <- js("25px Verdana");
+  ctx##fillStyle <- convert_color (snd sq_colors);
   ctx##fillText (js(sq_val_str),
-                float x +. float sq_w /. 2.0,
-                float y +. float sq_h /. 2.0 )
+                float x +. float sq_w /. 1.9,
+                float y +. float sq_h /. 1.9 )
 
 let draw_board ctx b =
-  ctx##fillRect (0.0, 0.0, float wind_w, float wind_h);
   ctx##fillStyle <- (convert_color board_lines_color);
+  ctx##fillRect (0.0, 0.0, float wind_w, float wind_h);
   for i = 0 to 3 do
     for j = 0 to 3 do
       (match b.(i).(j) with
