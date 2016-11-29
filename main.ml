@@ -2,4 +2,4 @@ open Gameplay
 open Gamelogic
 open Render
 
-let start () = ()
+let start () = init_board 4
