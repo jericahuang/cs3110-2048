@@ -80,7 +80,7 @@ val check_2048_square: square -> bool
 val is_valid_move : move -> board -> bool
 
 (** [insert_square square board] is [board] with [square] inserted
-    in an empty spot. *)
+    in a random empty spot. *)
 val insert_square : square -> board -> board
 
 
