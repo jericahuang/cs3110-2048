@@ -70,10 +70,12 @@ val keyup : move -> board -> unit
 val init_board : int -> board
 
 (** [is_game_over board] is [true] if there are no valid moves. *)
-val check_end_game : board -> board
+val check_end_game : board -> bool
 
 (** Whether a square is occupied by a winning tile (2048). *)
 val check_2048_square: square -> bool
+
+val check_winning_board: board -> bool
 
 (** [is_valid_move move board] is [true] if shifting [board] in the direction
     [move] results in a change in the game board. *)
@@ -81,6 +83,6 @@ val is_valid_move : move -> board -> bool
 
 (** [insert_square square board] is [board] with [square] inserted
     in a random empty spot. *)
-(* val insert_square : square -> board -> board *)
+val insert_square : square -> board -> unit
 
 

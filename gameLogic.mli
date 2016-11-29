@@ -12,4 +12,4 @@ val combine_tiles : int option array array -> int -> int -> int -> unit
 (* [replace_tile row f] replaces the first element in [row] with an element.
  * Note, this will be used for random tile insert, hence the new insert will
  * never be None. *)
-(*val replace_tile : Gameplay.board -> int -> int -> Gameplay.square -> unit*)
+val replace_tile : int option array array -> int -> int -> int option -> unit

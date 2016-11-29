@@ -1,3 +1,6 @@
+open Gamelogic
+
+exception Win_game
 exception End_game
 
 type move =
@@ -92,13 +95,13 @@ let is_valid_move m b =
   | Up -> is_valid_move_up b (Array.length b) (Array.length b)
   | Down -> is_valid_move_down b (Array.length b) (Array.length b)
 
-let combine_left b row s1 s2 =
+(*let combine_left b row s1 s2 =
   let left = (square_value (b.(row).(s1))) + (square_value (b.(row).(s2))) in
   b.(row).(s1) <- Some left;
   b.(row).(s2) <- None
 
 let combine_tiles b line s1 s2 =
-  combine_left b line s1 s2
+  combine_left b line s1 s2*)
 
 let rec shift_left b row s1 s2 =
   b.(row).(s1) <- b.(row).(s2);
@@ -173,9 +176,6 @@ let move m b =
             move_left b (Array.length b) (Array.length b) (Array.length b);
             rotate_right b; rotate_up b
 
-let keyup m b =
-  if is_valid_move m b then move m b else ()
-
 let check_winning_board (b : board) =
   let win = ref false in
   for i = 0 to (Array.length b) - 1 do
@@ -198,21 +198,24 @@ let random_avail b =
     [(i, j)]
   in
   let avail = List.filter (fun (i, j) -> b.(i).(j) = None) all_indicies in
-  if avail <> [] then
-    random_nth_list avail
-  else
-    raise (Failure "full board")
+  random_nth_list avail
+  
 (* Inserts pre-determined square [sq] into board [b] *)
-let insert_square (sq : square) (b : board) : board =
+let insert_square (sq : square) (b : board) : unit =
   let (i, j) = random_avail b in
-  b.(i).(j) <- sq; b
+  b.(i).(j) <- sq
 
 (* ASSUMING FUNCTIONALITY use is_valid_move*)
 let check_end_game (b : board) =
-  if is_valid_move Left b && is_valid_move Right b &&
-  is_valid_move Up b && is_valid_move Down b then b
-  else raise End_game
+  if is_valid_move Left b || is_valid_move Right b ||
+  is_valid_move Up b || is_valid_move Down b then false
+  else true
 
+let keyup m b =
+  if is_valid_move m b then (move m b;
+  if check_winning_board b then raise Win_game else (insert_square (Some 2) b;
+  if check_end_game b then raise End_game else ()))
+  else ()
 (*let check_end_game (b : board) =
   let lboard = move_left b in
   let rboard = move_right b in
