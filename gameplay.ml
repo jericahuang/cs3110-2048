@@ -133,7 +133,7 @@ let rec to_lst b size =
 
 let rec to_arr lst arr size = 
   match lst with
-  | [] -> arr
+  | [] -> ()
   | h::t -> arr.(size) <- (Array.of_list h); to_arr t arr (size+1)
 
 let rec get_head lst = 
@@ -164,21 +164,18 @@ let rotate_down b =
 let move m b = 
   match m with 
   | Left -> move_left b (Array.length b) (Array.length b) (Array.length b)
-  | Right -> move_left b (Array.length b) (Array.length b) (Array.length b);
-             rotate_right b; ()
-  | Up -> move_left b (Array.length b) (Array.length b) (Array.length b);
-          rotate_down b; ()
-  | Down -> move_left b (Array.length b) (Array.length b) (Array.length b);
-            rotate_up b; ()
+  | Right -> rotate_right b;
+             move_left b (Array.length b) (Array.length b) (Array.length b);
+             rotate_right b
+  | Up -> rotate_up b;
+          move_left b (Array.length b) (Array.length b) (Array.length b);
+          rotate_down b
+  | Down -> rotate_down b;
+            move_left b (Array.length b) (Array.length b) (Array.length b);
+            rotate_up b
 
 let keyup m b = 
-  if is_valid_move m b then 
-  (match m with
-    | Left -> move m b
-    | Right -> move m (rotate_right b)
-    | Up -> move m (rotate_up b)
-    | Down -> move m (rotate_down b))
-  else ()
+  if is_valid_move m b then move m b else ()
 
 let check_winning_board (b : board) =
   let win = ref false in
@@ -207,7 +204,7 @@ let random_avail b =
   else
     raise (Failure "full board")
 (* Inserts pre-determined square [sq] into board [b] *)
-let insert_square (sq : square) (b : board) : board =
+(*let insert_square (sq : square) (b : board) : board =
   let (i, j) = random_avail b in
   b.(i).(j) <- sq
 
@@ -219,4 +216,4 @@ let check_end_game (b : board) =
   let dboard = move_down b in
   let same_b = (b = lboard && b = rboard && b = uboard && b = dboard) in
   if same_b then raise End_game
-  else b
+  else b*)
