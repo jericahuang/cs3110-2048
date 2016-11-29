@@ -190,7 +190,9 @@ let random_nth_list l  =
   List.nth l (Random.int len)
 let (>>=) l f = List.concat (List.map f l)
 let list_index = [0;1;2;3]
-(* Returns a tuple (i,j) of a random open position in [b] in row i, column j*)
+(* Returns a tuple (i,j) of a random open position in [b] in row i, column j
+ * Precondition: [b] has at least one open position.
+ *)
 let random_avail b =
   let all_indicies =
     list_index >>= fun i ->
@@ -198,10 +200,9 @@ let random_avail b =
     [(i, j)]
   in
   let avail = List.filter (fun (i, j) -> b.(i).(j) = None) all_indicies in
-  if avail <> [] then
-    random_nth_list avail
-  else
-    raise (Failure "full board")
+  random_nth_list avail
+
+
 (* Inserts pre-determined square [sq] into board [b] *)
 let insert_square (sq : square) (b : board) : board =
   let (i, j) = random_avail b in
