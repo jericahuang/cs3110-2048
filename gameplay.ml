@@ -123,32 +123,32 @@ let rec move_left b row col size =
   if row = 0 then () else
   (if is_empty_row b (row-1) size then () else
   process_row b (row-1) 0 size;
-  move_left b (row-1) col size) 
+  move_left b (row-1) col size)
 
-let rec to_lst b size = 
+let rec to_lst b size =
   if size = 4 then [] else
   Array.to_list b.(size) :: to_lst b (size+1)
 
-let rec to_lst_rev b size = 
+let rec to_lst_rev b size =
   if size = 4 then [] else
   (List.rev (Array.to_list b.(size))) :: to_lst_rev b (size+1)
 
-let rec to_arr lst arr size = 
+let rec to_arr lst arr size =
   match lst with
   | [] -> ()
   | h::t -> arr.(size) <- (Array.of_list h); to_arr t arr (size+1)
 
-let rec get_head lst = 
-  match lst with 
+let rec get_head lst =
+  match lst with
   | [] -> []
   | (h::t) :: t' -> h :: get_head t'
 
-let rec get_tail lst = 
+let rec get_tail lst =
   match lst with
   | [] -> []
   | (h::t) :: t' -> t :: get_tail t'
 
-let rec rotate lst = 
+let rec rotate lst =
   match lst with
   | [] -> []
   | []::_ -> []
@@ -157,11 +157,11 @@ let rec rotate lst =
 let rotate_up b =
   to_arr (rotate (to_lst b 0)) b 0
 
-let rotate_right b = 
+let rotate_right b =
   to_arr (to_lst_rev b 0) b 0
 
-let move m b = 
-  match m with 
+let move m b =
+  match m with
   | Left -> move_left b (Array.length b) (Array.length b) (Array.length b)
   | Right -> rotate_right b;
              move_left b (Array.length b) (Array.length b) (Array.length b);
@@ -173,7 +173,7 @@ let move m b =
             move_left b (Array.length b) (Array.length b) (Array.length b);
             rotate_right b; rotate_up b
 
-let keyup m b = 
+let keyup m b =
   if is_valid_move m b then move m b else ()
 
 let check_winning_board (b : board) =
@@ -209,8 +209,8 @@ let insert_square (sq : square) (b : board) : board =
 
 (* ASSUMING FUNCTIONALITY use is_valid_move*)
 let check_end_game (b : board) =
-  if is_valid_move Left b && is_valid_move Right b && 
-  is_valid_move Up b && is_valid_move Down b then b 
+  if is_valid_move Left b && is_valid_move Right b &&
+  is_valid_move Up b && is_valid_move Down b then b
   else raise End_game
 
 (*let check_end_game (b : board) =
