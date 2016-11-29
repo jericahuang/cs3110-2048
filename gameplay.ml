@@ -7,9 +7,7 @@ type move =
   | Down
 
 (* We may be able to add more to this *)
-type square = {
-  mutable value: int option;
-}
+type square = int option
 
 type board = square array array
 
@@ -20,7 +18,7 @@ let square_value v =
 
 (* [is_empty_square s] checks if [s] is an empty square. *)
 let is_empty_square (s : square) =
-  square_value s.value = 0
+  square_value s = 0
 
 (* [init_board size] initializes the board with [size].
  * Starts with square of 2 in bottom left corner.
@@ -29,12 +27,12 @@ let is_empty_square (s : square) =
 let init_board size =
   if size < 1 then failwith "Invalid matrix size"
   else
-    let b = Array.make_matrix 4 4 {value = None} in
-    b.(3).(3) <- {value = (Some 2)}; b
+    let b = Array.make_matrix 4 4 None in
+    b.(3).(3) <- Some 2; b
 
 (* [check_2048_sqaure s] returns if 2048 square has been formed. *)
 let check_2048_square (s : square) =
-  square_value s.value = 2048
+  square_value s = 2048
 
 let rec is_empty_row b row size =
   if size = 0 then true else
@@ -207,14 +205,19 @@ let random_avail b =
 (* Inserts pre-determined square [sq] into board [b] *)
 let insert_square (sq : square) (b : board) : board =
   let (i, j) = random_avail b in
-  b.(i).(j) <- sq
+  b.(i).(j) <- sq; b
 
 (* ASSUMING FUNCTIONALITY use is_valid_move*)
 let check_end_game (b : board) =
+  if is_valid_move Left b && is_valid_move Right b && 
+  is_valid_move Up b && is_valid_move Down b then b 
+  else raise End_game
+
+(*let check_end_game (b : board) =
   let lboard = move_left b in
   let rboard = move_right b in
   let uboard = move_up b in
   let dboard = move_down b in
   let same_b = (b = lboard && b = rboard && b = uboard && b = dboard) in
   if same_b then raise End_game
-  else b
+  else b*)
