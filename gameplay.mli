@@ -83,6 +83,6 @@ val is_valid_move : move -> board -> bool
 
 (** [insert_square square board] is [board] with [square] inserted
     in a random empty spot. *)
-val insert_square : square -> board -> unit
+val insert_square : board -> unit
 
 

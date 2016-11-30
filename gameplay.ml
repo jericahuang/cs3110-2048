@@ -3,6 +3,8 @@
 exception Win_game
 exception End_game
 
+let () = Random.self_init ()
+
 type move =
   | Left
   | Right
@@ -33,7 +35,7 @@ let init_board size =
   if size < 1 then failwith "Invalid matrix size"
   else
     let b = Array.make_matrix 4 4 None in
-    let s = ref 0 in 
+    let s = ref 0 in
     b.(3).(3) <- Some 2; (b, s)
 
 (* [check_2048_sqaure s] returns if 2048 square has been formed. *)
@@ -206,9 +208,14 @@ let random_avail b =
   let avail = List.filter (fun (i, j) -> b.(i).(j) = None) all_indicies in
   random_nth_list avail
 
+let random_sq_value () =
+  let prob = Random.int 10 in
+  if prob = 0 then (Some 4) else (Some 2)
+
 (* Inserts pre-determined square [sq] into board [b] *)
-let insert_square (sq : square) (b : board) : unit =
+let insert_square (b : board) : unit =
   let (i, j) = random_avail b in
+  let sq = random_sq_value () in
   b.(i).(j) <- sq
 
 (* ASSUMING FUNCTIONALITY use is_valid_move*)
@@ -219,6 +226,6 @@ let check_end_game (b : board) =
 
 let key_press m (b,s) =
   if is_valid_move m b then (move m b s;
-  if check_winning_board b then raise Win_game else (insert_square (Some 2) b;
+  if check_winning_board b then raise Win_game else (insert_square b;
   if check_end_game b then raise End_game else ()))
   else ()
