@@ -1,0 +1,6 @@
+#directory "_build";;
+#load "gameplay.d.cmo";;
+#load "gamelogic.d.cmo";;
+
+open Gamelogic
+open Gameplay

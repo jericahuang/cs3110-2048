@@ -1,4 +1,4 @@
-open Gamelogic
+(*open Gamelogic*)
 
 exception Win_game
 exception End_game
@@ -98,13 +98,14 @@ let is_valid_move m b =
   | Up -> is_valid_move_up b (Array.length b) (Array.length b)
   | Down -> is_valid_move_down b (Array.length b) (Array.length b)
 
-(*let combine_left b row s1 s2 =
+let combine_left b s row s1 s2 =
   let left = (square_value (b.(row).(s1))) + (square_value (b.(row).(s2))) in
+  s := !s + left;
   b.(row).(s1) <- Some left;
   b.(row).(s2) <- None
 
-let combine_tiles b line s1 s2 =
-  combine_left b line s1 s2*)
+let combine_tiles b s line s1 s2 =
+  combine_left b s line s1 s2
 
 let rec shift_left b row s1 s2 =
   b.(row).(s1) <- b.(row).(s2);
