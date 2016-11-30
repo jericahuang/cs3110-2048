@@ -37,6 +37,10 @@ let init_board size =
     let b = Array.make_matrix 4 4 None in
     let s = ref 0 in
     b.(3).(3) <- Some 2; (b, s)
+    (* ([|[|None; None; None; None|];
+    [|None; Some 1024; None; None|];
+    [|None; None; None; None|];
+    [|None; None; None; Some 2048|]|], s) *)
 
 (* [check_2048_sqaure s] returns if 2048 square has been formed. *)
 let check_2048_square (s : square) =
