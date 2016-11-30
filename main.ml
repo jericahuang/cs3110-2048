@@ -125,6 +125,7 @@ let key_action ctx b s =
    | Some (Down) -> key_press Down (b,s)
    | _ -> ()
    end; draw_board ctx b;
+   (*H.window##alert (js(Pervasives.string_of_int !s));*)
    Js._true)
 
 let rec play_game ctx =
