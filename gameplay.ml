@@ -14,6 +14,8 @@ type square = int option
 
 type board = square array array
 
+type score = int ref
+
 let square_value v =
   match v with
   | None -> 0
@@ -31,7 +33,8 @@ let init_board size =
   if size < 1 then failwith "Invalid matrix size"
   else
     let b = Array.make_matrix 4 4 None in
-    b.(3).(3) <- Some 2; b
+    let s = ref 0 in 
+    b.(3).(3) <- Some 2; (b, s)
 
 (* [check_2048_sqaure s] returns if 2048 square has been formed. *)
 let check_2048_square (s : square) =
@@ -115,18 +118,18 @@ let rec fix_row b row size =
   then fix_row b row (size+1) else ();
   fix_row b row (size-1))
 
-let rec process_row b row col size =
+let rec process_row b s row col size =
   fix_row b row (size-1);
   if col > 3 then () else
   (if col <> 3 && is_valid_merge_horizontal b row col (col+1)
-  then combine_tiles b row col (col+1) else ();
-  process_row b row (col+1) size)
+  then combine_tiles b s row col (col+1) else ();
+  process_row b s row (col+1) size)
 
-let rec move_left b row col size =
+let rec move_left b s row col size =
   if row = 0 then () else
   (if is_empty_row b (row-1) size then () else
-  process_row b (row-1) 0 size;
-  move_left b (row-1) col size)
+  process_row b s (row-1) 0 size;
+  move_left b s (row-1) col size)
 
 let rec to_lst b size =
   if size = 4 then [] else
@@ -163,17 +166,17 @@ let rotate_up b =
 let rotate_right b =
   to_arr (to_lst_rev b 0) b 0
 
-let move m b =
+let move m b s =
   match m with
-  | Left -> move_left b (Array.length b) (Array.length b) (Array.length b)
+  | Left -> move_left b s (Array.length b) (Array.length b) (Array.length b)
   | Right -> rotate_right b;
-             move_left b (Array.length b) (Array.length b) (Array.length b);
+             move_left b s (Array.length b) (Array.length b) (Array.length b);
              rotate_right b
   | Up -> rotate_up b;
-          move_left b (Array.length b) (Array.length b) (Array.length b);
+          move_left b s (Array.length b) (Array.length b) (Array.length b);
           rotate_up b
   | Down -> rotate_up b; rotate_right b;
-            move_left b (Array.length b) (Array.length b) (Array.length b);
+            move_left b s (Array.length b) (Array.length b) (Array.length b);
             rotate_right b; rotate_up b
 
 let check_winning_board (b : board) =
@@ -201,7 +204,7 @@ let random_avail b =
   in
   let avail = List.filter (fun (i, j) -> b.(i).(j) = None) all_indicies in
   random_nth_list avail
-  
+
 (* Inserts pre-determined square [sq] into board [b] *)
 let insert_square (sq : square) (b : board) : unit =
   let (i, j) = random_avail b in
@@ -213,16 +216,8 @@ let check_end_game (b : board) =
   is_valid_move Up b || is_valid_move Down b then false
   else true
 
-let keyup m b =
-  if is_valid_move m b then (move m b;
+let key_press m (b,s) =
+  if is_valid_move m b then (move m b s;
   if check_winning_board b then raise Win_game else (insert_square (Some 2) b;
   if check_end_game b then raise End_game else ()))
   else ()
-(*let check_end_game (b : board) =
-  let lboard = move_left b in
-  let rboard = move_right b in
-  let uboard = move_up b in
-  let dboard = move_down b in
-  let same_b = (b = lboard && b = rboard && b = uboard && b = dboard) in
-  if same_b then raise End_game
-  else b*)

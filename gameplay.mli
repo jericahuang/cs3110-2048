@@ -16,7 +16,7 @@ type row = square list *)
 (** The type for boards. *)
 type board = square array array
 
-
+type score = int ref
 
 (* Square Values *)
 
@@ -64,10 +64,10 @@ val square_value : square -> int
 (* Board and move logic *)
 
 (* Keyup event handler function *)
-val keyup : move -> board -> unit
+val key_press : move -> board * score -> unit
 
 (** [create_board ()] is a new board. Defaults to 4. *)
-val init_board : int -> board
+val init_board : int -> board * score
 
 (** [is_game_over board] is [true] if there are no valid moves. *)
 val check_end_game : board -> bool
