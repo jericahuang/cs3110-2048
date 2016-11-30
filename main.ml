@@ -39,9 +39,9 @@ let square_dim i j =
 
 let board_lines_color = (187,173,160)
 
-(* [map_tile_colors val] maps a sqaure to its
+(* [map_sq_colors val] maps a sqaure to its
  * color value, text color, fontsize *)
-let map_tile_colors v =
+let map_sq_colors v =
   let white_text = (255, 252, 245) in
   let brown_text = (119, 110, 101) in
   match v with
@@ -57,6 +57,22 @@ let map_tile_colors v =
   | 512 -> (232,197,89), white_text
   | 1024 -> (237,197,63), white_text
   | 2048 -> (238,194,46), white_text
+  | _ -> failwith "Invalid Tile"
+
+let map_text_size v =
+  match v with
+  | 0 -> 30
+  | 2 -> 30
+  | 4 -> 30
+  | 8 -> 30
+  | 16 -> 30
+  | 32 -> 30
+  | 64 -> 30
+  | 128 -> int_of_float (30. /. 1.2)
+  | 256 -> int_of_float (30. /. 1.2)
+  | 512 -> int_of_float (30. /. 1.2)
+  | 1024 -> int_of_float (30. /. 1.5)
+  | 2048 -> int_of_float (30. /. 1.5)
   | _ -> failwith "Invalid Tile"
 
 (*
@@ -87,22 +103,23 @@ let append_text e str =
 
 let draw_empty_sq ctx i j =
   let (x, y, w, h) = square_dim i j in
-  let empty_color = fst (map_tile_colors 0) in
+  let empty_color = fst (map_sq_colors 0) in
   ctx##fillStyle <- convert_color empty_color;
   ctx##fillRect (float x, float y, float w, float h)
 
 let draw_sq ctx i j sq_v =
   let (x, y, w, h) = square_dim i j in
-  let sq_colors = map_tile_colors sq_v in
+  let sq_colors = map_sq_colors sq_v in
   let sq_val_str = string_of_int sq_v in
   ctx##fillStyle <- convert_color (fst sq_colors);
   ctx##fillRect (float x, float y, float w, float h);
-  ctx##font <- js("30px Verdana");
+  (* ctx##font <- js(Printf.sprintf "%dpx Verdana" ); *)
+  ctx##font <- js(Printf.sprintf "%dpx Verdana" (map_text_size sq_v));
   ctx##textAlign <- js("center");
   ctx##fillStyle <- convert_color (snd sq_colors);
   ctx##fillText (js(sq_val_str),
-                float x +. float sq_w /. 2.5,
-                float y +. float sq_h /. 1.5 )
+                float x +. float sq_w /. 2.,
+                float y +. float sq_h /. 1.5)
 
 let draw_board ctx b =
   ctx##fillStyle <- (convert_color board_lines_color);
