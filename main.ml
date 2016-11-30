@@ -109,7 +109,7 @@ let draw_board ctx b =
 *)
 
 let rec play_game ctx =
-  let b = Gameplay.init_board 4 in
+  let (b,s) = Gameplay.init_board 4 in
   draw_board ctx b
   (* draw_empty_sq ctx 0 0 *)
 
