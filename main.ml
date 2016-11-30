@@ -59,20 +59,37 @@ let map_sq_colors v =
   | 2048 -> (238,194,46), white_text
   | _ -> failwith "Invalid Tile"
 
+(* Gives back text size and Y divider *)
+(* let map_text_size v =
+  match v with
+  | 0 -> 38
+  | 2 -> 38
+  | 4 -> 38
+  | 8 -> 38
+  | 16 -> 35
+  | 32 -> 35
+  | 64 -> 35
+  | 128 -> int_of_float (38. /. 1.2)
+  | 256 -> int_of_float (38. /. 1.2)
+  | 512 -> int_of_float (38. /. 1.2)
+  | 1024 -> int_of_float (38. /. 1.5)
+  | 2048 -> int_of_float (38. /. 1.5)
+  | _ -> failwith "Invalid Tile" *)
+
 let map_text_size v =
   match v with
-  | 0 -> 30
-  | 2 -> 30
-  | 4 -> 30
-  | 8 -> 30
-  | 16 -> 30
-  | 32 -> 30
-  | 64 -> 30
-  | 128 -> int_of_float (30. /. 1.2)
-  | 256 -> int_of_float (30. /. 1.2)
-  | 512 -> int_of_float (30. /. 1.2)
-  | 1024 -> int_of_float (30. /. 1.5)
-  | 2048 -> int_of_float (30. /. 1.5)
+  | 0 -> 38, 1.45
+  | 2 -> 38, 1.45
+  | 4 -> 38, 1.45
+  | 8 -> 38, 1.45
+  | 16 -> 35, 1.45
+  | 32 -> 35, 1.45
+  | 64 -> 35, 1.45
+  | 128 -> int_of_float (38. /. 1.2), 1.5
+  | 256 -> int_of_float (38. /. 1.2), 1.5
+  | 512 -> int_of_float (38. /. 1.2), 1.5
+  | 1024 -> int_of_float (38. /. 1.5), 1.5
+  | 2048 -> int_of_float (38. /. 1.5), 1.5
   | _ -> failwith "Invalid Tile"
 
 (*
@@ -89,10 +106,7 @@ let convert_color (r,g,b) =
  DRAW FUNCTIONS
 *****************************************************************************
 *)
-(*
-let draw_score name =
-  let res = document##createDocumentFragment in
-  Dom.appendChild res (document##createTextNode (js name)) *)
+
 (* https://github.com/ocsigen/js_of_ocaml/blob/master/examples/boulderdash/boulderdash.ml *)
 let replace_child parent node =
   Js.Opt.iter (parent##firstChild) (fun child -> Dom.removeChild parent child);
@@ -111,15 +125,16 @@ let draw_sq ctx i j sq_v =
   let (x, y, w, h) = square_dim i j in
   let sq_colors = map_sq_colors sq_v in
   let sq_val_str = string_of_int sq_v in
+  let text_vals = map_text_size sq_v in
   ctx##fillStyle <- convert_color (fst sq_colors);
   ctx##fillRect (float x, float y, float w, float h);
   (* ctx##font <- js(Printf.sprintf "%dpx Verdana" ); *)
-  ctx##font <- js(Printf.sprintf "%dpx Verdana" (map_text_size sq_v));
+  ctx##font <- js(Printf.sprintf "700 %dpx open sans" (fst text_vals));
   ctx##textAlign <- js("center");
   ctx##fillStyle <- convert_color (snd sq_colors);
   ctx##fillText (js(sq_val_str),
                 float x +. float sq_w /. 2.,
-                float y +. float sq_h /. 1.5)
+                float y +. float sq_h /. (snd text_vals) )
 
 let draw_board ctx b =
   ctx##fillStyle <- (convert_color board_lines_color);
@@ -172,8 +187,8 @@ let main () =
       (fun () -> assert false)
   in
   let canvas = H.createCanvas H.document in
-  canvas##width <- wind_w;
-  canvas##height <- wind_w;
+  canvas##width <- (wind_w + 250);
+  canvas##height <- (wind_h + 250);
   Dom.appendChild game canvas;
   let ctx = canvas##getContext (H._2d_) in
   let score_sp =
