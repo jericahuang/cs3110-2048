@@ -108,16 +108,24 @@ let draw_board ctx b =
 *****************************************************************************
 *)
 
+(* let parse_ev e =
+  match e##keyCode with
+  | 37 -> Some (Left) Up
+  | 38 -> Some (Up) Left
+  | 39 -> Some (Right) Down
+  | 40 -> Some (Down) Rigth
+  | _ -> None *)
+
 let parse_ev e =
   match e##keyCode with
-  | 37 -> Some (Left)
-  | 38 -> Some (Up)
-  | 39 -> Some (Right)
-  | 40 -> Some (Down)
+  | 37 -> Some (Up)
+  | 38 -> Some (Left)
+  | 39 -> Some (Down)
+  | 40 -> Some (Right)
   | _ -> None
 
 let key_action ctx b s =
-   H.document##onkeydown <- H.handler (fun e -> 
+   H.document##onkeydown <- H.handler (fun e ->
    begin match parse_ev e with
    | Some (Left) -> key_press Left (b,s)
    | Some (Up) -> key_press Up (b,s)
