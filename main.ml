@@ -28,7 +28,7 @@ let wind_h = (3 * border) + (2 * border) + (4 * sq_h)
 let square_dim i j =
   let x = i * (sq_w + border) + border in
   let y = j * (sq_h + border) + border in
-  (x, y, sq_w, sq_h)
+  (y, x, sq_w, sq_h)
 
 (*
 *****************************************************************************
