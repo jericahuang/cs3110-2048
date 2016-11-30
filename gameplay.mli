@@ -1,5 +1,8 @@
 (* Types *)
 
+exception End_game
+exception Win_game
+
 (** The type for game moves corresponding to arrow keys (left, right, up, down). *)
 type move =
   | Left
@@ -84,5 +87,7 @@ val is_valid_move : move -> board -> bool
 (** [insert_square square board] is [board] with [square] inserted
     in a random empty spot. *)
 val insert_square : board -> unit
+
+val move : move -> board -> score -> unit
 
 

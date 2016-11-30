@@ -163,18 +163,16 @@ let parse_ev e =
 
 (* score_sp: element associated with "score" id *)
 let key_action ctx b s score_sp =
-   H.document##onkeydown <- H.handler (fun e ->
+   H.document##onkeydown <- H.handler (fun e -> 
    begin match parse_ev e with
-   | Some (Left) -> key_press Left (b,s)
-   | Some (Up) -> key_press Up (b,s)
-   | Some (Right) -> key_press Right (b,s)
-   | Some (Down) -> key_press Down (b,s)
+   | Some (x) -> try key_press x (b,s) with Win_game -> move x b s; H.window##alert (js "Win")
    | _ -> ()
    end; draw_board ctx b;
    let txt = document##createTextNode (js(string_of_int !s)) in
    replace_child score_sp txt;
+   if check_end_game b then H.window##alert (js "Lose") else ();
    Js._true)
-
+  
 let rec play_game ctx score_sp =
   let (b,s) = init_board 4 in
   draw_board ctx b;

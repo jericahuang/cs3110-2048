@@ -33,7 +33,7 @@ let is_empty_square (s : square) =
  (* right now deafult to 4. Change to size and size - 1 *)
 let init_board size =
   if size < 1 then failwith "Invalid matrix size"
-  else
+  else 
     let b = Array.make_matrix 4 4 None in
     let s = ref 0 in
     b.(3).(3) <- Some 2; (b, s)
@@ -229,6 +229,5 @@ let check_end_game (b : board) =
 
 let key_press m (b,s) =
   if is_valid_move m b then (move m b s;
-  if check_winning_board b then raise Win_game else (insert_square b;
-  if check_end_game b then raise End_game else ()))
+  if check_winning_board b then raise Win_game else insert_square b)
   else ()
