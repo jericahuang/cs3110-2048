@@ -220,9 +220,8 @@ let insert_square (b : board) : unit =
 
 (* ASSUMING FUNCTIONALITY use is_valid_move*)
 let check_end_game (b : board) =
-  if is_valid_move Left b || is_valid_move Right b ||
-  is_valid_move Up b || is_valid_move Down b then false
-  else true
+  not (is_valid_move Left b || is_valid_move Right b ||
+  is_valid_move Up b || is_valid_move Down b)
 
 let key_press m (b,s) =
   if is_valid_move m b then (move m b s;

@@ -78,11 +78,12 @@ let draw_score name =
   let res = document##createDocumentFragment in
   Dom.appendChild res (document##createTextNode (js name)) *)
 (* https://github.com/ocsigen/js_of_ocaml/blob/master/examples/boulderdash/boulderdash.ml *)
-let replace_child p n =
-  Js.Opt.iter (p##firstChild) (fun c -> Dom.removeChild p c);
-  Dom.appendChild p n
+let replace_child parent node =
+  Js.Opt.iter (parent##firstChild) (fun child -> Dom.removeChild parent child);
+  Dom.appendChild parent node
 
-let append_text e s = Dom.appendChild e (document##createTextNode (js s))
+let append_text e str =
+  Dom.appendChild e (document##createTextNode (js str))
 
 let draw_empty_sq ctx i j =
   let (x, y, w, h) = square_dim i j in
@@ -137,11 +138,6 @@ let key_action ctx b s score_sp =
    | Some (Down) -> key_press Down (b,s)
    | _ -> ()
    end; draw_board ctx b;
-   (* H.window##alert (js(string_of_int !s)); *)
-   (* let score_text = Dom_html.document##nodeValue (js(string_of_int !s)) in
-   Dom.empty;
-   Dom.appendChild score_sp score_text; *)
-   (* score_text##nodeValue (js(string_of_int !s)) *)
    let txt = document##createTextNode (js(string_of_int !s)) in
    replace_child score_sp txt;
    Js._true)
@@ -166,8 +162,6 @@ let main () =
     Js.Opt.get (H.document##getElementById(js"score"))
       (fun () -> assert false)
   in
-(*   let score_text = Dom_html.document##createTextNode (js("0")) in
-  Dom.appendChild score_sp score_text; *)
   append_text score_sp "0";
   play_game ctx score_sp
 
