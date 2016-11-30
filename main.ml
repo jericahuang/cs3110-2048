@@ -98,6 +98,7 @@ let draw_sq ctx i j sq_v =
   ctx##fillStyle <- convert_color (fst sq_colors);
   ctx##fillRect (float x, float y, float w, float h);
   ctx##font <- js("30px Verdana");
+  ctx##textAlign <- js("center");
   ctx##fillStyle <- convert_color (snd sq_colors);
   ctx##fillText (js(sq_val_str),
                 float x +. float sq_w /. 2.5,
