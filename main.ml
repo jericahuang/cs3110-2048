@@ -108,20 +108,12 @@ let draw_board ctx b =
 *****************************************************************************
 *)
 
-(* let parse_ev e =
-  match e##keyCode with
-  | 37 -> Some (Left) Up
-  | 38 -> Some (Up) Left
-  | 39 -> Some (Right) Down
-  | 40 -> Some (Down) Rigth
-  | _ -> None *)
-
 let parse_ev e =
   match e##keyCode with
-  | 37 -> Some (Up)
-  | 38 -> Some (Left)
-  | 39 -> Some (Down)
-  | 40 -> Some (Right)
+  | 37 -> Some (Left)
+  | 38 -> Some (Up)
+  | 39 -> Some (Right)
+  | 40 -> Some (Down)
   | _ -> None
 
 let key_action ctx b s =
