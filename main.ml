@@ -108,9 +108,29 @@ let draw_board ctx b =
 *****************************************************************************
 *)
 
+let parse_ev e =
+  match e##keyCode with
+  | 37 -> Some (Left)
+  | 38 -> Some (Up)
+  | 39 -> Some (Right)
+  | 40 -> Some (Down)
+  | _ -> None
+
+let key_action ctx b s =
+   H.document##onkeydown <- H.handler (fun e -> 
+   begin match parse_ev e with
+   | Some (Left) -> key_press Left (b,s)
+   | Some (Up) -> key_press Up (b,s)
+   | Some (Right) -> key_press Right (b,s)
+   | Some (Down) -> key_press Down (b,s)
+   | _ -> ()
+   end; draw_board ctx b;
+   Js._true)
+
 let rec play_game ctx =
-  let (b,s) = Gameplay.init_board 4 in
-  draw_board ctx b
+  let (b,s) = init_board 4 in
+  draw_board ctx b;
+  key_action ctx b s
   (* draw_empty_sq ctx 0 0 *)
 
 let main () =
