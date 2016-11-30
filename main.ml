@@ -11,6 +11,7 @@ open Render
 module H = Dom_html
 
 let js = Js.string
+let document = H.document
 
 (*
 *****************************************************************************
@@ -72,6 +73,16 @@ let convert_color (r,g,b) =
  DRAW FUNCTIONS
 *****************************************************************************
 *)
+(*
+let draw_score name =
+  let res = document##createDocumentFragment in
+  Dom.appendChild res (document##createTextNode (js name)) *)
+(* https://github.com/ocsigen/js_of_ocaml/blob/master/examples/boulderdash/boulderdash.ml *)
+let replace_child p n =
+  Js.Opt.iter (p##firstChild) (fun c -> Dom.removeChild p c);
+  Dom.appendChild p n
+
+let append_text e s = Dom.appendChild e (document##createTextNode (js s))
 
 let draw_empty_sq ctx i j =
   let (x, y, w, h) = square_dim i j in
@@ -117,8 +128,9 @@ let parse_ev e =
   | 40 -> Some (Down)
   | _ -> None
 
-let key_action ctx b s =
-   H.document##onkeydown <- H.handler (fun e -> 
+(* score_sp: element associated with "score" id *)
+let key_action ctx b s score_sp =
+   H.document##onkeydown <- H.handler (fun e ->
    begin match parse_ev e with
    | Some (Left) -> key_press Left (b,s)
    | Some (Up) -> key_press Up (b,s)
@@ -126,13 +138,19 @@ let key_action ctx b s =
    | Some (Down) -> key_press Down (b,s)
    | _ -> ()
    end; draw_board ctx b;
-   (*H.window##alert (js(Pervasives.string_of_int !s));*)
+   (* H.window##alert (js(string_of_int !s)); *)
+   (* let score_text = Dom_html.document##nodeValue (js(string_of_int !s)) in
+   Dom.empty;
+   Dom.appendChild score_sp score_text; *)
+   (* score_text##nodeValue (js(string_of_int !s)) *)
+   let txt = document##createTextNode (js(string_of_int !s)) in
+   replace_child score_sp txt;
    Js._true)
 
-let rec play_game ctx =
+let rec play_game ctx score_sp =
   let (b,s) = init_board 4 in
   draw_board ctx b;
-  key_action ctx b s
+  key_action ctx b s score_sp
   (* draw_empty_sq ctx 0 0 *)
 
 let main () =
@@ -145,6 +163,13 @@ let main () =
   canvas##height <- wind_w;
   Dom.appendChild game canvas;
   let ctx = canvas##getContext (H._2d_) in
-  play_game ctx
+  let score_sp =
+    Js.Opt.get (H.document##getElementById(js"score"))
+      (fun () -> assert false)
+  in
+(*   let score_text = Dom_html.document##createTextNode (js("0")) in
+  Dom.appendChild score_sp score_text; *)
+  append_text score_sp "0";
+  play_game ctx score_sp
 
 let _ = main ()
