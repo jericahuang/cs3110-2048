@@ -36,7 +36,7 @@ let square_dim i j =
 *****************************************************************************
 *)
 
-let board_lines_color = (73,68,62)
+let board_lines_color = (187,173,160)
 
 (* [map_tile_colors val] maps a sqaure to its
  * color value, text color, fontsize *)
@@ -85,11 +85,11 @@ let draw_sq ctx i j sq_v =
   let sq_val_str = string_of_int sq_v in
   ctx##fillStyle <- convert_color (fst sq_colors);
   ctx##fillRect (float x, float y, float w, float h);
-  ctx##font <- js("25px Verdana");
+  ctx##font <- js("30px Verdana");
   ctx##fillStyle <- convert_color (snd sq_colors);
   ctx##fillText (js(sq_val_str),
-                float x +. float sq_w /. 1.9,
-                float y +. float sq_h /. 1.9 )
+                float x +. float sq_w /. 2.5,
+                float y +. float sq_h /. 1.5 )
 
 let draw_board ctx b =
   ctx##fillStyle <- (convert_color board_lines_color);
