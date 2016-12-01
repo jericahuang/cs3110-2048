@@ -212,6 +212,16 @@ let random_avail b =
   let avail = List.filter (fun (i, j) -> b.(i).(j) = None) all_indicies in
   random_nth_list avail
 
+(* Repetive code? *)
+let random_not_avail b =
+  let all_indicies =
+    list_index >>= fun i ->
+    list_index >>= fun j ->
+    [(i, j)]
+  in
+  let avail = List.filter (fun (i, j) -> b.(i).(j) <> None) all_indicies in
+  random_nth_list avail
+
 let random_sq_value () =
   let prob = Random.int 10 in
   if prob = 0 then (Some 4) else (Some 2)
