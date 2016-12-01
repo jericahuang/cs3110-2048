@@ -129,7 +129,7 @@ let draw_sq ctx i j sq_v =
   ctx##fillStyle <- convert_color (fst sq_colors);
   ctx##fillRect (float x, float y, float w, float h);
   (* ctx##font <- js(Printf.sprintf "%dpx Verdana" ); *)
-  ctx##font <- js(Printf.sprintf "700 %dpx open sans" (fst text_vals));
+  ctx##font <- js(Printf.sprintf "700 %dpx Clearsans" (fst text_vals));
   ctx##textAlign <- js("center");
   ctx##fillStyle <- convert_color (snd sq_colors);
   ctx##fillText (js(sq_val_str),
@@ -163,7 +163,7 @@ let parse_ev e =
 
 (* score_sp: element associated with "score" id *)
 let key_action ctx b s score_sp =
-   H.document##onkeydown <- H.handler (fun e -> 
+   H.document##onkeydown <- H.handler (fun e ->
    begin match parse_ev e with
    | Some (x) -> try key_press x (b,s) with Win_game -> move x b s; H.window##alert (js "Win")
    | _ -> ()
@@ -172,7 +172,7 @@ let key_action ctx b s score_sp =
    replace_child score_sp txt;
    if check_end_game b then H.window##alert (js "Lose") else ();
    Js._true)
-  
+
 let rec play_game ctx score_sp =
   let (b,s) = init_board 4 in
   draw_board ctx b;
