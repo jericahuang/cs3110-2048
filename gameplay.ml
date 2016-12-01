@@ -91,7 +91,7 @@ let rec is_valid_move_down b row col =
   if col = 0 then false else
   if is_empty_col b (col-1) row then is_valid_move_down b row (col-1) else
   if b.(3).(col-1) = None then true else
-  if b.(3).(col-1) <> None && b.(2).(col-1) = None && (b.(1).(col-1) <> None || b.(3).(col-1) <> None) then true else
+  if b.(3).(col-1) <> None && b.(2).(col-1) = None && (b.(1).(col-1) <> None || b.(0).(col-1) <> None) then true else
   if b.(3).(col-1) <> None && b.(2).(col-1) <> None && b.(1).(col-1) = None && b.(0).(col-1) <> None then true else
   if is_valid_merge_vertical b (col-1) 0 1 || is_valid_merge_vertical b (col-1) 1 2 || is_valid_merge_vertical b (col-1) 2 3
   then true else is_valid_move_down b row (col-1)
