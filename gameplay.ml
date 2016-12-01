@@ -22,7 +22,7 @@ type score = int ref
 
 type state = {
   evil: bool ref;
-  s: int ref;
+  s: score;
   b: board;
 }
 
@@ -45,8 +45,8 @@ let init_board size =
     let b = Array.make_matrix 4 4 None in
     let s = ref 0 in
     let e = ref false in
-    b.(3).(3) <- Some 2;
-    (*b.(3).(3) <- Some 1024; b.(3).(2) <- Some 1024;*)
+    (*b.(3).(3) <- Some 2;*)
+    b.(3).(3) <- Some 1024; b.(3).(2) <- Some 1024;
     {
       evil = e;
       s = s;
@@ -301,7 +301,7 @@ let check_end_game (b : board) =
   not (is_valid_move Left b || is_valid_move Right b ||
   is_valid_move Up b || is_valid_move Down b)
 
-let key_press m (b,s) evil =
+let key_press m b s evil =
   if is_valid_move m b then (move m b s;
   if check_winning_board b then raise Win_game else insert_square b evil)
   else ()
