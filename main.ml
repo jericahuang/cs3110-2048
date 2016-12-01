@@ -153,11 +153,11 @@ let draw_board ctx b =
 *****************************************************************************
 *)
 
-type key = 
+type key =
 	| Move of move
 	| Regular
 	| Evil
-	| New 
+	| New
 
 let end_game ctx =
 	ctx##fillStyle <- convert_color (246,93,59);
@@ -186,6 +186,24 @@ let parse_ev e =
   | 78 -> Some (New)
   | _ -> None
 
+let regular_handler ctx evil =
+  let mode =
+    Js.Opt.get (H.document##getElementById(js"mode"))
+      (fun () -> assert false)
+  in
+  let txt = document##createTextNode (js("Regular")) in
+  replace_child mode txt;
+  evil := false
+
+let evil_handler ctx evil =
+  let mode =
+    Js.Opt.get (H.document##getElementById(js"mode"))
+      (fun () -> assert false)
+  in
+  let txt = document##createTextNode (js("Evil")) in
+  replace_child mode txt;
+  evil := true
+
 let rec play_game ctx score_sp =
   let state = init_board 4 in
   draw_board ctx state.b;
@@ -197,9 +215,9 @@ let rec play_game ctx score_sp =
 and key_action ctx b s score_sp evil =
    H.document##onkeydown <- H.handler (fun e ->
    begin match parse_ev e with
-   | Some (Regular) -> evil := false
-   | Some (Evil) -> evil := true
-   | Some (Move x) -> key_press x (b,s) evil
+   | Some (Regular) -> (regular_handler ctx evil)
+   | Some (Evil) -> (evil_handler ctx evil)
+   | Some (Move x) -> (try key_press x (b,s) evil with Win_game -> move x b s; H.window##alert (js "Win"))
    | Some (New) -> play_game ctx score_sp; draw_board ctx b
    | None -> ()
    end; 
