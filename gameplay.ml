@@ -6,6 +6,8 @@ exception End_game
 let () = Random.self_init ()
 
 type move =
+  | Regular
+  | Evil
   | Left
   | Right
   | Up
@@ -17,6 +19,12 @@ type square = int option
 type board = square array array
 
 type score = int ref
+
+type state = {
+  evil: bool ref;
+  s: int ref;
+  b: board;
+}
 
 let square_value v =
   match v with
@@ -36,7 +44,14 @@ let init_board size =
   else
     let b = Array.make_matrix 4 4 None in
     let s = ref 0 in
-    b.(3).(3) <- Some 2; (b, s)
+    let e = ref false in
+    (* b.(3).(3) <- Some 2; (b, s) *)
+    b.(3).(3) <- Some 2;
+    {
+      evil = e;
+      s = s;
+      b = b;
+    }
     (* ([|[|None; Some 512; Some 64; None|];
     [|None; Some 1024; None; None|];
     [|None; None; None; None|];
@@ -273,9 +288,11 @@ let random_sq_value () =
   if prob = 0 then (Some 4) else (Some 2)
 
 (* Inserts pre-determined square [sq] into board [b] *)
-let insert_square (b : board) : unit =
+let insert_square (b : board) evil : unit =
   (* let (i, j) = random_avail b in *)
-  let (i, j) = insert_evil_square b in
+  let (i, j) =
+    if !evil then insert_evil_square b
+    else random_avail b in
   let sq = random_sq_value () in
   b.(i).(j) <- sq
 
@@ -284,7 +301,7 @@ let check_end_game (b : board) =
   not (is_valid_move Left b || is_valid_move Right b ||
   is_valid_move Up b || is_valid_move Down b)
 
-let key_press m (b,s) =
+let key_press m (b,s) evil =
   if is_valid_move m b then (move m b s;
-  if check_winning_board b then raise Win_game else insert_square b)
+  if check_winning_board b then raise Win_game else insert_square b evil)
   else ()
