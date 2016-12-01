@@ -156,7 +156,7 @@ let draw_board ctx b =
 let end_game ctx = 
 	ctx##fillStyle <- convert_color (246,93,59); 
 	ctx##fillRect (0.0, 0.0, float wind_w, float wind_h);
-	ctx##font <- js("700 %dpx open sans");
+	ctx##font <- js("700 %dpx Clearsans, Arial");
 	ctx##textAlign <- js("center");
 	ctx##fillStyle <- convert_color (255, 252, 245);
 	ctx##fillText (js"You Lose! :(", float wind_w /. 2., float wind_h /. 2.)
