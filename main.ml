@@ -19,9 +19,9 @@ let document = H.document
 *****************************************************************************
 *)
 
-let border = 10
-let sq_w = 80
-let sq_h = 80
+let border = 25
+let sq_w = 180
+let sq_h = 180
 let sq_space = 10
 let wind_w = (3 * border) + (2 * border) + (4 * sq_w)
 let wind_h = (3 * border) + (2 * border) + (4 * sq_h)
@@ -78,18 +78,18 @@ let map_sq_colors v =
 
 let map_text_size v =
   match v with
-  | 0 -> 38, 1.45
-  | 2 -> 38, 1.45
-  | 4 -> 38, 1.45
-  | 8 -> 38, 1.45
-  | 16 -> 35, 1.45
-  | 32 -> 35, 1.45
-  | 64 -> 35, 1.45
-  | 128 -> int_of_float (38. /. 1.2), 1.5
-  | 256 -> int_of_float (38. /. 1.2), 1.5
-  | 512 -> int_of_float (38. /. 1.2), 1.5
-  | 1024 -> int_of_float (38. /. 1.5), 1.5
-  | 2048 -> int_of_float (38. /. 1.5), 1.5
+  | 0 -> 75, 1.5
+  | 2 -> 75, 1.5
+  | 4 -> 75, 1.5
+  | 8 -> 75, 1.5
+  | 16 -> 72, 1.5
+  | 32 -> 72, 1.5
+  | 64 -> 72, 1.5
+  | 128 -> int_of_float (75. /. 1.2), 1.55
+  | 256 -> int_of_float (75. /. 1.2), 1.55
+  | 512 -> int_of_float (75. /. 1.2), 1.55
+  | 1024 -> int_of_float (75. /. 1.5), 1.55
+  | 2048 -> int_of_float (75. /. 1.5), 1.55
   | _ -> failwith "Invalid Tile"
 
 (*

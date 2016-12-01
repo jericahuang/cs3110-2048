@@ -25,7 +25,10 @@
               font-family: Clearsans, Open Sans;
               font-weight: 300;
               line-height: 1.3125rem;
-              padding: 2.6rem; }
+              padding: 2.6rem;
+              background-size: cover;
+              background-position: right bottom; 
+              background-image: url('bg.jpg'); }
        h1 { font-weight: 300; font-size: 2rem;
             color:#776e65; line-height:2.2rem;
             padding-bottom:1.3rem;
@@ -34,6 +37,14 @@
                 max-width:98vmin; max-height:98vmin;
                 font-family: Clearsans, Open Sans;
                 outline:none; }
+       /* until I can remove the first canvas via ocaml */
+       canvas:nth-child(1){
+                display:none;
+       }
+       canvas:nth-child(2){
+                display:block;
+                margin:auto;
+       }
         #score, #scoreTitle {
           font-size: 25px;
           font-family: Clearsans, Open Sans;
@@ -50,5 +61,16 @@
       <div id="modeTitle">Current Mode</div>
       <div id="mode">Regular</div>
       <script type="text/javascript" src="_build/main.d.js" defer></script>
+      <script type='text/javascript'>
+        window.addEventListener("keydown", function(e) {
+            
+            // space and arrow keys
+            if([32, 37, 38, 39, 40].indexOf(e.keyCode) > -1) {
+                e.preventDefault();
+            }
+        }, false);
+
+
+      </script>
     </body>
 </html>
