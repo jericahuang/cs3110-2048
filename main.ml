@@ -129,11 +129,11 @@ let draw_sq ctx i j sq_v =
   ctx##fillStyle <- convert_color (fst sq_colors);
   ctx##fillRect (float x, float y, float w, float h);
   (* ctx##font <- js(Printf.sprintf "%dpx Verdana" ); *)
-  ctx##font <- js(Printf.sprintf "700 %dpx Clearsans" (fst text_vals));
+  ctx##font <- js(Printf.sprintf "700 %dpx Clearsans, Arial" (fst text_vals));
   ctx##textAlign <- js("center");
   ctx##fillStyle <- convert_color (snd sq_colors);
   ctx##fillText (js(sq_val_str),
-                float x +. float sq_w /. 2.,
+                float x +. float sq_w /. 2.05,
                 float y +. float sq_h /. (snd text_vals) )
 
 let draw_board ctx b =

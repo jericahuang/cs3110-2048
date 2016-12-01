@@ -22,7 +22,7 @@
               background-color: #faf8ef; }
        body { width:100%; height:100%;
               font-size: 1rem;
-              font-family: "Clearsans";
+              font-family: Clearsans, Open Sans;
               font-weight: 300;
               line-height: 1.3125rem;
               padding: 2.6rem; }
@@ -32,21 +32,22 @@
             text-transform: uppercase; }
        canvas { width:30rem; height:30rem;
                 max-width:98vmin; max-height:98vmin;
+                font-family: Clearsans, Open Sans;
                 outline:none; }
         #score, #scoreTitle {
           font-size: 25px;
-          font-family: "Clearsans";
+          font-family: Clearsans, Open Sans;
           /*font-family: "Arial";*/
           font-weight: 700;
           padding: 10px;
         }
     </style>
     <title>2048</title>
-    <body>
+    <body style="font-family: Clearsans;">
+      <div style="font-family: Clearsans;">.</div>
       <div id="scoreTitle">Score</div>
       <div id="score"></div>
-      <div id="2048"; style="font-family: Clearsans;"> </div>
-      <script type="text/javascript" defer="defer"
-          src="_build/main.d.js"></script>
+      <div id="2048"; style="font-family: Clearsans, Open Sans;"> </div>
+      <script type="text/javascript" src="_build/main.d.js" defer></script>
     </body>
 </html>
