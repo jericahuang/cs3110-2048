@@ -167,6 +167,14 @@ let end_game ctx =
 	ctx##fillStyle <- convert_color (255, 252, 245);
 	ctx##fillText (js"You Lose! :(", float wind_w /. 2., float wind_h /. 2.)
 
+let win_game ctx = 
+	ctx##fillStyle <- convert_color (1,255,1);
+	ctx##fillRect (0.0, 0.0, float wind_w, float wind_h);
+	ctx##font <- js("700 %dpx Clearsans, Arial");
+	ctx##textAlign <- js("center");
+	ctx##fillStyle <- convert_color (255, 252, 245);
+	ctx##fillText (js"You Win! :)", float wind_w /. 2., float wind_h /. 2.)
+
 let parse_ev e =
   match e##keyCode with
   | 37 -> Some (Move Left)
@@ -175,6 +183,7 @@ let parse_ev e =
   | 40 -> Some (Move Down)
   | 82 -> Some (Regular)
   | 69 -> Some (Evil)
+  | 78 -> Some (New)
   | _ -> None
 
 let rec play_game ctx score_sp =
@@ -190,10 +199,12 @@ and key_action ctx b s score_sp evil =
    begin match parse_ev e with
    | Some (Regular) -> evil := false
    | Some (Evil) -> evil := true
-   | Some (Move x) -> (try key_press x (b,s) evil with Win_game -> move x b s; H.window##alert (js "Win"))
+   | Some (Move x) -> key_press x (b,s) evil
    | Some (New) -> play_game ctx score_sp; draw_board ctx b
    | None -> ()
-   end; draw_board ctx b;
+   end; 
+   (*if check_winning_board b then win_game ctx else ();*)
+   draw_board ctx b;
    let txt = document##createTextNode (js(string_of_int !s)) in
    replace_child score_sp txt;
    if check_end_game b then end_game ctx else ();

@@ -46,13 +46,13 @@ let init_board size =
     let s = ref 0 in
     let e = ref false in
     (* b.(3).(3) <- Some 2; (b, s) *)
-    b.(3).(3) <- Some 2;
+    b.(3).(3) <- Some 1024; b.(3).(2) <- Some 1024;
     {
       evil = e;
       s = s;
       b = b;
     }
-    (* ([|[|None; Some 512; Some 64; None|];
+    (* ([|[|None; Some 1024; Some 64; None|];
     [|None; Some 1024; None; None|];
     [|None; None; None; None|];
     [|Some 2; None; None; Some 8|]|], s) *)
