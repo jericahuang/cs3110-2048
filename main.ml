@@ -177,7 +177,6 @@ let rec play_game ctx score_sp =
   let (b,s) = init_board 4 in
   draw_board ctx b;
   key_action ctx b s score_sp
-  (* draw_empty_sq ctx 0 0 *)
 
 let main () =
   let game =
