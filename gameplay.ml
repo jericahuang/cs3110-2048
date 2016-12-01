@@ -33,11 +33,11 @@ let is_empty_square (s : square) =
  (* right now deafult to 4. Change to size and size - 1 *)
 let init_board size =
   if size < 1 then failwith "Invalid matrix size"
-  else 
+  else
     let b = Array.make_matrix 4 4 None in
     let s = ref 0 in
     b.(3).(3) <- Some 2; (b, s)
-    (* ([|[|None; Some 512; Some 64; None|];
+   (*  ([|[|None; Some 512; Some 64; None|];
     [|None; Some 1024; None; None|];
     [|None; None; None; None|];
     [|Some 2; None; None; Some 2048|]|], s) *)
