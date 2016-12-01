@@ -171,12 +171,33 @@ let parse_ev e =
   | 69 -> Some (Evil)
   | _ -> None
 
+let regular_handler ctx evil =
+  let mode =
+    Js.Opt.get (H.document##getElementById(js"mode"))
+      (fun () -> assert false)
+  in
+  let txt = document##createTextNode (js("Regular")) in
+  replace_child mode txt;
+  evil := false
+
+let evil_handler ctx evil =
+  let mode =
+    Js.Opt.get (H.document##getElementById(js"mode"))
+      (fun () -> assert false)
+  in
+  let txt = document##createTextNode (js("Evil")) in
+  replace_child mode txt;
+  evil := true
+
+(* | Some (Regular) -> (regular_handler ctx evil)
+   | Some (Evil) -> (evil_handler ctx evil) *)
+
 (* score_sp: element associated with "score" id *)
 let key_action ctx b s score_sp evil =
    H.document##onkeydown <- H.handler (fun e ->
    begin match parse_ev e with
-   | Some (Regular) -> evil := false
-   | Some (Evil) -> evil := true
+   | Some (Regular) -> (regular_handler ctx evil)
+   | Some (Evil) -> (evil_handler ctx evil)
    | Some (x) -> (try key_press x (b,s) evil with Win_game -> move x b s; H.window##alert (js "Win"))
    | None -> ()
    end; draw_board ctx b;
