@@ -153,6 +153,12 @@ let draw_board ctx b =
 *****************************************************************************
 *)
 
+type key =
+	| Move of move
+	| Regular
+	| Evil
+	| New
+
 let end_game ctx =
 	ctx##fillStyle <- convert_color (246,93,59);
 	ctx##fillRect (0.0, 0.0, float wind_w, float wind_h);
@@ -163,10 +169,10 @@ let end_game ctx =
 
 let parse_ev e =
   match e##keyCode with
-  | 37 -> Some (Left)
-  | 38 -> Some (Up)
-  | 39 -> Some (Right)
-  | 40 -> Some (Down)
+  | 37 -> Some (Move Left)
+  | 38 -> Some (Move Up)
+  | 39 -> Some (Move Right)
+  | 40 -> Some (Move Down)
   | 82 -> Some (Regular)
   | 69 -> Some (Evil)
   | _ -> None
@@ -189,27 +195,27 @@ let evil_handler ctx evil =
   replace_child mode txt;
   evil := true
 
-(* | Some (Regular) -> (regular_handler ctx evil)
-   | Some (Evil) -> (evil_handler ctx evil) *)
+let rec play_game ctx score_sp =
+  let state = init_board 4 in
+  draw_board ctx state.b;
+  let txt = document##createTextNode (js(string_of_int !(state.s))) in
+  replace_child score_sp txt;
+  key_action ctx state.b state.s score_sp state.evil
 
 (* score_sp: element associated with "score" id *)
-let key_action ctx b s score_sp evil =
+and key_action ctx b s score_sp evil =
    H.document##onkeydown <- H.handler (fun e ->
    begin match parse_ev e with
    | Some (Regular) -> (regular_handler ctx evil)
    | Some (Evil) -> (evil_handler ctx evil)
-   | Some (x) -> (try key_press x (b,s) evil with Win_game -> move x b s; H.window##alert (js "Win"))
+   | Some (Move x) -> (try key_press x (b,s) evil with Win_game -> move x b s; H.window##alert (js "Win"))
+   | Some (New) -> play_game ctx score_sp; draw_board ctx b
    | None -> ()
    end; draw_board ctx b;
    let txt = document##createTextNode (js(string_of_int !s)) in
    replace_child score_sp txt;
    if check_end_game b then end_game ctx else ();
    Js._true)
-
-let rec play_game ctx score_sp =
-  let state = init_board 4 in
-  draw_board ctx state.b;
-  key_action ctx state.b state.s score_sp state.evil
 
 let main () =
   let game =
