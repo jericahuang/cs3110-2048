@@ -37,10 +37,10 @@ let init_board size =
     let b = Array.make_matrix 4 4 None in
     let s = ref 0 in
     b.(3).(3) <- Some 2; (b, s)
-   (*  ([|[|None; Some 512; Some 64; None|];
+    (* ([|[|None; Some 512; Some 64; None|];
     [|None; Some 1024; None; None|];
     [|None; None; None; None|];
-    [|Some 2; None; None; Some 2048|]|], s) *)
+    [|Some 2; None; None; Some 8|]|], s) *)
 
 (* [check_2048_sqaure s] returns if 2048 square has been formed. *)
 let check_2048_square (s : square) =
@@ -213,14 +213,60 @@ let random_avail b =
   random_nth_list avail
 
 (* Repetive code? *)
-let random_not_avail b =
+let not_avail_squares b =
   let all_indicies =
     list_index >>= fun i ->
     list_index >>= fun j ->
     [(i, j)]
   in
-  let avail = List.filter (fun (i, j) -> b.(i).(j) <> None) all_indicies in
-  random_nth_list avail
+  List.filter (fun (i, j) -> b.(i).(j) <> None) all_indicies
+
+(* Repetive code? Returns a list of empty squares *)
+let empty_squares b =
+  let all_indicies =
+    list_index >>= fun i ->
+    list_index >>= fun j ->
+    [(i, j)]
+  in
+  List.filter (fun (i, j) -> b.(i).(j) = None) all_indicies
+
+(* http://langref.org/ocaml/numbers/mathematical/distance-between-points *)
+let distance a b =
+  sqrt((float(fst a) -. float(fst b))**2. +. (float(snd a) -. float(snd b))**2.)
+
+(* Given list of current squares, find max
+ * returns (i,j) of the largest square *)
+let find_max_sq (b:board) =
+  let lst = not_avail_squares b in
+  let max_ref = ref 0 in
+  let max_pos = ref (0,0) in
+  for i = 0 to (List.length lst - 1) do
+    let pos = List.nth lst i in
+    let sq_val = square_value b.(fst pos).(snd pos) in
+    if sq_val > !max_ref then begin
+      max_ref := sq_val;
+      max_pos := pos;
+    end
+    else ()
+  done;
+  !max_pos
+
+let insert_evil_square (b:board) =
+  let max_pos = find_max_sq b in
+  let empty_sq = empty_squares b in
+  let min_ref = ref 10. in
+  let min_pos = ref (0,0) in
+  for i = 0 to (List.length empty_sq - 1) do
+    let pos = List.nth empty_sq i in
+    let dist = distance max_pos pos in
+    if dist < !min_ref then begin
+      min_ref := dist;
+      min_pos := pos;
+    end
+    else ()
+  done;
+  !min_pos
+
 
 let random_sq_value () =
   let prob = Random.int 10 in
@@ -228,7 +274,8 @@ let random_sq_value () =
 
 (* Inserts pre-determined square [sq] into board [b] *)
 let insert_square (b : board) : unit =
-  let (i, j) = random_avail b in
+  (* let (i, j) = random_avail b in *)
+  let (i, j) = insert_evil_square b in
   let sq = random_sq_value () in
   b.(i).(j) <- sq
 
