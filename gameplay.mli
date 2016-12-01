@@ -5,6 +5,8 @@ exception Win_game
 
 (** The type for game moves corresponding to arrow keys (left, right, up, down). *)
 type move =
+  | Regular
+  | Evil
   | Left
   | Right
   | Up
@@ -20,6 +22,12 @@ type row = square list *)
 type board = square array array
 
 type score = int ref
+
+type state = {
+  evil: bool ref;
+  s: int ref;
+  b: board;
+}
 
 (* Square Values *)
 
@@ -67,10 +75,11 @@ val square_value : square -> int
 (* Board and move logic *)
 
 (* Keyup event handler function *)
-val key_press : move -> board * score -> unit
+val key_press : move -> board * score -> bool ref -> unit
 
 (** [create_board ()] is a new board. Defaults to 4. *)
-val init_board : int -> board * score
+(* val init_board : int -> board * score *)
+val init_board : int -> state
 
 (** [is_game_over board] is [true] if there are no valid moves. *)
 val check_end_game : board -> bool
@@ -86,7 +95,8 @@ val is_valid_move : move -> board -> bool
 
 (** [insert_square square board] is [board] with [square] inserted
     in a random empty spot. *)
-val insert_square : board -> unit
+(* val insert_square : board -> unit *)
+val insert_square : board -> bool ref -> unit
 
 val move : move -> board -> score -> unit
 

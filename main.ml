@@ -155,10 +155,12 @@ let draw_board ctx b =
 
 type key = 
 	| Move of move
-	| New
+	| Regular
+	| Evil
+	| New 
 
-let end_game ctx = 
-	ctx##fillStyle <- convert_color (246,93,59); 
+let end_game ctx =
+	ctx##fillStyle <- convert_color (246,93,59);
 	ctx##fillRect (0.0, 0.0, float wind_w, float wind_h);
 	ctx##font <- js("700 %dpx Clearsans, Arial");
 	ctx##textAlign <- js("center");
@@ -171,21 +173,24 @@ let parse_ev e =
   | 38 -> Some (Move Up)
   | 39 -> Some (Move Right)
   | 40 -> Some (Move Down)
-  | 78 -> Some (New)
+  | 82 -> Some (Regular)
+  | 69 -> Some (Evil)
   | _ -> None
 
 let rec play_game ctx score_sp =
-  let (b,s) = init_board 4 in
-  draw_board ctx b;
-  let txt = document##createTextNode (js(string_of_int !s)) in
-   replace_child score_sp txt;
-  key_action ctx b s score_sp
+  let state = init_board 4 in
+  draw_board ctx state.b;
+  let txt = document##createTextNode (js(string_of_int !(state.s))) in
+  replace_child score_sp txt;
+  key_action ctx state.b state.s score_sp state.evil
 
 (* score_sp: element associated with "score" id *)
-and key_action ctx b s score_sp =
+and key_action ctx b s score_sp evil =
    H.document##onkeydown <- H.handler (fun e ->
    begin match parse_ev e with
-   | Some (Move x) -> (try key_press x (b,s) with Win_game -> move x b s; H.window##alert (js "Win"))
+   | Some (Regular) -> evil := false
+   | Some (Evil) -> evil := true
+   | Some (Move x) -> (try key_press x (b,s) evil with Win_game -> move x b s; H.window##alert (js "Win"))
    | Some (New) -> play_game ctx score_sp; draw_board ctx b
    | None -> ()
    end; draw_board ctx b;
@@ -193,7 +198,6 @@ and key_action ctx b s score_sp =
    replace_child score_sp txt;
    if check_end_game b then end_game ctx else ();
    Js._true)
-  (* draw_empty_sq ctx 0 0 *)
 
 let main () =
   let game =
