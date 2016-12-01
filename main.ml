@@ -153,6 +153,14 @@ let draw_board ctx b =
 *****************************************************************************
 *)
 
+let end_game ctx = 
+	ctx##fillStyle <- convert_color (246,93,59); 
+	ctx##fillRect (0.0, 0.0, float wind_w, float wind_h);
+	ctx##font <- js("700 %dpx open sans");
+	ctx##textAlign <- js("center");
+	ctx##fillStyle <- convert_color (255, 252, 245);
+	ctx##fillText (js"You Lose! :(", float wind_w /. 2., float wind_h /. 2.)
+
 let parse_ev e =
   match e##keyCode with
   | 37 -> Some (Left)
@@ -165,12 +173,12 @@ let parse_ev e =
 let key_action ctx b s score_sp =
    H.document##onkeydown <- H.handler (fun e -> 
    begin match parse_ev e with
-   | Some (x) -> try key_press x (b,s) with Win_game -> move x b s; H.window##alert (js "Win")
-   | _ -> ()
+   | Some (x) -> (try key_press x (b,s) with Win_game -> move x b s; H.window##alert (js "Win"))
+   | None -> ()
    end; draw_board ctx b;
    let txt = document##createTextNode (js(string_of_int !s)) in
    replace_child score_sp txt;
-   if check_end_game b then H.window##alert (js "Lose") else ();
+   if check_end_game b then end_game ctx else ();
    Js._true)
   
 let rec play_game ctx score_sp =
