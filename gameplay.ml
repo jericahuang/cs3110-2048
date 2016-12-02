@@ -45,8 +45,7 @@ let init_board size =
     let b = Array.make_matrix 4 4 None in
     let s = ref 0 in
     let e = ref false in
-    (*b.(3).(3) <- Some 2;*)
-    b.(3).(3) <- Some 1024; b.(3).(2) <- Some 1024;
+    b.(3).(3) <- Some 2;
     {
       evil = e;
       s = s;
@@ -215,12 +214,6 @@ let random_nth_list l  =
   List.nth l (Random.int len)
 let (>>=) l f = List.concat (List.map f l)
 let list_index = [0;1;2;3]
-(* Returns a tuple (i,j) of a random open position in [b] in row i, column j
- * Precondition: [b] has at least one open position.
- *)
-let random_avail b =
-  let empty_squares b = avail in
-  random_nth_list avail
 
 (* Repetive code? *)
 let not_avail_squares b =
@@ -239,6 +232,13 @@ let empty_squares b =
     [(i, j)]
   in
   List.filter (fun (i, j) -> b.(i).(j) = None) all_indicies
+
+(* Returns a tuple (i,j) of a random open position in [b] in row i, column j
+ * Precondition: [b] has at least one open position.
+ *)
+let random_avail b =
+  let avail = empty_squares b in
+  random_nth_list avail
 
 (* http://langref.org/ocaml/numbers/mathematical/distance-between-points *)
 let distance a b =
