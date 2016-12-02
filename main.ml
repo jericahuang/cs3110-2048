@@ -19,9 +19,9 @@ let document = H.document
 *****************************************************************************
 *)
 
-let border = 10
-let sq_w = 80
-let sq_h = 80
+let border = 25
+let sq_w = 180
+let sq_h = 180
 let sq_space = 10
 let wind_w = (3 * border) + (2 * border) + (4 * sq_w)
 let wind_h = (3 * border) + (2 * border) + (4 * sq_h)
@@ -78,18 +78,18 @@ let map_sq_colors v =
 
 let map_text_size v =
   match v with
-  | 0 -> 38, 1.45
-  | 2 -> 38, 1.45
-  | 4 -> 38, 1.45
-  | 8 -> 38, 1.45
-  | 16 -> 35, 1.45
-  | 32 -> 35, 1.45
-  | 64 -> 35, 1.45
-  | 128 -> int_of_float (38. /. 1.2), 1.5
-  | 256 -> int_of_float (38. /. 1.2), 1.5
-  | 512 -> int_of_float (38. /. 1.2), 1.5
-  | 1024 -> int_of_float (38. /. 1.5), 1.5
-  | 2048 -> int_of_float (38. /. 1.5), 1.5
+  | 0 -> 75, 1.5
+  | 2 -> 75, 1.5
+  | 4 -> 75, 1.5
+  | 8 -> 75, 1.5
+  | 16 -> 72, 1.5
+  | 32 -> 72, 1.5
+  | 64 -> 72, 1.5
+  | 128 -> int_of_float (75. /. 1.2), 1.55
+  | 256 -> int_of_float (75. /. 1.2), 1.55
+  | 512 -> int_of_float (75. /. 1.2), 1.55
+  | 1024 -> int_of_float (75. /. 1.5), 1.55
+  | 2048 -> int_of_float (75. /. 1.5), 1.55
   | _ -> failwith "Invalid Tile"
 
 (*
@@ -167,6 +167,14 @@ let end_game ctx =
 	ctx##fillStyle <- convert_color (255, 252, 245);
 	ctx##fillText (js"You Lose! :(", float wind_w /. 2., float wind_h /. 2.)
 
+let win_game ctx =
+	ctx##fillStyle <- convert_color (0,230,0);
+	ctx##fillRect (0.0, 0.0, float wind_w, float wind_h);
+	ctx##font <- js("700 %dpx Clearsans, Arial");
+	ctx##textAlign <- js("center");
+	ctx##fillStyle <- convert_color (255, 252, 245);
+	ctx##fillText (js"You Win! :)", float wind_w /. 2., float wind_h /. 2.)
+
 let parse_ev e =
   match e##keyCode with
   | 37 -> Some (Move Left)
@@ -175,6 +183,7 @@ let parse_ev e =
   | 40 -> Some (Move Down)
   | 82 -> Some (Regular)
   | 69 -> Some (Evil)
+  | 78 -> Some (New)
   | _ -> None
 
 let regular_handler ctx evil =
@@ -197,9 +206,7 @@ let evil_handler ctx evil =
 
 let rec play_game ctx score_sp =
   let state = init_board 4 in
-  draw_board ctx state.b;
-  let txt = document##createTextNode (js(string_of_int !(state.s))) in
-  replace_child score_sp txt;
+  draw_board ctx (state.b);
   key_action ctx state.b state.s score_sp state.evil
 
 (* score_sp: element associated with "score" id *)
@@ -208,12 +215,13 @@ and key_action ctx b s score_sp evil =
    begin match parse_ev e with
    | Some (Regular) -> (regular_handler ctx evil)
    | Some (Evil) -> (evil_handler ctx evil)
-   | Some (Move x) -> (try key_press x (b,s) evil with Win_game -> move x b s; H.window##alert (js "Win"))
-   | Some (New) -> play_game ctx score_sp; draw_board ctx b
+   | Some (Move x) -> (try key_press x b s evil; draw_board ctx b with Win_game -> win_game ctx)
+   | Some (New) -> replace_child score_sp (document##createTextNode (js(string_of_int 0))); play_game ctx score_sp
    | None -> ()
-   end; draw_board ctx b;
+   end;
    let txt = document##createTextNode (js(string_of_int !s)) in
    replace_child score_sp txt;
+   (*if check_winning_board b then win_game ctx else ();*)
    if check_end_game b then end_game ctx else ();
    Js._true)
 
@@ -223,10 +231,12 @@ let main () =
       (fun () -> assert false)
   in
   let canvas = H.createCanvas H.document in
-  canvas##width <- (wind_w + 250);
-  canvas##height <- (wind_h + 250);
+  (* canvas##width <- (wind_w + 250);
+  canvas##height <- (wind_h + 250); *)
 (*   canvas##style##width <- js(string_of_int (wind_w - 100));
   canvas##style##height <- js(string_of_int (wind_h - 100)); *)
+  canvas##width <- (wind_w);
+  canvas##height <- (wind_h);
   Dom.appendChild game canvas;
   let ctx = canvas##getContext (H._2d_) in
   let score_sp =

@@ -22,7 +22,7 @@ type score = int ref
 
 type state = {
   evil: bool ref;
-  s: int ref;
+  s: score;
   b: board;
 }
 
@@ -45,14 +45,14 @@ let init_board size =
     let b = Array.make_matrix 4 4 None in
     let s = ref 0 in
     let e = ref false in
-    (* b.(3).(3) <- Some 2; (b, s) *)
-    b.(3).(3) <- Some 2;
+    (*b.(3).(3) <- Some 2;*)
+    b.(3).(3) <- Some 1024; b.(3).(2) <- Some 1024;
     {
       evil = e;
       s = s;
       b = b;
     }
-    (* ([|[|None; Some 512; Some 64; None|];
+    (* ([|[|None; Some 1024; Some 64; None|];
     [|None; Some 1024; None; None|];
     [|None; None; None; None|];
     [|Some 2; None; None; Some 8|]|], s) *)
@@ -219,12 +219,7 @@ let list_index = [0;1;2;3]
  * Precondition: [b] has at least one open position.
  *)
 let random_avail b =
-  let all_indicies =
-    list_index >>= fun i ->
-    list_index >>= fun j ->
-    [(i, j)]
-  in
-  let avail = List.filter (fun (i, j) -> b.(i).(j) = None) all_indicies in
+  let empty_squares b = avail in
   random_nth_list avail
 
 (* Repetive code? *)
@@ -301,7 +296,7 @@ let check_end_game (b : board) =
   not (is_valid_move Left b || is_valid_move Right b ||
   is_valid_move Up b || is_valid_move Down b)
 
-let key_press m (b,s) evil =
+let key_press m b s evil =
   if is_valid_move m b then (move m b s;
   if check_winning_board b then raise Win_game else insert_square b evil)
   else ()

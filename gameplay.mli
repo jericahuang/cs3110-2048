@@ -25,7 +25,7 @@ type score = int ref
 
 type state = {
   evil: bool ref;
-  s: int ref;
+  s: score;
   b: board;
 }
 
@@ -75,10 +75,9 @@ val square_value : square -> int
 (* Board and move logic *)
 
 (* Keyup event handler function *)
-val key_press : move -> board * score -> bool ref -> unit
+val key_press : move -> board -> score -> bool ref -> unit
 
 (** [create_board ()] is a new board. Defaults to 4. *)
-(* val init_board : int -> board * score *)
 val init_board : int -> state
 
 (** [is_game_over board] is [true] if there are no valid moves. *)
@@ -95,7 +94,6 @@ val is_valid_move : move -> board -> bool
 
 (** [insert_square square board] is [board] with [square] inserted
     in a random empty spot. *)
-(* val insert_square : board -> unit *)
 val insert_square : board -> bool ref -> unit
 
 val move : move -> board -> score -> unit
