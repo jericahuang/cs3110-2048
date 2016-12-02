@@ -225,6 +225,8 @@ let main () =
   let canvas = H.createCanvas H.document in
   canvas##width <- (wind_w + 250);
   canvas##height <- (wind_h + 250);
+(*   canvas##style##width <- js(string_of_int (wind_w - 100));
+  canvas##style##height <- js(string_of_int (wind_h - 100)); *)
   Dom.appendChild game canvas;
   let ctx = canvas##getContext (H._2d_) in
   let score_sp =
