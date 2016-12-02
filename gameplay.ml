@@ -219,12 +219,7 @@ let list_index = [0;1;2;3]
  * Precondition: [b] has at least one open position.
  *)
 let random_avail b =
-  let all_indicies =
-    list_index >>= fun i ->
-    list_index >>= fun j ->
-    [(i, j)]
-  in
-  let avail = List.filter (fun (i, j) -> b.(i).(j) = None) all_indicies in
+  let empty_squares b = avil in
   random_nth_list avail
 
 (* Repetive code? *)

@@ -231,8 +231,8 @@ let main () =
       (fun () -> assert false)
   in
   let canvas = H.createCanvas H.document in
-  canvas##width <- (wind_w + 250);
-  canvas##height <- (wind_h + 250);
+  canvas##width <- (wind_w);
+  canvas##height <- (wind_h);
   Dom.appendChild game canvas;
   let ctx = canvas##getContext (H._2d_) in
   let score_sp =
