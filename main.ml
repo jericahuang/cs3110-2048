@@ -211,9 +211,12 @@ let reset_score ctx score_sp =
   let txt = document##createTextNode (js("0")) in 
   replace_child score_sp txt
 
+let change_score score_sp s = 
+   let txt = document##createTextNode (js(string_of_int !s)) in
+   replace_child score_sp txt
+
 let rec play_game ctx score_sp =
   let state = init_board 4 in
-  replace_child score_sp (document##createTextNode (js(string_of_int 0)));
   draw_board ctx (state.b);
   key_action ctx state.b state.s score_sp state.evil
 
@@ -223,13 +226,12 @@ and key_action ctx b s score_sp evil =
    begin match parse_ev e with
    | Some (Regular) -> (regular_handler ctx evil)
    | Some (Evil) -> (evil_handler ctx evil)
-   | Some (Move x) -> key_press x b s evil; draw_board ctx b; if check_end_game b then end_game ctx else
+   | Some (Move x) -> key_press x b s evil; draw_board ctx b; change_score score_sp s; 
+   					  if check_end_game b then end_game ctx else
    	       			  if check_winning_board b then win_game ctx else ()
-   | Some (New) -> reset_score ctx score_sp;(*replace_child score_sp (document##createTextNode (js(string_of_int 0)));*) play_game ctx score_sp
+   | Some (New) -> replace_child score_sp (document##createTextNode (js("0"))); play_game ctx score_sp
    | None -> ()
    end;  
-   let txt = document##createTextNode (js(string_of_int !s)) in
-   replace_child score_sp txt;
    (*if check_end_game b then end_game ctx else ();*)
    Js._true)
 
