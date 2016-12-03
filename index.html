@@ -6,49 +6,36 @@
                                    initial-scale=1.0">
       <link href="favicon.ico" rel="icon" type="image/x-icon" />
       <link href="favicon.ico" rel="shortcut icon" type="image/x-icon">
-    <style type="text/css">
-      @font-face {
-        font-family: "Clearsans";
-        src: url('ClearSans-Bold.eot');
-        src: url('ClearSans-Bold.ttf');
-      }
-       *, *:before, *:after { -moz-box-sizing: border-box;
-                              -webkit-box-sizing: border-box;
-                              box-sizing: border-box;
-                              margin: 0em;
-                              padding: 0em;}
-       html { font-size: 1em;
-              height:100%; width:100%;
-              background-color: #faf8ef; }
-       body { width:100%; height:100%;
-              font-size: 1rem;
-              font-family: Clearsans, Open Sans;
-              font-weight: 300;
-              line-height: 1.3125rem;
-              padding: 2.6rem; }
-       h1 { font-weight: 300; font-size: 2rem;
-            color:#776e65; line-height:2.2rem;
-            padding-bottom:1.3rem;
-            text-transform: uppercase; }
-       canvas { width:30rem; height:30rem;
-                max-width:98vmin; max-height:98vmin;
-                font-family: Clearsans, Open Sans;
-                outline:none; }
-        #score, #scoreTitle {
-          font-size: 25px;
-          font-family: Clearsans, Open Sans;
-          /*font-family: "Arial";*/
-          font-weight: 700;
-          padding: 10px;
-        }
-    </style>
-    <title>2048</title>
+      <link rel="stylesheet" type="text/css" href="styles.css">
+
+      <title>2048</title>
+
     <body style="font-family: Clearsans;">
-      <div id="scoreTitle">Score</div>
-      <div id="score"></div>
+      <div id="header">
+        <h1>2048</h1>
+        <ul id="stats">
+          <li>
+            <div class="statLabel">Score</div>
+            <div class="statContent" id="score"></div>
+          </li>
+          <li>
+            <label class="statLabel">Mode</label>
+            <div class="statContent" id="mode">Regular</div>
+          </li>
+        </ul>
+      </div>
       <div id="2048"; style="font-family: Clearsans, Open Sans;"> </div>
-      <div id="modeTitle">Current Mode</div>
-      <div id="mode">Regular</div>
       <script type="text/javascript" src="_build/main.d.js" defer></script>
+      <script type='text/javascript'>
+        window.addEventListener("keydown", function(e) {
+
+            // space and arrow keys - prevents scrolling up
+            if([32, 37, 38, 39, 40].indexOf(e.keyCode) > -1) {
+                e.preventDefault();
+            }
+        }, false);
+
+
+      </script>
     </body>
 </html>

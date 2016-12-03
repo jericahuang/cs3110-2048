@@ -215,17 +215,6 @@ let random_nth_list l  =
   List.nth l (Random.int len)
 let (>>=) l f = List.concat (List.map f l)
 let list_index = [0;1;2;3]
-(* Returns a tuple (i,j) of a random open position in [b] in row i, column j
- * Precondition: [b] has at least one open position.
- *)
-let random_avail b =
-  let all_indicies =
-    list_index >>= fun i ->
-    list_index >>= fun j ->
-    [(i, j)]
-  in
-  let avail = List.filter (fun (i, j) -> b.(i).(j) = None) all_indicies in
-  random_nth_list avail
 
 (* Repetive code? *)
 let not_avail_squares b =
@@ -244,6 +233,13 @@ let empty_squares b =
     [(i, j)]
   in
   List.filter (fun (i, j) -> b.(i).(j) = None) all_indicies
+
+(* Returns a tuple (i,j) of a random open position in [b] in row i, column j
+ * Precondition: [b] has at least one open position.
+ *)
+let random_avail b =
+  let avail = empty_squares b in
+  random_nth_list avail
 
 (* http://langref.org/ocaml/numbers/mathematical/distance-between-points *)
 let distance a b =
