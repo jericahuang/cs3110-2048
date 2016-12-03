@@ -121,54 +121,20 @@ let draw_empty_sq ctx i j =
   ctx##fillStyle <- convert_color empty_color;
   ctx##fillRect (float x, float y, float w, float h)
 
-let draw_sq time ctx i j sq_v =
+let draw_sq ctx i j sq_v =
   let (x, y, w, h) = square_dim i j in
   let sq_colors = map_sq_colors sq_v in
   let sq_val_str = string_of_int sq_v in
   let text_vals = map_text_size sq_v in
-  begin
-  (* ctx##fillStyle <- convert_color (fst sq_colors);
-  ctx##fillRect (float x, float y, float (w) *. 0.1, float (h) *. 0.1);
-  ctx##clearRect(float x, float y, float (w) *. 0.1, float (h) *. 0.1);
-  ctx##fillStyle <- convert_color (fst sq_colors);
-  ctx##fillRect (float x, float y, float (w) *. 0.2, float (h) *. 0.2);
-  ctx##clearRect(float x, float y, float (w) *. 0.2, float (h) *. 0.2);
-  ctx##fillStyle <- convert_color (fst sq_colors);
-  ctx##fillRect (float x, float y, float (w) *. 0.6, float (h) *. 0.6);
-  ctx##font <- js(Printf.sprintf "700 %dpx Clearsans, Arial" (15));
-  ctx##textAlign <- js("center");
-  ctx##fillStyle <- convert_color (snd sq_colors);
-  ctx##fillText (js(sq_val_str),
-                float x +. float sq_w /. 2.05,
-                float y +. float sq_h /. (snd text_vals) );
-  ctx##clearRect(float x, float y, float (w) *. 0.6, float (h) *. 0.6);
-  ctx##fillStyle <- convert_color (fst sq_colors);
-  ctx##fillRect (float x, float y, float (w) *. 0.8, float (h) *. 0.8);
-  ctx##font <- js(Printf.sprintf "700 %dpx Clearsans, Arial" (20));
-  ctx##textAlign <- js("center");
-  ctx##fillStyle <- convert_color (snd sq_colors);
-  ctx##fillText (js(sq_val_str),
-                float x +. float sq_w /. 2.05,
-                float y +. float sq_h /. (snd text_vals) );
-  ctx##clearRect(float x, float y, float (w) *. 0.8, float (h) *. 0.8);
-  ctx##fillStyle <- convert_color (fst sq_colors);
-  ctx##fillRect (float x, float y, float (w) *. 0.9, float (h) *. 0.9);
-  ctx##font <- js(Printf.sprintf "700 %dpx Clearsans, Arial" (20));
-  ctx##textAlign <- js("center");
-  ctx##fillStyle <- convert_color (snd sq_colors);
-  ctx##fillText (js(sq_val_str),
-                float x +. float sq_w /. 2.05,
-                float y +. float sq_h /. (snd text_vals) );
-  ctx##clearRect(float x, float y, float (w) *. 0.9, float (h) *. 0.9); *)
   ctx##fillStyle <- convert_color (fst sq_colors);
   ctx##fillRect (float x, float y, float w, float h);
+  (* ctx##font <- js(Printf.sprintf "%dpx Verdana" ); *)
   ctx##font <- js(Printf.sprintf "700 %dpx Clearsans, Arial" (fst text_vals));
   ctx##textAlign <- js("center");
   ctx##fillStyle <- convert_color (snd sq_colors);
   ctx##fillText (js(sq_val_str),
                 float x +. float sq_w /. 2.05,
                 float y +. float sq_h /. (snd text_vals) )
-end
 
 let draw_board ctx b =
   ctx##fillStyle <- (convert_color board_lines_color);
@@ -242,7 +208,7 @@ let reset_score ctx score_sp =
   let score_sp = Js.Opt.get (H.document##getElementById(js"score"))
       (fun () -> assert false)
   in
-  let txt = document##createTextNode (js("0")) in 
+  let txt = document##createTextNode (js("0")) in
   replace_child score_sp txt
 
 let rec play_game ctx score_sp =
@@ -259,9 +225,10 @@ and key_action ctx b s score_sp evil =
    | Some (Evil) -> (evil_handler ctx evil)
    | Some (Move x) -> key_press x b s evil; draw_board ctx b; if check_end_game b then end_game ctx else
    	       			  if check_winning_board b then win_game ctx else ()
-   | Some (New) -> reset_score ctx score_sp;(*replace_child score_sp (document##createTextNode (js(string_of_int 0)));*) play_game ctx score_sp
+   | Some (New) -> reset_score ctx score_sp (*replace_child score_sp (document##createTextNode (js(string_of_int 0)));*)
+   play_game ctx score_sp
    | None -> ()
-   end;  
+   end;
    let txt = document##createTextNode (js(string_of_int !s)) in
    replace_child score_sp txt;
    (*if check_end_game b then end_game ctx else ();*)
@@ -281,7 +248,7 @@ let main () =
   canvas##height <- (wind_h);
   Dom.appendChild game canvas;
   let ctx = canvas##getContext (H._2d_) in
-  let score_sp = 
+  let score_sp =
     Js.Opt.get (H.document##getElementById(js"score"))
       (fun () -> assert false)
   in
