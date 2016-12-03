@@ -204,13 +204,6 @@ let evil_handler ctx evil =
   replace_child mode txt;
   evil := true
 
-let reset_score ctx score_sp =
-  let score_sp = Js.Opt.get (H.document##getElementById(js"score"))
-      (fun () -> assert false)
-  in
-  let txt = document##createTextNode (js("0")) in 
-  replace_child score_sp txt
-
 let change_score score_sp s = 
    let txt = document##createTextNode (js(string_of_int !s)) in
    replace_child score_sp txt
@@ -227,12 +220,11 @@ and key_action ctx b s score_sp evil =
    | Some (Regular) -> (regular_handler ctx evil)
    | Some (Evil) -> (evil_handler ctx evil)
    | Some (Move x) -> key_press x b s evil; draw_board ctx b; change_score score_sp s; 
-   					  if check_end_game b then end_game ctx else
-   	       			  if check_winning_board b then win_game ctx else ()
+   	       			  if check_winning_board b then win_game ctx else 
+   	       			  if check_end_game b then end_game ctx else ()
    | Some (New) -> replace_child score_sp (document##createTextNode (js("0"))); play_game ctx score_sp
    | None -> ()
    end;  
-   (*if check_end_game b then end_game ctx else ();*)
    Js._true)
 
 let main () =
