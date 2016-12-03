@@ -204,8 +204,16 @@ let evil_handler ctx evil =
   replace_child mode txt;
   evil := true
 
+let reset_score ctx score_sp =
+  let score_sp = Js.Opt.get (H.document##getElementById(js"score"))
+      (fun () -> assert false)
+  in
+  let txt = document##createTextNode (js("0")) in 
+  replace_child score_sp txt
+
 let rec play_game ctx score_sp =
   let state = init_board 4 in
+  replace_child score_sp (document##createTextNode (js(string_of_int 0)));
   draw_board ctx (state.b);
   key_action ctx state.b state.s score_sp state.evil
 
@@ -215,14 +223,14 @@ and key_action ctx b s score_sp evil =
    begin match parse_ev e with
    | Some (Regular) -> (regular_handler ctx evil)
    | Some (Evil) -> (evil_handler ctx evil)
-   | Some (Move x) -> (try key_press x b s evil; draw_board ctx b with Win_game -> win_game ctx)
-   | Some (New) -> replace_child score_sp (document##createTextNode (js(string_of_int 0))); play_game ctx score_sp
+   | Some (Move x) -> key_press x b s evil; draw_board ctx b; if check_end_game b then end_game ctx else
+   	       			  if check_winning_board b then win_game ctx else ()
+   | Some (New) -> reset_score ctx score_sp;(*replace_child score_sp (document##createTextNode (js(string_of_int 0)));*) play_game ctx score_sp
    | None -> ()
-   end; 
+   end;  
    let txt = document##createTextNode (js(string_of_int !s)) in
    replace_child score_sp txt;
-   (*if check_winning_board b then win_game ctx else ();*)
-   if check_end_game b then end_game ctx else ();
+   (*if check_end_game b then end_game ctx else ();*)
    Js._true)
 
 let main () =
@@ -235,7 +243,7 @@ let main () =
   canvas##height <- (wind_h + 250);
   Dom.appendChild game canvas;
   let ctx = canvas##getContext (H._2d_) in
-  let score_sp =
+  let score_sp = 
     Js.Opt.get (H.document##getElementById(js"score"))
       (fun () -> assert false)
   in

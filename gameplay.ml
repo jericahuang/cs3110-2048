@@ -45,8 +45,8 @@ let init_board size =
     let b = Array.make_matrix 4 4 None in
     let s = ref 0 in
     let e = ref false in
-    (*b.(3).(3) <- Some 2;*)
-    b.(3).(3) <- Some 1024; b.(3).(2) <- Some 1024;
+    b.(3).(3) <- Some 2;
+    (*b.(3).(3) <- Some 1024; b.(3).(2) <- Some 1024;*)
     {
       evil = e;
       s = s;
