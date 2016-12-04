@@ -68,8 +68,6 @@ val t2048 : square
 (** [square_value t] is [t]'s value (if any). *)
 val square_value : square -> int
 
-
-
 (* Board and move logic *)
 
 (* Keyup event handler function *)
@@ -95,5 +93,8 @@ val is_valid_move : move -> board -> bool
 val insert_square : board -> bool ref -> unit
 
 val move : move -> board -> score -> unit
+
+val corner_ai: board -> move
+
 
 

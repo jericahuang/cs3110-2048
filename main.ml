@@ -243,7 +243,9 @@ and key_action ctx b s score_sp evil =
    	       			  if check_winning_board b then win_game ctx else
    	       			  if check_end_game b then end_game ctx else ()
    | Some (New) -> replace_child score_sp (document##createTextNode (js("0"))); play_game ctx score_sp
-   | Some (Corner) -> ()
+   | Some (Corner) -> key_press (corner_ai b) b s evil; draw_board ctx b; change_score score_sp s;
+                  if check_winning_board b then win_game ctx else
+                  if check_end_game b then end_game ctx else ()
    | Some (Greedy) -> ()
    | None -> ()
    end;
