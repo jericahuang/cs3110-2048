@@ -1,6 +1,14 @@
 
 let () = Random.self_init ()
 
+
+(*
+*****************************************************************************
+ TYPES
+*****************************************************************************
+*)
+
+
 type move =
   | Regular
   | Evil
@@ -9,7 +17,6 @@ type move =
   | Up
   | Down
 
-(* We may be able to add more to this *)
 type square = int option
 
 type board = square array array
