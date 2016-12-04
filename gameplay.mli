@@ -8,6 +8,7 @@ type move =
   | Right
   | Up
   | Down
+  | Null
 
 (** The type for squares. *)
 type square = int option
