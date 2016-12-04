@@ -320,14 +320,19 @@ let frst (x,_) = x
 (*second item of a 2-tuple*)
 let scnd (_,x) = x
 
+(*'compare' function to sort a 2-tup list based on the 1st tup value*)
 let compare_first (item1 : (int * movePair)) (item2 : (int * movePair)) =
   compare (frst item1) (frst item2)
 
+(*The state (evil, score, board) resulting from shifting 
+ * [b] in [m] direction with a score of [s] and [e] evil state*)
 let move_result m b s e: projectedState = failwith "Unimplemented"
 
-let sort_moveList_scores (l : score_to_moves)= List.sort compare_first l
+(*Sorts a scores_to_moves list [l] from the highest to lowest score*)
+let sort_moveList_scores (l : score_to_moves) : score_to_moves = List.rev (List.sort compare_first l)
 
-let score_move_possibilities (st : projectedState) : score_to_moves =
+(*Gets the greedy move for the current static state*)
+let get_greedy_move (st : projectedState) : move =
   let score_moves = ref [] in
     let valid_moves_1 = List.filter (fun m -> is_valid_move m st.b) moveList in
 
@@ -342,11 +347,7 @@ let score_move_possibilities (st : projectedState) : score_to_moves =
           score_moves := !score_moves@[(m1m2_result.s, (move1, move2))]
       done
     done;
-    !score_moves
-
-let get_greedy_move (sm : score_to_moves) : move =
-  let sortedList = List.rev (List.sort compare_first sm) in
-    frst (scnd (List.nth sortedList 0))
+    frst (scnd (List.nth (sort_moveList_scores !score_moves) 0))
 
 
 
