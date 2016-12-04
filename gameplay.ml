@@ -386,7 +386,7 @@ let sort_moveList_scores (l : score_to_moves) : score_to_moves =
   List.rev (List.sort compare_first l)
 
 (*Gets the greedy move for the current static state*)
-let get_greedy_move (st : staticState) =
+let get_greedy_move (st : staticState) : move =
   let score_moves = ref [] in
     let valid_moves_1 = 
       List.filter (fun m -> is_valid_move m st.board) moveList in

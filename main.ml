@@ -198,6 +198,7 @@ let parse_ev e =
   | 78 -> Some (New)
   | 69 -> Some (Evil)
   | 67 -> Some (Corner)
+  | 71 -> Some (Greedy)
   | _ -> None
 
 (* [regular_handler ctx evil] changes and draws mode to Regular *)
@@ -246,7 +247,9 @@ and key_action ctx b s score_sp evil =
    | Some (Corner) -> key_press (corner_ai b) b s evil; draw_board ctx b; change_score score_sp s;
                   if check_winning_board b then win_game ctx else
                   if check_end_game b then end_game ctx else ()
-   | Some (Greedy) -> ()
+   | Some (Greedy) -> (*key_press (get_greedy_move {e=!evil;score=s;board=b}) s evil; draw_board ctx b; change_score score_sp s;
+                  if check_winning_board b then win_game ctx else
+                  if check_end_game b then end_game ctx else*) ()
    | None -> ()
    end;
    Js._true)
