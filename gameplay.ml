@@ -118,6 +118,7 @@ let is_valid_move m b =
   | Right -> is_valid_move_right b (Array.length b) (Array.length b)
   | Up -> is_valid_move_up b (Array.length b) (Array.length b)
   | Down -> is_valid_move_down b (Array.length b) (Array.length b)
+  | (Regular|Evil) -> true
 
 let combine_left b s row s1 s2 =
   let left = (square_value (b.(row).(s1))) + (square_value (b.(row).(s2))) in
@@ -169,11 +170,15 @@ let rec to_arr lst arr size =
 let rec get_head lst =
   match lst with
   | [] -> []
+  | []::[] -> []
+  | []::(h::t) -> h
   | (h::t) :: t' -> h :: get_head t'
 
 let rec get_tail lst =
   match lst with
   | [] -> []
+  | []::[] -> []
+  | []::(h::t) -> t
   | (h::t) :: t' -> t :: get_tail t'
 
 let rec rotate lst =
@@ -200,6 +205,7 @@ let move m b s =
   | Down -> rotate_up b; rotate_right b;
             move_left b s (Array.length b) (Array.length b) (Array.length b);
             rotate_right b; rotate_up b
+  | (Regular|Evil) -> ()
 
 let check_winning_board (b : board) =
   let win = ref false in
