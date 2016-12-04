@@ -1,8 +1,5 @@
 (* Types *)
 
-exception End_game
-exception Win_game
-
 (** The type for game moves corresponding to arrow keys (left, right, up, down). *)
 type move =
   | Regular
