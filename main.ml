@@ -166,6 +166,8 @@ type key =
 	| Regular
 	| Evil
 	| New
+  | Greedy
+  | Corner
 
 (* [end_game ctx] handles endgame drawing in [ctx] *)
 let end_game ctx =
@@ -193,8 +195,9 @@ let parse_ev e =
   | 39 -> Some (Move Right)
   | 40 -> Some (Move Down)
   | 82 -> Some (Regular)
-  | 69 -> Some (Evil)
   | 78 -> Some (New)
+  | 69 -> Some (Evil)
+  | 67 -> Some (Corner)
   | _ -> None
 
 (* [regular_handler ctx evil] changes and draws mode to Regular *)
@@ -240,6 +243,8 @@ and key_action ctx b s score_sp evil =
    	       			  if check_winning_board b then win_game ctx else
    	       			  if check_end_game b then end_game ctx else ()
    | Some (New) -> replace_child score_sp (document##createTextNode (js("0"))); play_game ctx score_sp
+   | Some (Corner) -> ()
+   | Some (Greedy) -> ()
    | None -> ()
    end;
    Js._true)
