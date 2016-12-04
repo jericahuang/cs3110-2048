@@ -284,7 +284,6 @@ let insert_evil_square (b:board) =
   done;
   !min_pos
 
-
 let random_sq_value () =
   let prob = Random.int 10 in
   if prob = 0 then (Some 4) else (Some 2)
@@ -307,6 +306,11 @@ let key_press m b s evil =
   if is_valid_move m b then (move m b s;
   if check_winning_board b then () else insert_square b evil)
   else ()
+
+let corner_ai b = 
+  if is_valid_move Right b then Right else 
+  if is_valid_move Down b then Down else
+  if is_valid_move Left b then Left else Up
 
 
 (* Greedy AI *)
