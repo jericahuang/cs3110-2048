@@ -70,7 +70,7 @@ val t2048 : square
 (** [square_value t] is [t]'s value (if any). *)
 val square_value : square -> int
 
-
+val is_empty_square : square -> bool
 
 (* Board and move logic *)
 
@@ -97,5 +97,9 @@ val is_valid_move : move -> board -> bool
 val insert_square : board -> bool ref -> unit
 
 val move : move -> board -> score -> unit
+
+val empty_squares : board -> (int * int) list
+
+val find_max_sq : board -> int * int
 
 

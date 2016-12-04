@@ -319,7 +319,7 @@ let moveList = [Left;Right;Up;Down]
 let compare_first (item1 : (int * movePair)) (item2 : (int * movePair)) =
   compare (fst item1) (fst item2)
 
-(*The state (evil, score, board) resulting from shifting 
+(*The state (evil, score, board) resulting from shifting
  * [b] in [m] direction with a score of [s] and [e] evil state*)
 let move_result m b s e: staticState = failwith "Unimplemented"
 
