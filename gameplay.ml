@@ -315,14 +315,9 @@ type staticState = {
 
 let moveList = [Left;Right;Up;Down]
 
-(*first item of a 2-tuple*)
-let frst (x,_) = x
-(*second item of a 2-tuple*)
-let scnd (_,x) = x
-
 (*'compare' function to sort a 2-tup list based on the 1st tup value*)
 let compare_first (item1 : (int * movePair)) (item2 : (int * movePair)) =
-  compare (frst item1) (frst item2)
+  compare (fst item1) (fst item2)
 
 (*The state (evil, score, board) resulting from shifting 
  * [b] in [m] direction with a score of [s] and [e] evil state*)
@@ -347,13 +342,4 @@ let get_greedy_move (st : staticState) : move =
           score_moves := !score_moves@[(m1m2_result.s, (move1, move2))]
       done
     done;
-    frst (scnd (List.nth (sort_moveList_scores !score_moves) 0))
-
-
-
-
-
-
-
-
-
+    fst (snd (List.nth (sort_moveList_scores !score_moves) 0))
