@@ -75,7 +75,8 @@ val square_value : square -> int
 (* Board and move logic *)
 
 (* Keyup event handler function *)
-val key_press : move -> board -> score -> bool ref -> unit
+(* val key_press : move -> board -> score -> bool ref -> unit *)
+val key_press : move -> board -> int ref -> bool ref -> int * int * int
 
 (** [create_board ()] is a new board. Defaults to 4. *)
 val init_board : int -> state
@@ -94,8 +95,10 @@ val is_valid_move : move -> board -> bool
 
 (** [insert_square square board] is [board] with [square] inserted
     in a random empty spot. *)
-val insert_square : board -> bool ref -> unit
+(* val insert_square : board -> bool ref -> unit *)
+val insert_square : board -> bool ref -> int * int * int
 
 val move : move -> board -> score -> unit
+(* val move : move -> board -> int ref -> bool ref -> int * int * int option *)
 
 

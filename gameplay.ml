@@ -46,7 +46,7 @@ let init_board size =
     let s = ref 0 in
     let e = ref false in
     b.(3).(3) <- Some 2;
-    (*b.(3).(3) <- Some 1024; b.(3).(2) <- Some 1024;*)
+    (* b.(3).(3) <- Some 1024; b.(3).(2) <- Some 1024; *)
     {
       evil = e;
       s = s;
@@ -278,19 +278,19 @@ let insert_evil_square (b:board) =
   done;
   !min_pos
 
-
 let random_sq_value () =
   let prob = Random.int 10 in
   if prob = 0 then (Some 4) else (Some 2)
 
 (* Inserts pre-determined square [sq] into board [b] *)
-let insert_square (b : board) evil : unit =
+let insert_square (b : board) evil =
   (* let (i, j) = random_avail b in *)
   let (i, j) =
     if !evil then insert_evil_square b
     else random_avail b in
   let sq = random_sq_value () in
-  b.(i).(j) <- sq
+  (* can't call draw popup here bc need context *)
+  b.(i).(j) <- sq; (i,j,square_value sq)
 
 (* ASSUMING FUNCTIONALITY use is_valid_move*)
 let check_end_game (b : board) =
@@ -300,4 +300,4 @@ let check_end_game (b : board) =
 let key_press m b s evil =
   if is_valid_move m b then (move m b s;
   if check_winning_board b then raise Win_game else insert_square b evil)
-  else ()
+  else (0,0,0)

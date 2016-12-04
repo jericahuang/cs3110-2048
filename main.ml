@@ -107,6 +107,11 @@ let convert_color (r,g,b) =
 *****************************************************************************
 *)
 
+let clear_canvas ctx =
+  let cwidth = float_of_int wind_w in
+  let cheight = float_of_int wind_h in
+  ignore ctx##clearRect(0.,0.,cwidth,cheight)
+
 (* https://github.com/ocsigen/js_of_ocaml/blob/master/examples/boulderdash/boulderdash.ml *)
 let replace_child parent node =
   Js.Opt.iter (parent##firstChild) (fun child -> Dom.removeChild parent child);
@@ -146,6 +151,43 @@ let draw_board ctx b =
       | (Some v) -> draw_sq ctx i j v)
     done
   done
+
+let draw_popup ctx b i j sq_v =
+  (* let t = ref 0. in *)
+  let (x, y, w, h) = square_dim i j in
+  let sq_colors = map_sq_colors sq_v in
+  let sq_val_str = string_of_int sq_v in
+  let text_vals = map_text_size sq_v in
+  b.(i).(j) <- None;
+  draw_board ctx b;
+  ctx##fillStyle <- convert_color (fst sq_colors);
+  ctx##fillRect (float x, float y, float (w) *. 0.5, float (h) *. 0.5);
+  let rec draw_popup_helper ctx t b i j sq_v =
+    (* repetative but cleaner? *)
+    if t < 1. then
+      let (x, y, w, h) = square_dim i j in
+      let sq_colors = map_sq_colors sq_v in
+      let sq_val_str = string_of_int sq_v in
+      let text_vals = map_text_size sq_v in
+      (* t := !t +. 0.2; *)
+      (* clear_canvas ctx; *)
+      (* draw_board ctx b; *)
+      ctx##fillStyle <- convert_color (fst sq_colors);
+      ctx##fillRect (float (i+80), float (j+80), float (w) *. (t), float (h) *. (t));
+      ctx##font <-
+        js(Printf.sprintf "700 %dpx Clearsans, Arial"
+          (int_of_float (float_of_int (fst text_vals) *. (t /. 1000.))));
+      ctx##textAlign <- js("center");
+      ctx##fillStyle <- convert_color (snd sq_colors);
+      ctx##fillText (js(sq_val_str),
+                    float x +. float sq_w /. 2.05,
+                    float y +. float sq_h /. (snd text_vals) );
+      ignore Dom_html.window##requestAnimationFrame(
+        Js.wrap_callback (fun (time:float) ->
+          draw_popup_helper ctx time b i j sq_v))
+    else ()
+  in draw_popup_helper ctx 0. b i j sq_v;
+  b.(i).(j) <- Some sq_v;
 
 (*
 *****************************************************************************
@@ -211,9 +253,12 @@ let reset_score ctx score_sp =
   let txt = document##createTextNode (js("0")) in
   replace_child score_sp txt
 
+let change_score score_sp s =
+   let txt = document##createTextNode (js(string_of_int !s)) in
+   replace_child score_sp txt
+
 let rec play_game ctx score_sp =
   let state = init_board 4 in
-  replace_child score_sp (document##createTextNode (js(string_of_int 0)));
   draw_board ctx (state.b);
   key_action ctx state.b state.s score_sp state.evil
 
@@ -221,16 +266,20 @@ let rec play_game ctx score_sp =
 and key_action ctx b s score_sp evil =
    H.document##onkeydown <- H.handler (fun e ->
    begin match parse_ev e with
-   | Some (Regular) -> (regular_handler ctx evil)
-   | Some (Evil) -> (evil_handler ctx evil)
-   | Some (Move x) -> key_press x b s evil; draw_board ctx b; if check_end_game b then end_game ctx else
-   	       			  if check_winning_board b then win_game ctx else ()
-   | Some (New) -> reset_score ctx score_sp (*replace_child score_sp (document##createTextNode (js(string_of_int 0)));*)
-   play_game ctx score_sp
+   | Some (Regular) -> regular_handler ctx evil
+   | Some (Evil) -> evil_handler ctx evil
+   | Some (Move x) ->
+              let (i,j,sq_v) = key_press x b s evil in
+              draw_popup ctx b i j sq_v;
+              (* draw_board ctx b; *)
+              change_score score_sp s;
+   					  if check_end_game b then end_game ctx else
+   	       		if check_winning_board b then win_game ctx else ()
+   | Some (New) ->
+              replace_child score_sp (document##createTextNode (js("0")));
+              play_game ctx score_sp
    | None -> ()
    end;
-   let txt = document##createTextNode (js(string_of_int !s)) in
-   replace_child score_sp txt;
    (*if check_end_game b then end_game ctx else ();*)
    Js._true)
 
