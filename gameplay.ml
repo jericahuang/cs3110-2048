@@ -26,6 +26,7 @@ type state = {
   b: board;
 }
 
+(* Returns the numerical value of a square [v] *)
 let square_value v =
   match v with
   | None -> 0
@@ -61,19 +62,27 @@ let init_board size =
 let check_2048_square (s : square) =
   square_value s = 2048
 
-let rec is_empty_row b row size =
+(* Returns whether or not row [r] is empty in board [b] of 
+ * length/width [size] *)
+let rec is_empty_row (b : board) (row : int) (size : int) =
   if size = 0 then true else
-  if b.(row).(size-1) = None then is_empty_row b row (size-1) else false
+  if b.(row).(size-1) = None then 
+    is_empty_row b row (size-1) else false
 
+(* Returns whether or not column [col] is empty in board [b] of 
+ * length/width [size] *)
 let rec is_empty_col b col size =
   if size = 0 then true else
-  if b.(size-1).(col) = None then is_empty_col b col (size-1) else false
+  if b.(size-1).(col) = None then 
+    is_empty_col b col (size-1) else false
 
 let is_valid_merge_horizontal b row s1 s2 =
-  if b.(row).(s1) <> None then b.(row).(s1) = b.(row).(s2) else false
+  if b.(row).(s1) <> None then 
+    b.(row).(s1) = b.(row).(s2) else false
 
 let is_valid_merge_vertical b col r1 r2 =
-  if b.(r1).(col) <> None then b.(r1).(col) = b.(r2).(col) else false
+  if b.(r1).(col) <> None then 
+    b.(r1).(col) = b.(r2).(col) else false
 
 let rec is_valid_move_left b row col =
   if row = 0 then false else
@@ -111,7 +120,7 @@ let rec is_valid_move_down b row col =
   if is_valid_merge_vertical b (col-1) 0 1 || is_valid_merge_vertical b (col-1) 1 2 || is_valid_merge_vertical b (col-1) 2 3
   then true else is_valid_move_down b row (col-1)
 
-
+(*Returns boolean indicating whether move [m] would alter board [b]*)
 let is_valid_move m b =
   match m with
   | Left -> is_valid_move_left b (Array.length b) (Array.length b)
@@ -120,7 +129,8 @@ let is_valid_move m b =
   | Down -> is_valid_move_down b (Array.length b) (Array.length b)
 
 let combine_left b s row s1 s2 =
-  let left = (square_value (b.(row).(s1))) + (square_value (b.(row).(s2))) in
+  let left = (square_value (b.(row).(s1))) + 
+    (square_value (b.(row).(s2))) in
   s := !s + left;
   b.(row).(s1) <- Some left;
   b.(row).(s2) <- None
@@ -190,15 +200,19 @@ let rotate_right b =
 
 let move m b s =
   match m with
-  | Left -> move_left b s (Array.length b) (Array.length b) (Array.length b)
+  | Left -> move_left b s 
+            (Array.length b) (Array.length b) (Array.length b)
   | Right -> rotate_right b;
-             move_left b s (Array.length b) (Array.length b) (Array.length b);
+             move_left b s 
+            (Array.length b) (Array.length b) (Array.length b);
              rotate_right b
   | Up -> rotate_up b;
-          move_left b s (Array.length b) (Array.length b) (Array.length b);
+          move_left b s 
+          (Array.length b) (Array.length b) (Array.length b);
           rotate_up b
   | Down -> rotate_up b; rotate_right b;
-            move_left b s (Array.length b) (Array.length b) (Array.length b);
+            move_left b s 
+            (Array.length b) (Array.length b) (Array.length b);
             rotate_right b; rotate_up b
 
 let check_winning_board (b : board) =
@@ -234,8 +248,8 @@ let empty_squares b =
   in
   List.filter (fun (i, j) -> b.(i).(j) = None) all_indicies
 
-(* Returns a tuple (i,j) of a random open position in [b] in row i, column j
- * Precondition: [b] has at least one open position.
+(* Returns a tuple (i,j) of a random open position in [b] in row i, 
+ * column j. Precondition: [b] has at least one open position.
  *)
 let random_avail b =
   let avail = empty_squares b in
@@ -243,7 +257,8 @@ let random_avail b =
 
 (* http://langref.org/ocaml/numbers/mathematical/distance-between-points *)
 let distance a b =
-  sqrt((float(fst a) -. float(fst b))**2. +. (float(snd a) -. float(snd b))**2.)
+  sqrt((float(fst a) -. float(fst b))**2. 
+    +. (float(snd a) -. float(snd b))**2.)
 
 (* Given list of current squares, find max
  * returns (i,j) of the largest square *)
@@ -333,21 +348,25 @@ let move_result m b s e: staticState =
   {evil = e; s = new_score; b = copy}
 
 (*Sorts a scores_to_moves list [l] from the highest to lowest score*)
-let sort_moveList_scores (l : score_to_moves) : score_to_moves = List.rev (List.sort compare_first l)
+let sort_moveList_scores (l : score_to_moves) : score_to_moves = 
+  List.rev (List.sort compare_first l)
 
 (*Gets the greedy move for the current static state*)
 let get_greedy_move (st : staticState) : move =
   let score_moves = ref [] in
-    let valid_moves_1 = List.filter (fun m -> is_valid_move m st.b) moveList in
+    let valid_moves_1 = 
+      List.filter (fun m -> is_valid_move m st.b) moveList in
 
     for i1=0 to (List.length valid_moves_1 - 1) do
       let move1 = List.nth valid_moves_1 i1 in
       let m1_result = move_result move1 st.b st.s st.evil in
-      let valid_moves_2 = List.filter (fun m -> is_valid_move m m1_result.b) moveList in
+      let valid_moves_2 = 
+        List.filter (fun m -> is_valid_move m m1_result.b) moveList in
 
       for i2 = 0 to (List.length valid_moves_2 - 1) do
         let move2 = List.nth valid_moves_2 i2 in
-        let m1m2_result = move_result move2 m1_result.b m1_result.s m1_result.evil in
+        let m1m2_result = 
+          move_result move2 m1_result.b m1_result.s m1_result.evil in
           score_moves := !score_moves@[(m1m2_result.s, (move1, move2))]
       done
     done;
