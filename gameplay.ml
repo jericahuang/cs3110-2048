@@ -309,23 +309,28 @@ let corner_ai b =
 
 (* Greedy AI *)
 type movePair = move * move
-type score_to_moves = (int * movePair) list
+type score_to_moves = (score * movePair) list
 
 type staticState = {
   evil: bool;
-  s: int;
+  s: score;
   b: board;
 }
 
 let moveList = [Left;Right;Up;Down]
 
 (*'compare' function to sort a 2-tup list based on the 1st tup value*)
-let compare_first (item1 : (int * movePair)) (item2 : (int * movePair)) =
-  compare (fst item1) (fst item2)
+let compare_first (item1 : (score * movePair)) (item2 : (score * movePair)) =
+  compare !(fst item1) !(fst item2)
 
 (*The state (evil, score, board) resulting from shifting 
  * [b] in [m] direction with a score of [s] and [e] evil state*)
-let move_result m b s e: staticState = failwith "Unimplemented"
+let move_result m b s e: staticState = 
+  let copy = Array.make_matrix 4 4 None in
+  let new_score = ref !s in 
+  to_arr (to_lst b 0) copy 0;
+  move m copy new_score;
+  {evil = e; s = new_score; b = copy}
 
 (*Sorts a scores_to_moves list [l] from the highest to lowest score*)
 let sort_moveList_scores (l : score_to_moves) : score_to_moves = List.rev (List.sort compare_first l)
