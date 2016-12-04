@@ -301,3 +301,58 @@ let key_press m b s evil =
   if is_valid_move m b then (move m b s;
   if check_winning_board b then () else insert_square b evil)
   else ()
+
+
+(* Greedy AI *)
+type movePair = move * move
+type score_to_moves = (int * movePair) list
+
+type projectedState = {
+  evil: bool;
+  s: int;
+  b: board;
+}
+
+let moveList = [Left;Right;Up;Down]
+
+(*first item of a 2-tuple*)
+let frst (x,_) = x
+(*second item of a 2-tuple*)
+let scnd (_,x) = x
+
+let compare_first (item1 : (int * movePair)) (item2 : (int * movePair)) =
+  compare (frst item1) (frst item2)
+
+let move_result m b s e: projectedState = failwith "Unimplemented"
+
+let sort_moveList_scores (l : score_to_moves)= List.sort compare_first l
+
+let score_move_possibilities (st : projectedState) : score_to_moves =
+  let score_moves = ref [] in
+    let valid_moves_1 = List.filter (fun m -> is_valid_move m st.b) moveList in
+
+    for i1=0 to (List.length valid_moves_1 - 1) do
+      let move1 = List.nth valid_moves_1 i1 in
+      let m1_result = move_result move1 st.b st.s st.evil in
+      let valid_moves_2 = List.filter (fun m -> is_valid_move m m1_result.b) moveList in
+
+      for i2 = 0 to (List.length valid_moves_2 - 1) do
+        let move2 = List.nth valid_moves_2 i2 in
+        let m1m2_result = move_result move2 m1_result.b m1_result.s m1_result.evil in
+          score_moves := !score_moves@[(m1m2_result.s, (move1, move2))]
+      done
+    done;
+    !score_moves
+
+let get_greedy_move (sm : score_to_moves) : move =
+  let sortedList = List.rev (List.sort compare_first sm) in
+    frst (scnd (List.nth sortedList 0))
+
+
+
+
+
+
+
+
+
