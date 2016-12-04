@@ -39,8 +39,7 @@ let square_dim i j =
 
 let board_lines_color = (187,173,160)
 
-(* [map_sq_colors val] maps a sqaure to its
- * color value, text color, fontsize *)
+(* [map_sq_colors val] maps a sqaure to its color value, text color *)
 let map_sq_colors v =
   let white_text = (255, 252, 245) in
   let brown_text = (119, 110, 101) in
@@ -76,6 +75,7 @@ let map_sq_colors v =
   | 2048 -> int_of_float (38. /. 1.5)
   | _ -> failwith "Invalid Tile" *)
 
+(* [map_text_size v] maps a sqaure to its text size, y-coord position *)
 let map_text_size v =
   match v with
   | 0 -> 75, 1.5
@@ -98,6 +98,7 @@ let map_text_size v =
 *****************************************************************************
 *)
 
+(* [convert_color (r,g,b)] formats into JS readable rgb value *)
 let convert_color (r,g,b) =
   js(Printf.sprintf "rgb(%d,%d,%d)" r g b)
 
@@ -113,19 +114,24 @@ let clear_canvas ctx =
   ignore ctx##clearRect(0.,0.,cwidth,cheight)
 
 (* https://github.com/ocsigen/js_of_ocaml/blob/master/examples/boulderdash/boulderdash.ml *)
+(* [replace_child parent node] replaces first child
+ * of the [parent] with [node] *)
 let replace_child parent node =
   Js.Opt.iter (parent##firstChild) (fun child -> Dom.removeChild parent child);
   Dom.appendChild parent node
 
-let append_text e str =
-  Dom.appendChild e (document##createTextNode (js str))
+(* [append_text elm str] adds text [str] to [elm] *)
+let append_text elm str =
+  Dom.appendChild elm (document##createTextNode (js str))
 
+(* [draw_empty_sq ctx i j] draws an empty square at (i,j) in [ctx] *)
 let draw_empty_sq ctx i j =
   let (x, y, w, h) = square_dim i j in
   let empty_color = fst (map_sq_colors 0) in
   ctx##fillStyle <- convert_color empty_color;
   ctx##fillRect (float x, float y, float w, float h)
 
+(* [draw_sq ctx i j sq_v] draws an square with value [sq_v] at (i,j) in [ctx] *)
 let draw_sq ctx i j sq_v =
   let (x, y, w, h) = square_dim i j in
   let sq_colors = map_sq_colors sq_v in
@@ -141,6 +147,7 @@ let draw_sq ctx i j sq_v =
                 float x +. float sq_w /. 2.05,
                 float y +. float sq_h /. (snd text_vals) )
 
+(* [draw_board ctx b] draws an board [b] in [ctx] *)
 let draw_board ctx b =
   ctx##fillStyle <- (convert_color board_lines_color);
   ctx##fillRect (0.0, 0.0, float wind_w, float wind_h);
@@ -195,12 +202,14 @@ let draw_popup ctx b i j sq_v =
 *****************************************************************************
 *)
 
+(* key defines the types of actions within the game *)
 type key =
 	| Move of move
 	| Regular
 	| Evil
 	| New
 
+(* [end_game ctx] handles endgame drawing in [ctx] *)
 let end_game ctx =
 	ctx##fillStyle <- convert_color (246,93,59);
 	ctx##fillRect (0.0, 0.0, float wind_w, float wind_h);
@@ -209,6 +218,7 @@ let end_game ctx =
 	ctx##fillStyle <- convert_color (255, 252, 245);
 	ctx##fillText (js"You Lose! :(", float wind_w /. 2., float wind_h /. 2.)
 
+(* [win_game ctx] handles win game drawing in [ctx] *)
 let win_game ctx =
 	ctx##fillStyle <- convert_color (0,230,0);
 	ctx##fillRect (0.0, 0.0, float wind_w, float wind_h);
@@ -217,6 +227,7 @@ let win_game ctx =
 	ctx##fillStyle <- convert_color (255, 252, 245);
 	ctx##fillText (js"You Win! :)", float wind_w /. 2., float wind_h /. 2.)
 
+(* [parse_ev e] parses key presses to correct behavior *)
 let parse_ev e =
   match e##keyCode with
   | 37 -> Some (Move Left)
@@ -228,6 +239,7 @@ let parse_ev e =
   | 78 -> Some (New)
   | _ -> None
 
+(* [regular_handler ctx evil] changes and draws mode to Regular *)
 let regular_handler ctx evil =
   let mode =
     Js.Opt.get (H.document##getElementById(js"mode"))
@@ -237,6 +249,7 @@ let regular_handler ctx evil =
   replace_child mode txt;
   evil := false
 
+(* [regular_handler ctx evil] changes and draws mode to Evil *)
 let evil_handler ctx evil =
   let mode =
     Js.Opt.get (H.document##getElementById(js"mode"))
@@ -253,19 +266,24 @@ let reset_score ctx score_sp =
   let txt = document##createTextNode (js("0")) in
   replace_child score_sp txt
 
+(* [change_score score_sp s] updates score [s] in context [score_sp] *)
 let change_score score_sp s =
    let txt = document##createTextNode (js(string_of_int !s)) in
    replace_child score_sp txt
 
+(* [play_game ctx score_sp] begins gameplay by
+ * init state and drawing the game *)
 let rec play_game ctx score_sp =
   let state = init_board 4 in
   draw_board ctx (state.b);
   key_action ctx state.b state.s score_sp state.evil
 
-(* score_sp: element associated with "score" id *)
+(* [key_action ctx b s score_sp evil] maps key actions to correct behacior
+ * Note: [score_sp] element associated with "score" id *)
 and key_action ctx b s score_sp evil =
    H.document##onkeydown <- H.handler (fun e ->
    begin match parse_ev e with
+
    | Some (Regular) -> regular_handler ctx evil
    | Some (Evil) -> evil_handler ctx evil
    | Some (Move x) ->
@@ -280,9 +298,9 @@ and key_action ctx b s score_sp evil =
               play_game ctx score_sp
    | None -> ()
    end;
-   (*if check_end_game b then end_game ctx else ();*)
    Js._true)
 
+(* [main] initially sets and draws the game and triggers gameplay *)
 let main () =
   let game =
     Js.Opt.get (H.document##getElementById(js"2048"))
