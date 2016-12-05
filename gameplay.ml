@@ -301,8 +301,8 @@ let key_press m b s evil =
   if check_winning_board b then () else insert_square b evil)
   else ()
 
-let corner_ai b = 
-  if is_valid_move Right b then Right else 
+let corner_ai b =
+  if is_valid_move Right b then Right else
   if is_valid_move Down b then Down else
   if is_valid_move Left b then Left else Up
 
