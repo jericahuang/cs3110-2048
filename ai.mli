@@ -1,3 +1,6 @@
+(* This module will handle the AI auto-run algorithms
+ * for optimizing game play: corner, greedy, and random. *)
+
 open Types
 
 val corner_ai: board -> move
