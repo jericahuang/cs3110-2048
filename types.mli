@@ -7,6 +7,15 @@ type move =
   | Down
   | Null
 
+(* key defines the types of actions within the game *)
+type key =
+  | Move of move
+  | Regular
+  | Evil
+  | New
+  | Greedy
+  | Corner
+  
 type square = int option
 
 type board = square array array
