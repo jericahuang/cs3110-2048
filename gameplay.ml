@@ -3,13 +3,6 @@ open Gamelogic
 
 let () = Random.self_init ()
 
-
-(*
-*****************************************************************************
- TYPES
-*****************************************************************************
-*)
-
 (* [is_empty_square s] checks if [s] is an empty square. *)
 let is_empty_square (s : square) =
   Gamelogic.square_value s = 0

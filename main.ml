@@ -58,16 +58,21 @@ and key_action ctx b s score_sp evil =
    begin match parse_ev e with
    | Some (Regular) -> Render.regular_handler ctx evil
    | Some (Evil) -> Render.evil_handler ctx evil
-   | Some (Move x) -> key_press x b s evil; Render.draw_board ctx b; Render.change_score score_sp s;
+   | Some (Move x) -> key_press x b s evil; Render.draw_board ctx b; 
+                  Render.change_score score_sp s;
    	       			  if check_winning_board b then Render.win_game ctx else
    	       			  if check_end_game b then Render.end_game ctx else ()
-   | Some (New) -> Render.replace_child score_sp (document##createTextNode (js("0"))); play_game ctx score_sp
-   | Some (Corner) -> key_press (corner_ai b) b s evil; Render.draw_board ctx b; Render.change_score score_sp s;
+   | Some (New) -> Render.replace_child score_sp 
+                  (document##createTextNode (js("0"))); 
+                  play_game ctx score_sp
+   | Some (Corner) -> key_press (corner_ai b) b s evil; 
+                  Render.draw_board ctx b; Render.change_score score_sp s;
                   if check_winning_board b then Render.win_game ctx else
                   if check_end_game b then Render.end_game ctx else ()
    | Some (Greedy) ->
       let st = {e = !evil; score = s; board = b} in
-        key_press (get_greedy_move st) b s evil; Render.draw_board ctx b; Render.change_score score_sp s;
+        key_press (get_greedy_move st) b s evil; 
+        Render.draw_board ctx b; Render.change_score score_sp s;
         if check_winning_board b then Render.win_game ctx else
         if check_end_game b then Render.end_game ctx else ()
    | None -> ()
