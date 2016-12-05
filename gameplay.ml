@@ -3,16 +3,9 @@ open Gamelogic
 
 let () = Random.self_init ()
 
-
-(*
-*****************************************************************************
- TYPES
-*****************************************************************************
-*)
-
 (* [is_empty_square s] checks if [s] is an empty square. *)
 let is_empty_square (s : square) =
-  Gamelogic.square_value s = 0
+  square_value s = 0
 
 (* [init_board size] initializes the board with [size].
  * Starts with square of 2 in bottom left corner.
@@ -38,7 +31,7 @@ let init_board size =
 
 (* [check_2048_square s] returns if 2048 square has been formed. *)
 let check_2048_square (s : square) =
-  Gamelogic.square_value s = 2048
+  square_value s = 2048
 
 (* Returns whether or not column [col] is empty in board [b] of
  * length/width [size] *)
@@ -46,11 +39,6 @@ let rec is_empty_col b col size =
   if size = 0 then true else
   if b.(size-1).(col) = None then
     is_empty_col b col (size-1) else false
-
-(* Returns whether or not a valid vertical move (up or down) is valid *)
-let is_valid_merge_vertical b col r1 r2 =
-  if b.(r1).(col) <> None then
-    b.(r1).(col) = b.(r2).(col) else false
 
 let rec is_valid_move_left b row col =
   if row = 0 then false else
@@ -109,38 +97,6 @@ let is_valid_move m b =
   | Up -> is_valid_move_up b (Array.length b) (Array.length b)
   | Down -> is_valid_move_down b (Array.length b) (Array.length b)
   | (Regular|Evil|Null) -> true
-
-(* converts the board to a matrix list *)
-let rec to_lst b size =
-  if size = 4 then [] else
-  Array.to_list b.(size) :: to_lst b (size+1)
-
-(* converts the board to a matrix list but each row is in reverse order *)
-let rec to_lst_rev b size =
-  if size = 4 then [] else
-  (List.rev (Array.to_list b.(size))) :: to_lst_rev b (size+1)
-
-(* converts the matrix list back into a valid board array *)
-let rec to_arr lst arr size =
-  match lst with
-  | [] -> ()
-  | h::t -> arr.(size) <- (Array.of_list h); to_arr t arr (size+1)
-
-(* gets the first value of a row *)
-let rec get_head lst =
-  match lst with
-  | [] -> []
-  | []::[] -> []
-  | []::(h::t) -> h
-  | (h::t) :: t' -> h :: get_head t'
-
-(* gets the rest of the row excluding the first value *)
-let rec get_tail lst =
-  match lst with
-  | [] -> []
-  | []::[] -> []
-  | []::(h::t) -> t
-  | (h::t) :: t' -> t :: get_tail t'
 
 (* checks to see if the 2048 tile has been created yet *)
 let check_winning_board (b : board) =
