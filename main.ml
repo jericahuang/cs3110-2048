@@ -39,7 +39,7 @@ let parse_ev e =
 (* [play_game ctx score_sp] begins gameplay by
  * init state and drawing the game *)
 let rec play_game ctx score_sp =
-  let state = init_board 4 in
+  let state = init_board () in
   Render.draw_board ctx (state.b);
   key_action ctx state.b state.s score_sp state.evil
 

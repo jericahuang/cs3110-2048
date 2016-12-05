@@ -7,34 +7,32 @@ let () = Random.self_init ()
 let is_empty_square (s : square) =
   square_value s = 0
 
-(* [init_board size] initializes the board with [size].
- * Starts with square of 2 in bottom left corner.
- * requires: size >= 1 *)
- (* right now deafult to 4. Change to size and size - 1 *)
-let init_board size =
-  if size < 1 then failwith "Invalid matrix size"
-  else
-    let b = Array.make_matrix 4 4 None in
-    let s = ref 0 in
-    let e = ref false in
-    b.(3).(3) <- Some 2;
-    {
-      evil = e;
-      s = s;
-      b = b;
-    }
+(* [init_board ()] initializes a 4 by 4 matrix.
+ * Starts with square of 2 in bottom left corner. *)
+let init_board () =
+  let b = Array.make_matrix 4 4 None in
+  let s = ref 0 in
+  let e = ref false in
+  b.(3).(3) <- Some 2;
+  {
+    evil = e;
+    s = s;
+    b = b;
+  }
 
 (* [check_2048_square s] returns if 2048 square has been formed. *)
 let check_2048_square (s : square) =
   square_value s = 2048
 
-(* Returns whether or not column [col] is empty in board [b] of
- * length/width [size] *)
+(* [is_empty_col b col size] returns whether or not column [col] 
+ * is empty in board [b] of length/width [size] *)
 let rec is_empty_col b col size =
   if size = 0 then true else
   if b.(size-1).(col) = None then
     is_empty_col b col (size-1) else false
 
+(* [is_valid_move_left b row col] returns a bool true if 
+ * a left move is valid. *)
 let rec is_valid_move_left b row col =
   if row = 0 then false else
   if is_empty_row b (row-1) col then is_valid_move_left b (row-1) col else
@@ -48,6 +46,8 @@ let rec is_valid_move_left b row col =
   || is_valid_merge_horizontal b (row-1) 2 3
   then true else is_valid_move_left b (row-1) col
 
+(* [is_valid_move_right b row col] returns a bool true if 
+ * a right move is valid. *)
 let rec is_valid_move_right b row col =
   if row = 0 then false else
   if is_empty_row b (row-1) col then is_valid_move_right b (row-1) col else
@@ -60,6 +60,8 @@ let rec is_valid_move_right b row col =
   || is_valid_merge_horizontal b (row-1) 2 3
   then true else is_valid_move_right b (row-1) col
 
+(* [is_valid_move_up b row col] returns a bool true if 
+ * a up move is valid. *)
 let rec is_valid_move_up b row col =
   if col = 0 then false else
   if is_empty_col b (col-1) row then is_valid_move_up b row (col-1) else
@@ -72,6 +74,8 @@ let rec is_valid_move_up b row col =
   || is_valid_merge_vertical b (col-1) 2 3
   then true else is_valid_move_up b row (col-1)
 
+(* [is_valid_move_down b row col] returns a bool true if 
+ * a down move is valid. *)
 let rec is_valid_move_down b row col =
   if col = 0 then false else
   if is_empty_col b (col-1) row then is_valid_move_down b row (col-1) else
@@ -84,7 +88,8 @@ let rec is_valid_move_down b row col =
   || is_valid_merge_vertical b (col-1) 2 3
   then true else is_valid_move_down b row (col-1)
 
-(*Returns boolean indicating whether move [m] would alter board [b]*)
+(* [is_valid_move m b] is [true] if shifting [board] in the direction
+ * [move] results in a change in the game board. *)
 let is_valid_move m b =
   match m with
   | Left -> is_valid_move_left b (Array.length b) (Array.length b)
@@ -93,7 +98,7 @@ let is_valid_move m b =
   | Down -> is_valid_move_down b (Array.length b) (Array.length b)
   | (Regular|Evil|Null) -> true
 
-(* checks to see if the 2048 tile has been created yet *)
+(* [check_winning_board b] is [true] if the 2048 tile has been created *)
 let check_winning_board (b : board) =
   let win = ref false in
   for i = 0 to (Array.length b) - 1 do
