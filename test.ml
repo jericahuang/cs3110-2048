@@ -7,10 +7,6 @@ let board = [|[|Some 8; Some 4; Some 4; Some 4|];
     [|None; Some 4; Some 4; Some 4|];
     [|Some 4; Some 2; None; None|];
     [|Some 4; Some 4; None; Some 2|]|]
-(* let board1 = [|[|None; Some 4; Some 4; Some 4|];
-    [|None; Some 4; Some 16; None|];
-    [|None; Some 2; None; None|];
-    [|Some 4; Some 4; None; Some 2|]|] *)
 
 let score = ref 0
 
