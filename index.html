@@ -4,9 +4,9 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width,
                                    initial-scale=1.0">
-      <link href="favicon.ico" rel="icon" type="image/x-icon" />
-      <link href="favicon.ico" rel="shortcut icon" type="image/x-icon">
-      <link rel="stylesheet" type="text/css" href="styles.css">
+      <link href="_web/favicon.ico" rel="icon" type="image/x-icon" />
+      <link href="_web/favicon.ico" rel="shortcut icon" type="image/x-icon">
+      <link rel="stylesheet" type="text/css" href="_web/styles.css">
 
       <title>2048</title>
 
@@ -25,6 +25,20 @@
         </ul>
       </div>
       <div id="2048"; style="font-family: Clearsans, Open Sans;"> </div>
+
+      <script type="text/javascript" src="_build/main.d.js" defer></script>
+      <script type='text/javascript'>
+        window.addEventListener("keydown", function(e) {
+
+            // space and arrow keys - prevents scrolling up
+            if([32, 37, 38, 39, 40].indexOf(e.keyCode) > -1) {
+                e.preventDefault();
+            }
+        }, false);
+
+
+      </script>
+      
       <div class="howToPlay">
         <h3>How to play:</h3>
           <table>
@@ -42,7 +56,9 @@
             </tr>
             <tr>
               <td>
-                <kbd class="light">R/E</kbd>
+                <kbd class="light">R</kbd>
+                /
+                <kbd class="light">E</kbd>
               </td>
               <td>Toggle between Regular and Evil Mode</td>
             </tr>
@@ -66,17 +82,5 @@
             </tr>
           </table>
       </div>
-      <script type="text/javascript" src="_build/main.d.js" defer></script>
-      <script type='text/javascript'>
-        window.addEventListener("keydown", function(e) {
-
-            // space and arrow keys - prevents scrolling up
-            if([32, 37, 38, 39, 40].indexOf(e.keyCode) > -1) {
-                e.preventDefault();
-            }
-        }, false);
-
-
-      </script>
     </body>
 </html>

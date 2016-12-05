@@ -30,9 +30,6 @@ val is_valid_move : move -> board -> bool
     in a random empty spot. *)
 val insert_square : board -> bool ref -> unit
 
-val move : move -> board -> score -> unit
-
-
 val empty_squares : board -> (int * int) list
 
 val find_max_sq : board -> int * int
