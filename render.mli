@@ -54,7 +54,7 @@ val draw_empty_sq : Dom_html.canvasRenderingContext2D Js.t -> int -> int -> unit
 val draw_sq : Dom_html.canvasRenderingContext2D Js.t -> int -> int -> int -> unit
 
 (* [draw_board ctx b] draws an board [b] in [ctx] *)
-val draw_board : Dom_html.canvasRenderingContext2D Js.t -> Gameplay.board -> unit
+val draw_board : Dom_html.canvasRenderingContext2D Js.t -> Types.board -> unit
 
 (* [append_text elm str] adds text [str] to [elm] *)
 val append_text : #Dom.node Js.t -> string -> unit

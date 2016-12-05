@@ -1,5 +1,8 @@
 open Gameplay
 open Gamelogic
+open Render
+open Types
+
 
 (*
 *****************************************************************************
@@ -24,6 +27,8 @@ type key =
 	| Regular
 	| Evil
 	| New
+  | Greedy
+  | Corner
 
 (* [parse_ev e] parses key presses to correct behavior *)
 let parse_ev e =
@@ -33,8 +38,10 @@ let parse_ev e =
   | 39 -> Some (Move Right)
   | 40 -> Some (Move Down)
   | 82 -> Some (Regular)
-  | 69 -> Some (Evil)
   | 78 -> Some (New)
+  | 69 -> Some (Evil)
+  | 67 -> Some (Corner)
+  | 71 -> Some (Greedy)
   | _ -> None
 
 (* [play_game ctx score_sp] begins gameplay by
@@ -55,6 +62,12 @@ and key_action ctx b s score_sp evil =
    	       			  if check_winning_board b then Render.win_game ctx else
    	       			  if check_end_game b then Render.end_game ctx else ()
    | Some (New) -> Render.replace_child score_sp (document##createTextNode (js("0"))); play_game ctx score_sp
+   | Some (Corner) -> key_press (corner_ai b) b s evil; Render.draw_board ctx b; Render.change_score score_sp s;
+                  if check_winning_board b then Render.win_game ctx else
+                  if check_end_game b then Render.end_game ctx else ()
+   | Some (Greedy) -> (*key_press (get_greedy_move {e=!evil;score=s;board=b}) s evil; draw_board ctx b; change_score score_sp s;
+                  if check_winning_board b then win_game ctx else
+                  if check_end_game b then end_game ctx else*) ()
    | None -> ()
    end;
    Js._true)

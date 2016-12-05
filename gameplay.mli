@@ -1,36 +1,4 @@
-(* Types *)
-
-exception End_game
-exception Win_game
-
-(** The type for game moves corresponding to arrow keys (left, right, up, down). *)
-type move =
-  | Regular
-  | Evil
-  | Left
-  | Right
-  | Up
-  | Down
-
-(** The type for squares. *)
-type square = int option
-
-(* * The type for board rows.
-type row = square list *)
-
-(** The type for boards. *)
-type board = square array array
-
-type score = int ref
-
-type state = {
-  evil: bool ref;
-  s: score;
-  b: board;
-}
-
-(** [square_value t] is [t]'s value (if any). *)
-val square_value : square -> int
+open Types
 
 val is_empty_square : square -> bool
 
@@ -50,9 +18,13 @@ val check_2048_square: square -> bool
 
 val check_winning_board: board -> bool
 
+(* val is_valid_merge_horizontal : board -> int -> int -> int -> bool*)
+
 (** [is_valid_move move board] is [true] if shifting [board] in the direction
     [move] results in a change in the game board. *)
 val is_valid_move : move -> board -> bool
+
+(* val is_empty_row : board -> int -> int -> bool *)
 
 (** [insert_square square board] is [board] with [square] inserted
     in a random empty spot. *)
@@ -60,8 +32,14 @@ val insert_square : board -> bool ref -> unit
 
 val move : move -> board -> score -> unit
 
+
 val empty_squares : board -> (int * int) list
 
 val find_max_sq : board -> int * int
+
+val corner_ai: board -> move
+
+(* type staticState = { e : bool; score : score; board : board; } *)
+val get_greedy_move: staticState -> move
 
 
