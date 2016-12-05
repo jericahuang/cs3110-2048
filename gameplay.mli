@@ -48,7 +48,3 @@ val check_end_game : board -> bool
 
 (* [key_press m b s evil] handles the keyboard inputs. *)
 val key_press : move -> board -> score -> bool ref -> unit
-
-
-
-

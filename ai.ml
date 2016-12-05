@@ -13,7 +13,7 @@ open Gamelogic
                                                 
 (* [corner_ai b] uses the strategy of building up the tiles in the
  * corner. It moves all the tiles to the bottom-right. *)
-let corner_ai b =
+let corner_ai (b : board) : move =
   if is_valid_move Right b then Right else
   if is_valid_move Down b then Down else
   if is_valid_move Left b then Left else Up
@@ -78,8 +78,8 @@ let get_greedy_move st =
                                                        
 *******************************************************)
 
-(* [random_ai b] makes random moves *)
-let random_ai b =
+(* [random_ai b] returns a random move *)
+let random_ai (b : board) : move =
   let valid_moves_1 =
       List.filter (fun m -> is_valid_move m b) moveList in
   let rand_ind = Random.int (List.length valid_moves_1) in
