@@ -25,6 +25,20 @@
         </ul>
       </div>
       <div id="2048"; style="font-family: Clearsans, Open Sans;"> </div>
+
+      <script type="text/javascript" src="_build/main.d.js" defer></script>
+      <script type='text/javascript'>
+        window.addEventListener("keydown", function(e) {
+
+            // space and arrow keys - prevents scrolling up
+            if([32, 37, 38, 39, 40].indexOf(e.keyCode) > -1) {
+                e.preventDefault();
+            }
+        }, false);
+
+
+      </script>
+      
       <div class="howToPlay">
         <h3>How to play:</h3>
           <table>
@@ -68,17 +82,5 @@
             </tr>
           </table>
       </div>
-      <script type="text/javascript" src="_build/main.d.js" defer></script>
-      <script type='text/javascript'>
-        window.addEventListener("keydown", function(e) {
-
-            // space and arrow keys - prevents scrolling up
-            if([32, 37, 38, 39, 40].indexOf(e.keyCode) > -1) {
-                e.preventDefault();
-            }
-        }, false);
-
-
-      </script>
     </body>
 </html>

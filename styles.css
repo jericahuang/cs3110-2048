@@ -75,7 +75,7 @@ html {
     font-size: 1em;
     height: 100%;
     width: 100%;
-    background-color: #faf8ef;
+    background-color: #e6e2bf;
 }
 body {
     width: 100%;
@@ -162,13 +162,17 @@ ul#stats li {
 }
 .howToPlay {
     display: block;
-    font-size: 12px;
-    height: 20px;
+    font-size: 13px;
+    height: 50px;
     width: 100%;
     position: relative;
     text-transform: uppercase;
-    top: -330px;
     color: #a89b90;
+    top:0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    margin: auto;
 }
 .statContent {
     height: 35px;
