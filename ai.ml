@@ -53,4 +53,11 @@ let get_greedy_move (st : staticState) : move =
       fst (snd (List.nth (sort_moveList_scores !score_moves) 0))
     else Null
 
+(* Random AI *)
+let random_ai b =
+  let valid_moves_1 =
+      List.filter (fun m -> is_valid_move m b) moveList in
+  let rand_ind = Random.int (List.length valid_moves_1) in
+  List.nth valid_moves_1 rand_ind
+
 

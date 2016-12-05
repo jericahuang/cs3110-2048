@@ -203,4 +203,3 @@ let key_press m b s evil =
   if is_valid_move m b then (move m b s;
   if check_winning_board b then () else insert_square b evil)
   else ()
-
