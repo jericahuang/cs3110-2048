@@ -1,6 +1,5 @@
 open Gameplay
 open Gamelogic
-(* open Render *)
 open Types
 
 
