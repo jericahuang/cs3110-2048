@@ -16,6 +16,13 @@ open Types
 (* [is_empty_square s] checks if [s] is an empty square. *)
 val is_empty_square : square -> bool
 
+(* [empty_squares b] Returns a list of empty squares in [b] *)
+val empty_squares : board -> (int * int) list
+
+(* [find_max_sq b] Given list of current squares, find max
+ * returns (i,j) of the largest square *)
+val find_max_sq : board -> int * int
+
 (* [init_board ()] is a new board. Defaults to 4. *)
 val init_board : unit -> state
 
