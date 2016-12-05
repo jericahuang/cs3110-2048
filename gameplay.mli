@@ -1,31 +1,4 @@
-(* Types *)
-
-(** The type for game moves corresponding to arrow keys (left, right, up, down). *)
-type move =
-  | Regular
-  | Evil
-  | Left
-  | Right
-  | Up
-  | Down
-  | Null
-
-(** The type for squares. *)
-type square = int option
-
-(* * The type for board rows.
-type row = square list *)
-
-(** The type for boards. *)
-type board = square array array
-
-type score = int ref
-
-type state = {
-  evil: bool ref;
-  s: score;
-  b: board;
-}
+open Types
 
 (* Square Values *)
 
@@ -65,8 +38,6 @@ val t1024 : square
 (** [t2048] is a square tile with value 2048. *)
 val t2048 : square
  *)
-(** [square_value t] is [t]'s value (if any). *)
-val square_value : square -> int
 
 (* Board and move logic *)
 
@@ -84,9 +55,13 @@ val check_2048_square: square -> bool
 
 val check_winning_board: board -> bool
 
+(* val is_valid_merge_horizontal : board -> int -> int -> int -> bool*)
+
 (** [is_valid_move move board] is [true] if shifting [board] in the direction
     [move] results in a change in the game board. *)
 val is_valid_move : move -> board -> bool
+
+(* val is_empty_row : board -> int -> int -> bool *)
 
 (** [insert_square square board] is [board] with [square] inserted
     in a random empty spot. *)
