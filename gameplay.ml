@@ -18,16 +18,11 @@ let init_board size =
     let s = ref 0 in
     let e = ref false in
     b.(3).(3) <- Some 2;
-    (*b.(3).(3) <- Some 1024; b.(3).(2) <- Some 1024;*)
     {
       evil = e;
       s = s;
       b = b;
     }
-    (* ([|[|None; Some 1024; Some 64; None|];
-    [|None; Some 1024; None; None|];
-    [|None; None; None; None|];
-    [|Some 2; None; None; Some 8|]|], s) *)
 
 (* [check_2048_square s] returns if 2048 square has been formed. *)
 let check_2048_square (s : square) =
@@ -106,15 +101,14 @@ let check_winning_board (b : board) =
   done;
   !win
 
-(* Random square insertion *)
-(* Returns a random member of list [l] *)
+(* [random_nth_list l] returns a random member of list [l] *)
 let random_nth_list l  =
   let len = List.length l in
   List.nth l (Random.int len)
 let (>>=) l f = List.concat (List.map f l)
 let list_index = [0;1;2;3]
 
-(* Repetive code? *)
+(* [not_avail_squares b] Returns a list of non-empty squares in [b] *)
 let not_avail_squares b =
   let all_indicies =
     list_index >>= fun i ->
@@ -123,7 +117,7 @@ let not_avail_squares b =
   in
   List.filter (fun (i, j) -> b.(i).(j) <> None) all_indicies
 
-(* Repetive code? Returns a list of empty squares *)
+(* [empty_squares b] Returns a list of empty squares in [b] *)
 let empty_squares b =
   let all_indicies =
     list_index >>= fun i ->
@@ -132,19 +126,21 @@ let empty_squares b =
   in
   List.filter (fun (i, j) -> b.(i).(j) = None) all_indicies
 
-(* Returns a tuple (i,j) of a random open position in [b] in row i,
- * column j. Precondition: [b] has at least one open position.
- *)
+(* [random_avail b] Returns a tuple (i,j) of a random open position
+ * in [b] in row i, column j.
+ * Precondition: [b] has at least one open position. *)
 let random_avail b =
   let avail = empty_squares b in
   random_nth_list avail
 
-(* http://langref.org/ocaml/numbers/mathematical/distance-between-points *)
+(* Inspiration taken from: http://langref.org/ocaml/
+ * numbers/mathematical/distance-between-points
+ * [distance a b] finds distance between points a b *)
 let distance a b =
   sqrt((float(fst a) -. float(fst b))**2.
     +. (float(snd a) -. float(snd b))**2.)
 
-(* Given list of current squares, find max
+(* [find_max_sq b] Given list of current squares, find max
  * returns (i,j) of the largest square *)
 let find_max_sq (b:board) =
   let lst = not_avail_squares b in
@@ -161,6 +157,9 @@ let find_max_sq (b:board) =
   done;
   !max_pos
 
+(* [insert_evil_square b] places new square in the worst possible
+ * position. Determined by max square and relative distance to that
+ * square *)
 let insert_evil_square (b:board) =
   let max_pos = find_max_sq b in
   let empty_sq = empty_squares b in
@@ -177,11 +176,14 @@ let insert_evil_square (b:board) =
   done;
   !min_pos
 
+(* [random_sq_value] returns value for new square, with 90% probability
+ * of 2, 10% for 4 *)
 let random_sq_value () =
   let prob = Random.int 10 in
   if prob = 0 then (Some 4) else (Some 2)
 
-(* Inserts pre-determined square [sq] into board [b] *)
+(* [insert_square b evil] inserts pre-determined square [sq] into board [b];
+ * checks if in evil mode *)
 let insert_square (b : board) evil : unit =
   (* let (i, j) = random_avail b in *)
   let (i, j) =
@@ -190,11 +192,13 @@ let insert_square (b : board) evil : unit =
   let sq = random_sq_value () in
   b.(i).(j) <- sq
 
-(* ASSUMING FUNCTIONALITY use is_valid_move*)
+(* [check_end_game b] checks end game condition; no more valid moves *)
 let check_end_game (b : board) =
   not (is_valid_move Left b || is_valid_move Right b ||
   is_valid_move Up b || is_valid_move Down b)
 
+(* [key_press m b s evil] checks for wining board; inserts new square
+ * otherwise *)
 let key_press m b s evil =
   if is_valid_move m b then (move m b s;
   if check_winning_board b then () else insert_square b evil)

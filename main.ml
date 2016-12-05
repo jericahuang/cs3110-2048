@@ -1,6 +1,5 @@
 open Gameplay
 open Gamelogic
-(* open Render *)
 open Types
 
 
@@ -61,8 +60,6 @@ and key_action ctx b s score_sp evil =
                       Render.change_score score_sp s;
    	       			  if check_winning_board b then Render.win_game ctx else
    	       			  if check_end_game b then Render.end_game ctx else ()
-   | Some (New) -> Render.replace_child score_sp (document##createTextNode (js("0"))); 
-                    play_game ctx score_sp
    | Some (Greedy) ->
       let st = {e = !evil; score = s; board = b} in
         key_press (get_greedy_move st) b s evil; 

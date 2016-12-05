@@ -1,15 +1,20 @@
 open OUnit2
 open Gameplay
-(* open Main *)
+open Gamelogic
+open Types
+
+let board = [|[|Some 8; Some 4; Some 4; Some 4|];
+    [|None; Some 4; Some 4; Some 4|];
+    [|Some 4; Some 2; None; None|];
+    [|Some 4; Some 4; None; Some 2|]|]
+(* let board1 = [|[|None; Some 4; Some 4; Some 4|];
+    [|None; Some 4; Some 16; None|];
+    [|None; Some 2; None; None|];
+    [|Some 4; Some 4; None; Some 2|]|] *)
+
+let score = ref 0
 
 let gameplay_tests = [
-  (* TEST GAMEPLAY *)
-  "Check square_value 0" >:: (fun _ -> assert_equal
-    0
-    (square_value (None)));
-  "Check square_value 2" >:: (fun _ -> assert_equal
-    2
-    (square_value (Some 2)));
   "Check is_empty_square True" >:: (fun _ -> assert_equal
     true
     (is_empty_square (None)));
@@ -68,21 +73,43 @@ let gameplay_tests = [
     [|Some 2; Some 4; Some 4; Some 4|];
     [|Some 4; Some 2; Some 4; Some 4|];
     [|Some 4; Some 4; Some 2; Some 2|]|]));
-
-(*   [|[|Some 4; None; None; Some 4|];
-    [|Some 2; None; None; None|];
-    [|None; Some 2; Some 4; None|];
-    [|None; None; Some 2; Some 2|]|]
-
-    [|[|Some 8; None; None; None|];
-      [|Some 2; None; None; None|];
-      [|Some 2; Some 4; None; None|];
-      [|Some 4; None; None; None|]|]  *)
-
 ]
 
-let my_tests = [
-  (* put any tests you like here; they will not be graded *)
+(* Shift testing was tested through gameplay as shifting
+ * functions returned units and could not predict random
+ * square placement. Score is used as a correctness
+ * indicator. *)
+let gamelogic_tests = [
+  "Check square_value 0" >:: (fun _ -> assert_equal
+    0
+    (square_value (None)));
+  "Check square_value 2" >:: (fun _ -> assert_equal
+    2
+    (square_value (Some 2)));
+  "Move Right" >:: (fun _ -> assert_equal
+    24
+    (score = ref 0;
+    board = [|[|Some 8; Some 4; Some 4; Some 4|];
+    [|None; Some 4; Some 4; Some 4|];
+    [|Some 4; Some 2; None; None|];
+    [|Some 4; Some 4; None; Some 2|]|];
+    move Right board score; !score));
+  "Move Down" >:: (fun _ -> assert_equal
+    32
+    (score = ref 0;
+    board = [|[|Some 8; Some 4; Some 4; Some 4|];
+    [|None; Some 4; Some 4; Some 4|];
+    [|Some 4; Some 2; None; None|];
+    [|Some 4; Some 4; None; Some 2|]|];
+     move Down board score; !score));
+  "Move Left" >:: (fun _ -> assert_equal
+    24
+    (score = ref 0;
+    board = [|[|Some 8; Some 4; Some 4; Some 4|];
+    [|None; Some 4; Some 4; Some 4|];
+    [|Some 4; Some 2; None; None|];
+    [|Some 4; Some 4; None; Some 2|]|];
+    move Left board score; !score));
 ]
 
-let _ = run_test_tt_main ("suite" >::: gameplay_tests @ my_tests)
+let _ = run_test_tt_main ("suite" >::: gameplay_tests @ gamelogic_tests)
