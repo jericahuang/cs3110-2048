@@ -21,3 +21,5 @@ val combine_tiles : board -> int ref -> int -> int -> int -> unit
 val replace_tile : board -> int -> int -> int option -> unit
 
 val move_left : board -> int ref -> int -> 'a -> int -> unit 
+
+val move : move -> board -> score -> unit

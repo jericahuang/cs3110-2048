@@ -61,3 +61,70 @@ let rec move_left b s row col size =
   (if is_empty_row b (row-1) size then () else
   process_row b s (row-1) 0 size;
   move_left b s (row-1) col size)
+
+(* converts the board to a matrix list *)
+let rec to_lst b size =
+  if size = 4 then [] else
+  Array.to_list b.(size) :: to_lst b (size+1)
+
+(* converts the board to a matrix list but each row is in reverse order *)
+let rec to_lst_rev b size =
+  if size = 4 then [] else
+  (List.rev (Array.to_list b.(size))) :: to_lst_rev b (size+1)
+
+(* converts the matrix list back into a valid board array *)
+let rec to_arr lst arr size =
+  match lst with
+  | [] -> ()
+  | h::t -> arr.(size) <- (Array.of_list h); to_arr t arr (size+1)
+
+(* gets the first value of a row *)
+let rec get_head lst =
+  match lst with
+  | [] -> []
+  | []::[] -> []
+  | []::(h::t) -> h
+  | (h::t) :: t' -> h :: get_head t'
+
+(* gets the rest of the row excluding the first value *)
+let rec get_tail lst =
+  match lst with
+  | [] -> []
+  | []::[] -> []
+  | []::(h::t) -> t
+  | (h::t) :: t' -> t :: get_tail t'
+  
+  (* rotates the board so that the only moves that need to be done are in the
+   leftward direction *)
+let rec rotate lst =
+  match lst with
+  | [] -> []
+  | []::_ -> []
+  | (h::t) :: t' -> (h :: get_head t') :: rotate (t :: get_tail t')
+
+(* rotates the board 90 degrees counter-clockwise *)
+let rotate_up b =
+  to_arr (rotate (to_lst b 0)) b 0
+
+(* rotates the board to be in reverse order *)
+let rotate_right b =
+  to_arr (to_lst_rev b 0) b 0
+
+(* moves the board in direction [m] *)
+let move m b s =
+  match m with
+  | Left -> move_left b s
+            (Array.length b.(0)) (Array.length b) (Array.length b)
+  | Right -> rotate_right b;
+             move_left b s
+            (Array.length b) (Array.length b) (Array.length b);
+             rotate_right b
+  | Up -> rotate_up b;
+          move_left b s
+          (Array.length b) (Array.length b) (Array.length b);
+          rotate_up b
+  | Down -> rotate_up b; rotate_right b;
+            move_left b s
+            (Array.length b) (Array.length b) (Array.length b);
+            rotate_right b; rotate_up b
+  | (Regular|Evil|Null) -> ()

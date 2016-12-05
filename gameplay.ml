@@ -36,11 +36,9 @@ let init_board size =
     [|None; None; None; None|];
     [|Some 2; None; None; Some 8|]|], s) *)
 
-(* [check_2048_sqaure s] returns if 2048 square has been formed. *)
+(* [check_2048_square s] returns if 2048 square has been formed. *)
 let check_2048_square (s : square) =
   Gamelogic.square_value s = 2048
-
-
 
 (* Returns whether or not column [col] is empty in board [b] of
  * length/width [size] *)
@@ -49,7 +47,7 @@ let rec is_empty_col b col size =
   if b.(size-1).(col) = None then
     is_empty_col b col (size-1) else false
 
-
+(* Returns whether or not a valid vertical move (up or down) is valid *)
 let is_valid_merge_vertical b col r1 r2 =
   if b.(r1).(col) <> None then
     b.(r1).(col) = b.(r2).(col) else false
@@ -143,41 +141,6 @@ let rec get_tail lst =
   | []::[] -> []
   | []::(h::t) -> t
   | (h::t) :: t' -> t :: get_tail t'
-
-(* rotates the board so that the only moves that need to be done are in the
-   leftward direction *)
-let rec rotate lst =
-  match lst with
-  | [] -> []
-  | []::_ -> []
-  | (h::t) :: t' -> (h :: get_head t') :: rotate (t :: get_tail t')
-
-(* rotates the board 90 degrees counter-clockwise *)
-let rotate_up b =
-  to_arr (rotate (to_lst b 0)) b 0
-
-(* rotates the board to be in reverse order *)
-let rotate_right b =
-  to_arr (to_lst_rev b 0) b 0
-
-(* moves the board in direction [m] *)
-let move m b s =
-  match m with
-  | Left -> move_left b s
-            (Array.length b.(0)) (Array.length b) (Array.length b)
-  | Right -> rotate_right b;
-             move_left b s
-            (Array.length b) (Array.length b) (Array.length b);
-             rotate_right b
-  | Up -> rotate_up b;
-          move_left b s
-          (Array.length b) (Array.length b) (Array.length b);
-          rotate_up b
-  | Down -> rotate_up b; rotate_right b;
-            move_left b s
-            (Array.length b) (Array.length b) (Array.length b);
-            rotate_right b; rotate_up b
-  | (Regular|Evil|Null) -> ()
 
 (* checks to see if the 2048 tile has been created yet *)
 let check_winning_board (b : board) =
@@ -281,7 +244,6 @@ let key_press m b s evil =
   if check_winning_board b then () else insert_square b evil)
   else ()
 
-
 (* Corner AI *)
 let corner_ai b =
   if is_valid_move Right b then Right else
@@ -290,7 +252,6 @@ let corner_ai b =
 
 
 (* Greedy AI *)
-
 
 let moveList = [Up;Down;Left;Right;]
 
