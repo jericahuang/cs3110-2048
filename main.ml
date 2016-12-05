@@ -20,15 +20,6 @@ let document = H.document
 *****************************************************************************
 *)
 
-(* key defines the types of actions within the game *)
-type key =
-	| Move of move
-	| Regular
-	| Evil
-	| New
-  | Greedy
-  | Corner
-
 (* [parse_ev e] parses key presses to correct behavior *)
 let parse_ev e =
   match e##keyCode with
