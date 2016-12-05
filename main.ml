@@ -61,6 +61,11 @@ and key_action ctx b s score_sp evil =
                       Render.change_score score_sp s;
    	       			  if check_winning_board b then Render.win_game ctx else
    	       			  if check_end_game b then Render.end_game ctx else ()
+    | Some (Random) -> key_press (random_ai b) b s evil;
+                  Render.draw_board ctx b; Render.change_score score_sp s;
+                      Render.change_score score_sp s;
+                  if check_winning_board b then Render.win_game ctx else
+                  if check_end_game b then Render.end_game ctx else ()
    | Some (Greedy) ->
       let st = {e = !evil; score = s; board = b} in
         key_press (get_greedy_move st) b s evil;

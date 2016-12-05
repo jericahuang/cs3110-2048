@@ -15,7 +15,8 @@ type key =
   | New
   | Greedy
   | Corner
-  
+  | Random
+
 type square = int option
 
 type board = square array array
