@@ -35,6 +35,7 @@ let rec is_empty_col b col size =
   if b.(size-1).(col) = None then
     is_empty_col b col (size-1) else false
 
+(* Helper function for [is_valid_move] *)
 let rec is_valid_move_left b row col =
   if row = 0 then false else
   if is_empty_row b (row-1) col then is_valid_move_left b (row-1) col else
@@ -48,6 +49,7 @@ let rec is_valid_move_left b row col =
   || is_valid_merge_horizontal b (row-1) 2 3
   then true else is_valid_move_left b (row-1) col
 
+(* Helper function for [is_valid_move] *)
 let rec is_valid_move_right b row col =
   if row = 0 then false else
   if is_empty_row b (row-1) col then is_valid_move_right b (row-1) col else
@@ -61,6 +63,7 @@ let rec is_valid_move_right b row col =
   || is_valid_merge_horizontal b (row-1) 2 3
   then true else is_valid_move_right b (row-1) col
 
+(* Helper function for [is_valid_move] *)
 let rec is_valid_move_up b row col =
   if col = 0 then false else
   if is_empty_col b (col-1) row then is_valid_move_up b row (col-1) else
@@ -74,6 +77,7 @@ let rec is_valid_move_up b row col =
   || is_valid_merge_vertical b (col-1) 2 3
   then true else is_valid_move_up b row (col-1)
 
+(* Helper function for [is_valid_move] *)
 let rec is_valid_move_down b row col =
   if col = 0 then false else
   if is_empty_col b (col-1) row then is_valid_move_down b row (col-1) else
