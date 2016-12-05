@@ -1,8 +1,10 @@
+(* This module will delegate move input, check for valid moves,
+ * and handle game ending, inserting random squares, and AI. *)
+
 open Types
 
+(* [is_empty_square s] checks if [s] is an empty square. *)
 val is_empty_square : square -> bool
-
-(* Board and move logic *)
 
 (* Keyup event handler function *)
 val key_press : move -> board -> score -> bool ref -> unit

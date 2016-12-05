@@ -1,6 +1,8 @@
 (* This module will handle return the updated board as a matrix.
  * Note, this includes combinations and replacement. *)
 
+open Types
+
 (******************************************************************************)
 (** Game Logic functions                                                     **)
 (******************************************************************************)
