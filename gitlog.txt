@@ -1,0 +1,1932 @@
+commit d4ed1fc6fc3dc5cc29641c597d7b3d492bffc8ad
+Merge: 932e5ff 434cc6f
+Author: Lillyan <ldp54@cornell.edu>
+Date:   Sun Dec 4 23:57:06 2016 -0500
+
+    Merge branch 'master' of https://github.com/jericahuang/cs3110-2048
+
+commit 932e5ff71d43eebf848d354bdab501a7c0e600f1
+Author: Lillyan <ldp54@cornell.edu>
+Date:   Sun Dec 4 23:57:01 2016 -0500
+
+    commenting warning tests
+
+ test.byte |  1 +
+ test.ml   | 10 +++++++---
+ 2 files changed, 8 insertions(+), 3 deletions(-)
+
+commit 434cc6fc414ff1c33346c06aefc5d703e6389118
+Author: Jerica Huang <jerica.huang@gmail.com>
+Date:   Sun Dec 4 23:49:37 2016 -0500
+
+    quickfix
+
+ README.txt | 3 ++-
+ 1 file changed, 2 insertions(+), 1 deletion(-)
+
+commit e6d4f994d934437365b8f8dae5a696af04d0b91f
+Author: Lillyan <ldp54@cornell.edu>
+Date:   Sun Dec 4 23:43:27 2016 -0500
+
+    cleaning
+
+ test.ml | 4 ----
+ 1 file changed, 4 deletions(-)
+
+commit 32dbaf0180bedf38d9b62f68556c563d804cfce7
+Merge: d9d4391 f41fae4
+Author: Lillyan <ldp54@cornell.edu>
+Date:   Sun Dec 4 23:42:59 2016 -0500
+
+    Merge branch 'master' of https://github.com/jericahuang/cs3110-2048
+
+commit d9d4391310eba16f4e8801a19f1ccb5a8ef4970b
+Author: Lillyan <ldp54@cornell.edu>
+Date:   Sun Dec 4 23:42:54 2016 -0500
+
+    styling
+
+ gameLogic.mli | 21 +++++++++++----------
+ gamelogic.ml  | 32 +++++++++++++++++---------------
+ gameplay.ml   |  9 ++++++---
+ main.ml       | 23 +++++++++++++----------
+ 4 files changed, 47 insertions(+), 38 deletions(-)
+
+commit f41fae4f8d418190cb78a3c84e520b3f8cb057d8
+Author: swaggie <amandac188@gmail.com>
+Date:   Sun Dec 4 23:39:05 2016 -0500
+
+    I love ASCII art
+
+ gameLogic.mli | 12 +++++++++---
+ gameplay.mli  | 10 ++++++++++
+ 2 files changed, 19 insertions(+), 3 deletions(-)
+
+commit 10b0c489471eb1d37d41c3bf72e9107959791005
+Author: swaggie <amandac188@gmail.com>
+Date:   Sun Dec 4 23:36:40 2016 -0500
+
+    ai.mli specs
+
+ ai.ml  | 45 +++++++++++++++++++++++++++++++++++----------
+ ai.mli |  5 ++++-
+ 2 files changed, 39 insertions(+), 11 deletions(-)
+
+commit 2cefb74aeaec5e622dbdb7a7f93afdd595e9cf9a
+Merge: 70ec213 3c439b8
+Author: swaggie <amandac188@gmail.com>
+Date:   Sun Dec 4 23:16:02 2016 -0500
+
+    Merge branch 'master' of https://github.com/jericahuang/cs3110-2048
+
+commit 70ec213136fa133a5e3e63f9d7e73ebe296b8297
+Author: swaggie <amandac188@gmail.com>
+Date:   Sun Dec 4 23:15:28 2016 -0500
+
+    modules
+
+ ai.mli | 3 +++
+ 1 file changed, 3 insertions(+)
+
+commit 3c439b8f68b2e0cbe0fa810b2a0280dd4a71da26
+Merge: 3d24455 905468d
+Author: Lillyan <ldp54@cornell.edu>
+Date:   Sun Dec 4 23:15:02 2016 -0500
+
+    random ai
+
+commit 3d24455f71aec4124aa309f20a6fae44a946703f
+Merge: 55ff06b da6a646
+Author: Lillyan <ldp54@cornell.edu>
+Date:   Sun Dec 4 23:11:52 2016 -0500
+
+    Merge branch 'master' of https://github.com/jericahuang/cs3110-2048
+
+commit 905468d478ce210191de569c689613cfd9be8a9a
+Merge: 8a6970c da6a646
+Author: swaggie <amandac188@gmail.com>
+Date:   Sun Dec 4 23:11:51 2016 -0500
+
+    Merge branch 'master' of https://github.com/jericahuang/cs3110-2048
+
+commit 55ff06b9d052fa234da1d72b8bb3b0db36fb9deb
+Author: Lillyan <ldp54@cornell.edu>
+Date:   Sun Dec 4 23:11:48 2016 -0500
+
+    random ai
+
+ gameplay.ml  | 6 ++++++
+ gameplay.mli | 2 ++
+ index.html   | 8 +++++++-
+ main.ml      | 5 +++++
+ types.ml     | 1 +
+ types.mli    | 3 ++-
+ 6 files changed, 23 insertions(+), 2 deletions(-)
+
+commit 8a6970c3c3734953fc671b01bf5ee0b3969a0da0
+Author: swaggie <amandac188@gmail.com>
+Date:   Sun Dec 4 23:11:44 2016 -0500
+
+    Separate file for AI
+
+ ai.ml        | 56 ++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+ ai.mli       |  8 ++++++++
+ gameplay.ml  | 52 ----------------------------------------------------
+ gameplay.mli |  4 ----
+ main.ml      |  1 +
+ 5 files changed, 65 insertions(+), 56 deletions(-)
+
+commit da6a6463cb77e529a27eb1e5d0da0ac3f80c6110
+Merge: 474ff10 704be0c
+Author: Jerica Huang <jerica.huang@gmail.com>
+Date:   Sun Dec 4 23:07:06 2016 -0500
+
+    Merge remote-tracking branch 'origin/master'
+
+commit 474ff103307247635a2006d3dbc40f860aa1bcb3
+Author: Jerica Huang <jerica.huang@gmail.com>
+Date:   Sun Dec 4 23:07:02 2016 -0500
+
+    auto-run messages
+
+ _web/styles.css | 7 ++++++-
+ index.html      | 4 ++--
+ 2 files changed, 8 insertions(+), 3 deletions(-)
+
+commit 0f5d3b4d89512f122124274d674873b8548ad52b
+Merge: 6d7a2d4 704be0c
+Author: Lillyan <ldp54@cornell.edu>
+Date:   Sun Dec 4 23:02:44 2016 -0500
+
+    Merge branch 'master' of https://github.com/jericahuang/cs3110-2048
+
+commit 6d7a2d4f556751ad8df9f813a40c0cfcb34da75e
+Author: Lillyan <ldp54@cornell.edu>
+Date:   Sun Dec 4 23:02:42 2016 -0500
+
+    merge
+
+ main.ml    | 11 ++++++-----
+ styles.css |  4 ++--
+ 2 files changed, 8 insertions(+), 7 deletions(-)
+
+commit 704be0ca376c54cc234521fe11a4c21e521af8db
+Merge: b4fc763 6bc3081
+Author: swaggie <amandac188@gmail.com>
+Date:   Sun Dec 4 23:02:15 2016 -0500
+
+    Merge branch 'master' of https://github.com/jericahuang/cs3110-2048
+
+commit b4fc763621a2137234b3da2f9d1e38964c3cc227
+Author: swaggie <amandac188@gmail.com>
+Date:   Sun Dec 4 23:02:11 2016 -0500
+
+    Moved stuff around
+
+ gameLogic.mli | 2 ++
+ gameplay.mli  | 6 ++++--
+ main.ml       | 9 ---------
+ types.ml      | 9 +++++++++
+ types.mli     | 9 +++++++++
+ 5 files changed, 24 insertions(+), 11 deletions(-)
+
+commit 6bc308140ee97a68d018fec434d2fbc0fb0fe2ce
+Merge: 84b1079 7a05860
+Author: Lillyan <ldp54@cornell.edu>
+Date:   Sun Dec 4 22:55:29 2016 -0500
+
+    merge
+
+commit 84b107969a86efded3dbeb661f5f1b89ba0be816
+Author: Lillyan <ldp54@cornell.edu>
+Date:   Sun Dec 4 22:52:49 2016 -0500
+
+    test and cleaning
+
+ bg1.jpg     | Bin 90822 -> 0 bytes
+ bg2.jpg     | Bin 48127 -> 0 bytes
+ gameplay.ml |  40 +++++++++++++++++-----------------
+ main.ml     |   1 -
+ main.mli    |   1 +
+ samplejs.ml |   7 ------
+ styles.css  |  22 +++++++++++--------
+ test.ml     |  71 +++++++++++++++++++++++++++++++++++++++++-------------------
+ 8 files changed, 83 insertions(+), 59 deletions(-)
+
+commit 7a058604d2e646e6f47c5d16028959b71f7492ee
+Author: Jerica Huang <jerica.huang@gmail.com>
+Date:   Sun Dec 4 22:51:52 2016 -0500
+
+    readme
+
+ README.txt | 5 +++++
+ test.byte  | 1 -
+ 2 files changed, 5 insertions(+), 1 deletion(-)
+
+commit 59cae48d9afef403495e5e2be28f454801b3f7ee
+Author: Jerica Huang <jerica.huang@gmail.com>
+Date:   Sun Dec 4 22:49:08 2016 -0500
+
+    cleanup and prep for submission
+
+ ClearSans-Bold.eot                                 |   Bin 101828 -> 0 bytes
+ ClearSans-Bold.ttf                                 |   Bin 269792 -> 0 bytes
+ README.md                                          |     1 -
+ README.txt                                         |     0
+ _web/ClearSans-Bold.eot                            |   Bin 0 -> 101828 bytes
+ _web/ClearSans-Bold.ttf                            |   Bin 0 -> 269792 bytes
+ _web/bg.jpg                                        |   Bin 0 -> 67285 bytes
+ _web/bg2.jpg                                       |   Bin 0 -> 48127 bytes
+ _web/clearsans-1.00/EOT/ClearSans-BoldItalic.eot   |   Bin 0 -> 111311 bytes
+ _web/clearsans-1.00/EOT/ClearSans-Italic.eot       |   Bin 0 -> 110273 bytes
+ _web/clearsans-1.00/EOT/ClearSans-Light.eot        |   Bin 0 -> 108120 bytes
+ _web/clearsans-1.00/EOT/ClearSans-Medium.eot       |   Bin 0 -> 122888 bytes
+ _web/clearsans-1.00/EOT/ClearSans-MediumItalic.eot |   Bin 0 -> 126081 bytes
+ _web/clearsans-1.00/EOT/ClearSans-Regular.eot      |   Bin 0 -> 113875 bytes
+ _web/clearsans-1.00/EOT/ClearSans-Thin.eot         |   Bin 0 -> 106121 bytes
+ _web/clearsans-1.00/LICENSE-2.0.txt                |   202 +
+ _web/clearsans-1.00/SVG/ClearSans-Bold.svg         | 22646 +++++++++++++++
+ _web/clearsans-1.00/SVG/ClearSans-BoldItalic.svg   | 23072 +++++++++++++++
+ _web/clearsans-1.00/SVG/ClearSans-Italic.svg       | 22411 +++++++++++++++
+ _web/clearsans-1.00/SVG/ClearSans-Light.svg        | 22411 +++++++++++++++
+ _web/clearsans-1.00/SVG/ClearSans-Medium.svg       | 28626 +++++++++++++++++++
+ _web/clearsans-1.00/SVG/ClearSans-MediumItalic.svg | 27990 ++++++++++++++++++
+ _web/clearsans-1.00/SVG/ClearSans-Regular.svg      | 28060 ++++++++++++++++++
+ _web/clearsans-1.00/SVG/ClearSans-Thin.svg         | 22180 ++++++++++++++
+ _web/clearsans-1.00/TTF/ClearSans-BoldItalic.ttf   |   Bin 0 -> 287460 bytes
+ _web/clearsans-1.00/TTF/ClearSans-Italic.ttf       |   Bin 0 -> 282800 bytes
+ _web/clearsans-1.00/TTF/ClearSans-Light.ttf        |   Bin 0 -> 272724 bytes
+ _web/clearsans-1.00/TTF/ClearSans-Medium.ttf       |   Bin 0 -> 313308 bytes
+ _web/clearsans-1.00/TTF/ClearSans-MediumItalic.ttf |   Bin 0 -> 315792 bytes
+ _web/clearsans-1.00/TTF/ClearSans-Regular.ttf      |   Bin 0 -> 304516 bytes
+ _web/clearsans-1.00/TTF/ClearSans-Thin.ttf         |   Bin 0 -> 272304 bytes
+ _web/clearsans-1.00/WOFF/ClearSans-Bold.woff       |   Bin 0 -> 116584 bytes
+ _web/clearsans-1.00/WOFF/ClearSans-BoldItalic.woff |   Bin 0 -> 128760 bytes
+ _web/clearsans-1.00/WOFF/ClearSans-Italic.woff     |   Bin 0 -> 126128 bytes
+ _web/clearsans-1.00/WOFF/ClearSans-Light.woff      |   Bin 0 -> 121346 bytes
+ _web/clearsans-1.00/WOFF/ClearSans-Medium.woff     |   Bin 0 -> 137305 bytes
+ .../WOFF/ClearSans-MediumItalic.woff               |   Bin 0 -> 141040 bytes
+ _web/clearsans-1.00/WOFF/ClearSans-Regular.woff    |   Bin 0 -> 130846 bytes
+ _web/clearsans-1.00/WOFF/ClearSans-Thin.woff       |   Bin 0 -> 119542 bytes
+ _web/favicon.ico                                   |   Bin 0 -> 1150 bytes
+ _web/styles.css                                    |   185 +
+ bg.jpg                                             |   Bin 67285 -> 0 bytes
+ bg1.jpg                                            |   Bin 90822 -> 0 bytes
+ bg2.jpg                                            |   Bin 48127 -> 0 bytes
+ clearsans-1.00/EOT/ClearSans-BoldItalic.eot        |   Bin 111311 -> 0 bytes
+ clearsans-1.00/EOT/ClearSans-Italic.eot            |   Bin 110273 -> 0 bytes
+ clearsans-1.00/EOT/ClearSans-Light.eot             |   Bin 108120 -> 0 bytes
+ clearsans-1.00/EOT/ClearSans-Medium.eot            |   Bin 122888 -> 0 bytes
+ clearsans-1.00/EOT/ClearSans-MediumItalic.eot      |   Bin 126081 -> 0 bytes
+ clearsans-1.00/EOT/ClearSans-Regular.eot           |   Bin 113875 -> 0 bytes
+ clearsans-1.00/EOT/ClearSans-Thin.eot              |   Bin 106121 -> 0 bytes
+ clearsans-1.00/LICENSE-2.0.txt                     |   202 -
+ clearsans-1.00/SVG/ClearSans-Bold.svg              | 22646 ---------------
+ clearsans-1.00/SVG/ClearSans-BoldItalic.svg        | 23072 ---------------
+ clearsans-1.00/SVG/ClearSans-Italic.svg            | 22411 ---------------
+ clearsans-1.00/SVG/ClearSans-Light.svg             | 22411 ---------------
+ clearsans-1.00/SVG/ClearSans-Medium.svg            | 28626 -------------------
+ clearsans-1.00/SVG/ClearSans-MediumItalic.svg      | 27990 ------------------
+ clearsans-1.00/SVG/ClearSans-Regular.svg           | 28060 ------------------
+ clearsans-1.00/SVG/ClearSans-Thin.svg              | 22180 --------------
+ clearsans-1.00/TTF/ClearSans-BoldItalic.ttf        |   Bin 287460 -> 0 bytes
+ clearsans-1.00/TTF/ClearSans-Italic.ttf            |   Bin 282800 -> 0 bytes
+ clearsans-1.00/TTF/ClearSans-Light.ttf             |   Bin 272724 -> 0 bytes
+ clearsans-1.00/TTF/ClearSans-Medium.ttf            |   Bin 313308 -> 0 bytes
+ clearsans-1.00/TTF/ClearSans-MediumItalic.ttf      |   Bin 315792 -> 0 bytes
+ clearsans-1.00/TTF/ClearSans-Regular.ttf           |   Bin 304516 -> 0 bytes
+ clearsans-1.00/TTF/ClearSans-Thin.ttf              |   Bin 272304 -> 0 bytes
+ clearsans-1.00/WOFF/ClearSans-Bold.woff            |   Bin 116584 -> 0 bytes
+ clearsans-1.00/WOFF/ClearSans-BoldItalic.woff      |   Bin 128760 -> 0 bytes
+ clearsans-1.00/WOFF/ClearSans-Italic.woff          |   Bin 126128 -> 0 bytes
+ clearsans-1.00/WOFF/ClearSans-Light.woff           |   Bin 121346 -> 0 bytes
+ clearsans-1.00/WOFF/ClearSans-Medium.woff          |   Bin 137305 -> 0 bytes
+ clearsans-1.00/WOFF/ClearSans-MediumItalic.woff    |   Bin 141040 -> 0 bytes
+ clearsans-1.00/WOFF/ClearSans-Regular.woff         |   Bin 130846 -> 0 bytes
+ clearsans-1.00/WOFF/ClearSans-Thin.woff            |   Bin 119542 -> 0 bytes
+ favicon.ico                                        |   Bin 1150 -> 0 bytes
+ index.html                                         |     6 +-
+ interfaces.zip                                     |   Bin 1776 -> 0 bytes
+ main.ml                                            |     2 -
+ samplejs.ml                                        |     7 -
+ styles.css                                         |   185 -
+ 81 files changed, 197786 insertions(+), 197796 deletions(-)
+
+commit de24c0924f00dadc23b3ebfedae46211057ed370
+Merge: 9d2b7ad 1939b5a
+Author: swaggie <amandac188@gmail.com>
+Date:   Sun Dec 4 22:41:17 2016 -0500
+
+    Merge branch 'master' of https://github.com/jericahuang/cs3110-2048
+
+commit 9d2b7ad3c434d96b9848adb1aa4b1c0291c0f6c9
+Author: swaggie <amandac188@gmail.com>
+Date:   Sun Dec 4 22:41:12 2016 -0500
+
+    Finished updating gamelgic.mli
+
+ gameLogic.mli | 65 ++++++++++++++++++++++++++++++++++++++++++++-------
+ gamelogic.ml  | 75 +++++++++++++++++++++++++++++++++++++----------------------
+ gameplay.ml   | 48 ++------------------------------------
+ 3 files changed, 106 insertions(+), 82 deletions(-)
+
+commit 1939b5aa5d38a5df9e2353887ab11ff1873c56aa
+Author: Jerica Huang <jerica.huang@gmail.com>
+Date:   Sun Dec 4 22:16:33 2016 -0500
+
+    Cleanup
+
+ main.ml | 4 ----
+ 1 file changed, 4 deletions(-)
+
+commit f8e9c054ade5f2a15b4e38d25af8009db8abd520
+Author: Jerica Huang <jerica.huang@gmail.com>
+Date:   Sun Dec 4 22:04:27 2016 -0500
+
+    added padding
+
+ styles.css | 1 +
+ 1 file changed, 1 insertion(+)
+
+commit b7b8d50802c39cab5c0382ce1932148035cf5ea4
+Merge: 8a8a5c0 7bd0868
+Author: Jerica Huang <jerica.huang@gmail.com>
+Date:   Sun Dec 4 21:57:37 2016 -0500
+
+    Merge remote-tracking branch 'origin/master'
+    
+    # Conflicts:
+    #	main.ml
+
+commit 8a8a5c02ea2f61d01aea44c50e8dbfa2bdaed512
+Author: Jerica Huang <jerica.huang@gmail.com>
+Date:   Sun Dec 4 21:56:48 2016 -0500
+
+    <80 chars and specs
+
+ gameplay.ml |  7 -------
+ main.ml     | 13 +++++++++----
+ 2 files changed, 9 insertions(+), 11 deletions(-)
+
+commit 7bd08687c4351793ba1dbde1775de5432cdd26c8
+Author: swaggie <amandac188@gmail.com>
+Date:   Sun Dec 4 21:50:21 2016 -0500
+
+    80 lines
+
+ main.ml | 12 ++++++++----
+ 1 file changed, 8 insertions(+), 4 deletions(-)
+
+commit ffd072332c7af7fe2a4a6638f99b8376427d85ed
+Author: swaggie <amandac188@gmail.com>
+Date:   Sun Dec 4 21:48:01 2016 -0500
+
+    Centered instructions
+
+ styles.css | 7 ++-----
+ 1 file changed, 2 insertions(+), 5 deletions(-)
+
+commit d72f43eedb3ac587e3ee1081dd7183347dcc1b12
+Author: swaggie <amandac188@gmail.com>
+Date:   Sun Dec 4 19:43:27 2016 -0500
+
+    Moved instructions to bottom
+
+ index.html | 26 ++++++++++++++------------
+ styles.css | 12 ++++++++----
+ 2 files changed, 22 insertions(+), 16 deletions(-)
+
+commit d52d045d116a34f647672234a7b836742b86e70d
+Merge: 6e8a8bd db08eaf
+Author: swaggie <amandac188@gmail.com>
+Date:   Sun Dec 4 19:27:18 2016 -0500
+
+    Merge branch 'master' of https://github.com/jericahuang/cs3110-2048
+
+commit 6e8a8bdfda0eb7e17c9ab159f27c730eb6cfbff5
+Author: swaggie <amandac188@gmail.com>
+Date:   Sun Dec 4 19:26:00 2016 -0500
+
+    Separated gamelogic and gameplay
+
+ gameLogic.mli |  4 +++-
+ gamelogic.ml  | 67 +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+ gameplay.ml   | 43 ++------------------------------------
+ gameplay.mli  |  3 ---
+ index.html    |  4 +++-
+ 5 files changed, 75 insertions(+), 46 deletions(-)
+
+commit db08eaff336744275b424cee66bfbeb27a4cfbdf
+Author: Lillyan <ldp54@cornell.edu>
+Date:   Sun Dec 4 19:25:28 2016 -0500
+
+    greedy
+
+ main.ml  | 10 ++++++----
+ types.ml |  1 -
+ 2 files changed, 6 insertions(+), 5 deletions(-)
+
+commit f9681037e1faed112f4eedb89efe19fe5d90908f
+Merge: f574c40 2980232
+Author: Lillyan <ldp54@cornell.edu>
+Date:   Sun Dec 4 19:16:02 2016 -0500
+
+    render
+
+commit f574c404e992054ccf221b01a71d4eac478fdf5a
+Author: Lillyan <ldp54@cornell.edu>
+Date:   Sun Dec 4 19:11:35 2016 -0500
+
+    render
+
+ gameplay.ml  |   4 +-
+ gameplay.mli |  38 -----------
+ main.ml      | 209 +++------------------------------------------------------
+ render.ml    | 215 ++++++++++++++++++++++++++++++++++++++++++++++++++---------
+ render.mli   |  87 ++++++++++++++++++++++--
+ 5 files changed, 278 insertions(+), 275 deletions(-)
+
+commit 29802321007189095d0302aa0e469123ea2fb37c
+Merge: 80e18f5 6d833ef
+Author: swaggie <amandac188@gmail.com>
+Date:   Sun Dec 4 19:02:10 2016 -0500
+
+    Merge branch 'master' of https://github.com/jericahuang/cs3110-2048
+
+commit 80e18f576858b8ffd54e264dfff17e52f5d20fd9
+Author: swaggie <amandac188@gmail.com>
+Date:   Sun Dec 4 19:00:46 2016 -0500
+
+    Moved types to its own file and separated gameplay and gamelogic functions
+
+ gameLogic.mli | 12 ++++++--
+ gamelogic.ml  | 49 +++++++++++++++++++++++++++++++-
+ gameplay.ml   | 91 ++++++-----------------------------------------------------
+ gameplay.mli  | 35 ++++-------------------
+ main.ml       |  1 +
+ main.mli      |  1 +
+ types.ml      | 30 ++++++++++++++++++++
+ types.mli     | 29 +++++++++++++++++++
+ 8 files changed, 132 insertions(+), 116 deletions(-)
+
+commit 6d833ef7623f5e3f92c5181f0cf53ae4d91178e9
+Author: Jerica Huang <jerica.huang@gmail.com>
+Date:   Sun Dec 4 18:20:47 2016 -0500
+
+    Greedy key event progress
+    
+    still getting an error
+
+ gameplay.ml  | 2 +-
+ gameplay.mli | 2 ++
+ main.ml      | 5 ++++-
+ 3 files changed, 7 insertions(+), 2 deletions(-)
+
+commit a7efdd8138d38624d0cc1261151fe99849cc0fc3
+Author: Jerica Huang <jerica.huang@gmail.com>
+Date:   Sun Dec 4 17:54:14 2016 -0500
+
+    Corner ai working
+
+ gameplay.mli | 5 +++--
+ main.ml      | 4 +++-
+ 2 files changed, 6 insertions(+), 3 deletions(-)
+
+commit ed769c5b58ad81bbdc571d89121d25379b44e7c5
+Author: Jerica Huang <jerica.huang@gmail.com>
+Date:   Sun Dec 4 17:48:12 2016 -0500
+
+    Starting key events
+
+ main.ml | 7 ++++++-
+ 1 file changed, 6 insertions(+), 1 deletion(-)
+
+commit 0b9ea5d100bcbd5ec4d04b1c382e9dff256f7f56
+Author: Jerica Huang <jerica.huang@gmail.com>
+Date:   Sun Dec 4 17:45:32 2016 -0500
+
+    Final gameplay fixes
+
+ gameplay.ml  | 36 ++++++++++++++++++++----------------
+ gameplay.mli |  1 +
+ 2 files changed, 21 insertions(+), 16 deletions(-)
+
+commit c8ec9b07386dce0ec1734f14660d4f8a1b6a1f5e
+Author: Jerica Huang <jerica.huang@gmail.com>
+Date:   Sun Dec 4 12:42:57 2016 -0500
+
+    More specs
+
+ gameplay.ml |  9 ++++++++-
+ index.html  | 12 ++++++++++++
+ 2 files changed, 20 insertions(+), 1 deletion(-)
+
+commit f3ee34f9e99b0326edc2dc2da42f6b56737171bb
+Merge: 764de80 7d0ae20
+Author: Michael Velez <MichaelVelez@dhcp-ccc-4203.eduroam.cornell.edu>
+Date:   Sun Dec 4 12:35:32 2016 -0500
+
+    Merge branch 'master' of https://github.com/jericahuang/cs3110-2048
+
+commit 764de80229d69ec804abe30e6f86ccc77edeed23
+Author: Michael Velez <MichaelVelez@dhcp-ccc-4203.eduroam.cornell.edu>
+Date:   Sun Dec 4 12:35:24 2016 -0500
+
+    specs
+
+ gameplay.ml  | 37 ++++++++++++++++++++++---------------
+ gameplay.mli |  3 ---
+ 2 files changed, 22 insertions(+), 18 deletions(-)
+
+commit 7d0ae2019333854467e78e6a9c1106b663d1a404
+Merge: 8bbfb60 9833d21
+Author: swaggie <amandac188@gmail.com>
+Date:   Sun Dec 4 12:15:45 2016 -0500
+
+    Merge branch 'master' of https://github.com/jericahuang/cs3110-2048
+
+commit 9833d21a591cadaf3757caf2f67eb5d715f6cd65
+Merge: 2079156 d15fc0f
+Author: Michael Velez <MichaelVelez@dhcp-ccc-4203.eduroam.cornell.edu>
+Date:   Sun Dec 4 12:15:13 2016 -0500
+
+    Merge branch 'master' of https://github.com/jericahuang/cs3110-2048
+
+commit 2079156251884ce53d194902bccb803550ab5130
+Author: Michael Velez <MichaelVelez@dhcp-ccc-4203.eduroam.cornell.edu>
+Date:   Sun Dec 4 12:15:05 2016 -0500
+
+    move
+
+ gameplay.ml | 15 ++++++++++-----
+ 1 file changed, 10 insertions(+), 5 deletions(-)
+
+commit 8bbfb605012b385b5ab26cf61236f007c50be140
+Merge: cb1aba7 d15fc0f
+Author: swaggie <amandac188@gmail.com>
+Date:   Sun Dec 4 12:07:16 2016 -0500
+
+    Merge branch 'master' of https://github.com/jericahuang/cs3110-2048
+
+commit d15fc0f363582ebf662f06f99d245a45170fc224
+Author: Jerica Huang <jerica.huang@gmail.com>
+Date:   Sun Dec 4 12:04:31 2016 -0500
+
+    Comments and lines<70 chars
+
+ gameplay.ml | 55 +++++++++++++++++++++++++++++++++++++------------------
+ 1 file changed, 37 insertions(+), 18 deletions(-)
+
+commit cb1aba72e4ac111755e86bdd3ba7daca238bd47a
+Author: swaggie <amandac188@gmail.com>
+Date:   Sun Dec 4 11:44:34 2016 -0500
+
+    80 lines stuff
+
+ gameplay.ml | 40 +++++++++++++++++++++++++++-------------
+ 1 file changed, 27 insertions(+), 13 deletions(-)
+
+commit 54b0e400afacca2814afabfa2e6c3f5c1b1c91e4
+Merge: 4933e80 278ea2d
+Author: swaggie <amandac188@gmail.com>
+Date:   Sun Dec 4 11:39:28 2016 -0500
+
+    Merge branch 'master' of https://github.com/jericahuang/cs3110-2048
+    
+    Removed warnings
+
+commit 4933e8080af1ba99a1bd573e8d3a26291c3ec630
+Author: swaggie <amandac188@gmail.com>
+Date:   Sun Dec 4 11:39:18 2016 -0500
+
+    Got rid of warnings
+
+ gameplay.ml | 6 ++++++
+ styles.css  | 1 -
+ 2 files changed, 6 insertions(+), 1 deletion(-)
+
+commit 97620b54c9d589c8005332b3b676323e8c58773e
+Merge: 5b350b1 278ea2d
+Author: Lillyan <ldp54@cornell.edu>
+Date:   Sun Dec 4 11:34:08 2016 -0500
+
+    Merge branch 'master' of https://github.com/jericahuang/cs3110-2048
+
+commit 5b350b1d566509a5872edbfe8491c319b273d852
+Author: Lillyan <ldp54@cornell.edu>
+Date:   Sun Dec 4 11:34:06 2016 -0500
+
+    tests
+
+ gameplay.ml  |  2 +-
+ gameplay.mli |  6 +++++-
+ test.byte    |  1 +
+ test.ml      | 69 ++++++++++++++++++++++++++++++++++++++++++++++++++----------
+ 4 files changed, 65 insertions(+), 13 deletions(-)
+
+commit 0d291b1925f1942bc0a78b7f0c2732c68d387822
+Author: swaggie <amandac188@gmail.com>
+Date:   Sun Dec 4 11:30:17 2016 -0500
+
+    css readability
+
+ styles.css | 332 +++++++++++++++++++++++++++++++------------------------------
+ 1 file changed, 169 insertions(+), 163 deletions(-)
+
+commit 278ea2d183bb78a6805960138bddea7b4ff0f7f9
+Merge: 2eb9fa7 b958b66
+Author: Michael Velez <MichaelVelez@dhcp-ccc-4203.eduroam.cornell.edu>
+Date:   Sun Dec 4 11:28:41 2016 -0500
+
+    Merge branch 'master' of https://github.com/jericahuang/cs3110-2048
+
+commit 2eb9fa75cca152d5362c6d96d6cb6d5bec773df8
+Merge: f723d7f 8d2c30b
+Author: Michael Velez <MichaelVelez@dhcp-ccc-4203.eduroam.cornell.edu>
+Date:   Sun Dec 4 11:28:33 2016 -0500
+
+    ai
+
+commit b958b668d3c6bb1eb5736c813ce765b6b4718af2
+Author: swaggie <amandac188@gmail.com>
+Date:   Sun Dec 4 11:25:37 2016 -0500
+
+    Readability and citations for css
+
+ styles.css | 62 ++++++++++++++++++++++++++++++++++++--------------------------
+ 1 file changed, 36 insertions(+), 26 deletions(-)
+
+commit fbfbcc13c1f01351e024ab9296bcc82975ea20cd
+Author: swaggie <amandac188@gmail.com>
+Date:   Sun Dec 4 11:19:15 2016 -0500
+
+    Added css for key icons
+
+ styles.css | 46 ++++++++++++++++++++++++++++++++++++++++++++++
+ 1 file changed, 46 insertions(+)
+
+commit f723d7f4c2cd31881b1219d64a472ea8db3eac23
+Author: Michael Velez <MichaelVelez@dhcp-ccc-4203.eduroam.cornell.edu>
+Date:   Sun Dec 4 11:16:44 2016 -0500
+
+    ai
+
+ gameplay.ml | 9 +++++++--
+ 1 file changed, 7 insertions(+), 2 deletions(-)
+
+commit 8d2c30bc7bf98a9009a4279cf879f9910661b8dc
+Author: swaggie <amandac188@gmail.com>
+Date:   Sun Dec 4 11:16:08 2016 -0500
+
+    Changed instructions color
+
+ styles.css | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
+
+commit fd1bf9eabd14b4a1bfb98d935fb0c564620f3206
+Author: swaggie <amandac188@gmail.com>
+Date:   Sun Dec 4 11:14:22 2016 -0500
+
+    Added key input instructions
+
+ index.html | 29 +++++++++++++++++++++++++++++
+ styles.css | 12 ++++++++++++
+ 2 files changed, 41 insertions(+)
+
+commit 8c67c623bc5b390e28d3cd8d9fec61adcaddd626
+Merge: c1935e1 5140dc3
+Author: Lillyan <ldp54@cornell.edu>
+Date:   Sun Dec 4 10:48:20 2016 -0500
+
+    Merge branch 'master' of https://github.com/jericahuang/cs3110-2048
+
+commit c1935e1ce01143e4bef454991a5508703133429a
+Author: Lillyan <ldp54@cornell.edu>
+Date:   Sun Dec 4 10:48:15 2016 -0500
+
+    comment in main
+
+ main.ml | 38 ++++++++++++++++++++++++++++----------
+ 1 file changed, 28 insertions(+), 10 deletions(-)
+
+commit 5140dc3734c7d1235176d20e09cd0e15079de831
+Author: Jerica Huang <jerica.huang@gmail.com>
+Date:   Sun Dec 4 10:43:09 2016 -0500
+
+    Fixed redundancy
+
+ gameplay.ml | 18 ++----------------
+ 1 file changed, 2 insertions(+), 16 deletions(-)
+
+commit 2e093baf5fca237a9e4181abdbb966c0d289db6c
+Author: Jerica Huang <jerica.huang@gmail.com>
+Date:   Sun Dec 4 10:34:43 2016 -0500
+
+    Better naming
+
+ gameplay.ml | 6 +++---
+ 1 file changed, 3 insertions(+), 3 deletions(-)
+
+commit 5a2b5b757547a917d595fdaa0df89dc733d2d81d
+Author: Jerica Huang <jerica.huang@gmail.com>
+Date:   Sun Dec 4 10:16:12 2016 -0500
+
+    Cleaning up
+
+ gameplay.ml | 15 ++++++++-------
+ 1 file changed, 8 insertions(+), 7 deletions(-)
+
+commit a47e65bf57f7e4aaea4a454a76a2445b05162270
+Author: Jerica Huang <jerica.huang@gmail.com>
+Date:   Sun Dec 4 10:07:33 2016 -0500
+
+    greedy AI
+
+ gameplay.ml | 57 ++++++++++++++++++++++++++++++++++++++++++++++++++++++++-
+ 1 file changed, 56 insertions(+), 1 deletion(-)
+
+commit fda9cdd5a8abd237b842f98101cd2079c7299fb6
+Author: Michael Velez <MichaelVelez@dhcp-ccc-4203.eduroam.cornell.edu>
+Date:   Sat Dec 3 13:42:53 2016 -0500
+
+    fix
+
+ gameplay.ml | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
+
+commit 8b18ccdd488065df764ea9e9639faf6966adfc20
+Author: Michael Velez <MichaelVelez@dhcp-ccc-4203.eduroam.cornell.edu>
+Date:   Sat Dec 3 13:37:04 2016 -0500
+
+    fix win
+
+ gameplay.ml |  4 ++--
+ main.ml     | 12 ++----------
+ 2 files changed, 4 insertions(+), 12 deletions(-)
+
+commit b5288815892f58aa21fbbbe65712b009675bd4fb
+Author: Michael Velez <MichaelVelez@dhcp-ccc-4203.eduroam.cornell.edu>
+Date:   Sat Dec 3 13:29:11 2016 -0500
+
+    score fix
+
+ main.ml | 12 +++++++-----
+ 1 file changed, 7 insertions(+), 5 deletions(-)
+
+commit fdc03cd7bfc84b9872a2e0a606b11d1bfcc90dc8
+Merge: af8ff33 aa96678
+Author: Michael Velez <MichaelVelez@dhcp-ccc-4203.eduroam.cornell.edu>
+Date:   Sat Dec 3 13:15:03 2016 -0500
+
+    fix
+
+commit af8ff335596daa0df385734bfdaccd007eec673d
+Author: Michael Velez <MichaelVelez@dhcp-ccc-4203.eduroam.cornell.edu>
+Date:   Sat Dec 3 13:12:22 2016 -0500
+
+    updates are almost all good
+
+ gameplay.ml |  4 ++--
+ main.ml     | 20 ++++++++++++++------
+ 2 files changed, 16 insertions(+), 8 deletions(-)
+
+commit aa966780e14dc6926a9a4c3c452fbd0bcf480ad8
+Author: Lillyan <ldp54@cornell.edu>
+Date:   Fri Dec 2 12:58:26 2016 -0500
+
+    styling
+
+ bg.jpg     | Bin 48127 -> 67285 bytes
+ bg2.jpg    | Bin 0 -> 48127 bytes
+ styles.css |  51 ++++++++++++++++++++++++++++++---------------------
+ 3 files changed, 30 insertions(+), 21 deletions(-)
+
+commit 0b683be6f09cb4481fd6a17185117da4cca5bb70
+Merge: 5b37277 d4e272f
+Author: Lillyan <ldp54@cornell.edu>
+Date:   Fri Dec 2 10:10:47 2016 -0500
+
+    patch and style
+
+commit 5b3727793f3c4e605cac4cea4d7a9f6da333f7d2
+Merge: 94aaf37 467c3ba
+Author: Lillyan <ldp54@cornell.edu>
+Date:   Fri Dec 2 10:05:44 2016 -0500
+
+    styling
+
+commit d4e272f4b8aa31308523825beec149fc005397d4
+Author: Jerica Huang <jerica.huang@gmail.com>
+Date:   Fri Dec 2 09:50:45 2016 -0500
+
+    patch 2
+
+ index.html | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
+
+commit 2686660be7d015dd639c84de2dc0acd8b4fda81c
+Author: Jerica Huang <jerica.huang@gmail.com>
+Date:   Fri Dec 2 09:33:03 2016 -0500
+
+    patch
+
+ gameplay.ml | 13 +++++++------
+ 1 file changed, 7 insertions(+), 6 deletions(-)
+
+commit 94aaf37e6b4f6d80ecf590426c04e3f47394bde9
+Author: Lillyan <ldp54@cornell.edu>
+Date:   Fri Dec 2 09:06:33 2016 -0500
+
+    merge
+
+ index.html | 2 +-
+ main.ml    | 2 ++
+ 2 files changed, 3 insertions(+), 1 deletion(-)
+
+commit 467c3bab9cee21f61d9785facbf74484af061023
+Author: Jerica Huang <jerica.huang@gmail.com>
+Date:   Fri Dec 2 01:41:53 2016 -0500
+
+    frontend styling
+
+ gameplay.ml |   7 +----
+ index.html  |  71 +++++++++++-------------------------------
+ main.ml     |   4 +--
+ styles.css  | 100 ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+ 4 files changed, 121 insertions(+), 61 deletions(-)
+
+commit a691ee29e55f2634be9a31f85db369e0a6d333ef
+Merge: 1067cbe 81dd018
+Author: Jerica Huang <jerica.huang@gmail.com>
+Date:   Thu Dec 1 17:35:08 2016 -0500
+
+    Merge remote-tracking branch 'origin/master'
+
+commit 1067cbe55305e2a1c0aa24d379f7fa1279b7b205
+Author: Jerica Huang <jerica.huang@gmail.com>
+Date:   Thu Dec 1 17:34:59 2016 -0500
+
+    styling
+    
+    increased board size, added a background
+
+ bg.jpg     | Bin 0 -> 90822 bytes
+ index.html |  24 +++++++++++++++++++++++-
+ main.ml    |  30 +++++++++++++++---------------
+ 3 files changed, 38 insertions(+), 16 deletions(-)
+
+commit 81dd01804ed83b6f8c69af93a78493073ec86d38
+Author: Michael Velez <MichaelVelez@dhcp-ccc-4203.eduroam.cornell.edu>
+Date:   Thu Dec 1 15:12:31 2016 -0500
+
+    winning
+
+ gameplay.ml  |  8 ++++----
+ gameplay.mli |  6 ++----
+ main.ml      | 13 +++++--------
+ 3 files changed, 11 insertions(+), 16 deletions(-)
+
+commit 94251059825a9452f311b19662fa1e7f41b1d70b
+Merge: 66ed1f8 2759085
+Author: Michael Velez <MichaelVelez@dhcp-ccc-4203.eduroam.cornell.edu>
+Date:   Thu Dec 1 11:58:56 2016 -0500
+
+    win
+
+commit 66ed1f8f5344963186267a3f6c9602ea6334e3bb
+Author: Michael Velez <MichaelVelez@dhcp-ccc-4203.eduroam.cornell.edu>
+Date:   Thu Dec 1 11:56:55 2016 -0500
+
+    win
+
+ gameplay.ml |  4 ++--
+ main.ml     | 15 +++++++++++++--
+ 2 files changed, 15 insertions(+), 4 deletions(-)
+
+commit 275908532ac4e811d103d5c2bba6071324e5f9c3
+Merge: 3044efb 7716fa7
+Author: Lillyan <ldp54@cornell.edu>
+Date:   Thu Dec 1 09:56:31 2016 -0500
+
+    merge
+
+commit 3044efbc805fc3aa484bf94636806c2ea4616666
+Author: Lillyan <ldp54@cornell.edu>
+Date:   Thu Dec 1 09:54:11 2016 -0500
+
+    text indication of mode
+
+ index.html |  2 ++
+ main.ml    | 25 +++++++++++++++++++++++--
+ 2 files changed, 25 insertions(+), 2 deletions(-)
+
+commit 7716fa7a44eb18c6ead60d7ee1f8216b1b362001
+Merge: 77ee75a 00e57e3
+Author: Michael Velez <MichaelVelez@dhcp-ccc-4203.eduroam.cornell.edu>
+Date:   Thu Dec 1 01:39:42 2016 -0500
+
+    new
+
+commit 77ee75a80104f1e008d2817b43e60e12d9d469b9
+Author: Michael Velez <MichaelVelez@dhcp-ccc-4203.eduroam.cornell.edu>
+Date:   Thu Dec 1 01:32:49 2016 -0500
+
+    new
+
+ gameplay.ml |  2 +-
+ main.ml     | 30 +++++++++++++++++++-----------
+ 2 files changed, 20 insertions(+), 12 deletions(-)
+
+commit 00e57e342a3c37e48545eb56075619afdef76fb1
+Author: Lillyan <ldp54@cornell.edu>
+Date:   Wed Nov 30 22:51:33 2016 -0500
+
+    toggle between evil and regular
+
+ gameplay.mli | 6 ++++--
+ 1 file changed, 4 insertions(+), 2 deletions(-)
+
+commit a304fbc0cec20e142f99e47b03a51cec07db7073
+Author: Lillyan <ldp54@cornell.edu>
+Date:   Wed Nov 30 22:45:51 2016 -0500
+
+    key changes
+
+ gameplay.ml  | 27 ++++++++++++++++++++++-----
+ gameplay.mli | 10 +++++++++-
+ main.ml      | 18 +++++++++++-------
+ 3 files changed, 42 insertions(+), 13 deletions(-)
+
+commit b6ba8b3d5ac415fdc8d7182cea485879609ccca7
+Merge: 141d798 d90ef88
+Author: Lillyan <ldp54@cornell.edu>
+Date:   Wed Nov 30 22:13:03 2016 -0500
+
+    Merge branch 'master' of https://github.com/jericahuang/cs3110-2048
+
+commit 141d7986037b9a76944eb06ec3277006b6891662
+Author: Lillyan <ldp54@cornell.edu>
+Date:   Wed Nov 30 22:12:59 2016 -0500
+
+    evil 2048
+
+ gameplay.ml | 59 +++++++++++++++++++++++++++++++++++++++++++++++++++++------
+ 1 file changed, 53 insertions(+), 6 deletions(-)
+
+commit d90ef885002b8db855c2362a05db86baa7afdc69
+Author: Michael Velez <MichaelVelez@dhcp-ccc-4203.eduroam.cornell.edu>
+Date:   Wed Nov 30 21:33:31 2016 -0500
+
+    lose
+
+ main.ml | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
+
+commit f681e0951f4dea3975219e067439310c20b3a5c4
+Author: Lillyan <ldp54@cornell.edu>
+Date:   Wed Nov 30 21:33:21 2016 -0500
+
+    not avail
+
+ gameplay.ml | 10 ++++++++++
+ 1 file changed, 10 insertions(+)
+
+commit 17ed1d5bdfcf5418b3cead1425155db610ae2082
+Merge: 2aade31 e1c9b9e
+Author: Lillyan <ldp54@cornell.edu>
+Date:   Wed Nov 30 21:32:55 2016 -0500
+
+    Merge branch 'master' of https://github.com/jericahuang/cs3110-2048
+
+commit e1c9b9e11eddb3a9ed1809f8fcc23ea5ee60cb0c
+Merge: 470a68c 6210658
+Author: Michael Velez <MichaelVelez@dhcp-ccc-4203.eduroam.cornell.edu>
+Date:   Wed Nov 30 21:32:12 2016 -0500
+
+    Merge branch 'master' of https://github.com/jericahuang/cs3110-2048
+
+commit 470a68c1276524afc6c370d02cb832a88d01f7ee
+Author: Michael Velez <MichaelVelez@dhcp-ccc-4203.eduroam.cornell.edu>
+Date:   Wed Nov 30 21:32:09 2016 -0500
+
+    lose
+
+ main.ml | 14 +++++++++++---
+ 1 file changed, 11 insertions(+), 3 deletions(-)
+
+commit 2aade316aea7ac36fd60cfc85e03a5285cd606c9
+Author: Lillyan <ldp54@cornell.edu>
+Date:   Wed Nov 30 21:23:42 2016 -0500
+
+    cleaning
+
+ index.html | 1 -
+ main.ml    | 1 -
+ 2 files changed, 2 deletions(-)
+
+commit 6210658350a4509860dfdcf16a16e09f39a9d64d
+Author: Lillyan <ldp54@cornell.edu>
+Date:   Wed Nov 30 21:18:50 2016 -0500
+
+    patch fix Arial
+
+ gameplay.ml |  4 ++--
+ index.html  | 13 +++++++------
+ main.ml     |  4 ++--
+ 3 files changed, 11 insertions(+), 10 deletions(-)
+
+commit 739bf857e85c9d2ea6365385686224cc2f36fcbf
+Author: Lillyan <ldp54@cornell.edu>
+Date:   Wed Nov 30 21:07:09 2016 -0500
+
+    merge conflicts
+
+ index.html | 5 -----
+ 1 file changed, 5 deletions(-)
+
+commit 9378a41d4ed4819fc961be3ab34f250414802e77
+Merge: 8ba62f7 cbfcde3
+Author: Lillyan <ldp54@cornell.edu>
+Date:   Wed Nov 30 21:03:45 2016 -0500
+
+    font
+
+commit 8ba62f7249d3b135427f97b468eb26ba025cc763
+Author: Lillyan <ldp54@cornell.edu>
+Date:   Wed Nov 30 21:03:23 2016 -0500
+
+    font
+
+ ClearSans-Bold.eot                              |   Bin 0 -> 101828 bytes
+ ClearSans-Bold.ttf                              |   Bin 0 -> 269792 bytes
+ clearsans-1.00/EOT/ClearSans-BoldItalic.eot     |   Bin 0 -> 111311 bytes
+ clearsans-1.00/EOT/ClearSans-Italic.eot         |   Bin 0 -> 110273 bytes
+ clearsans-1.00/EOT/ClearSans-Light.eot          |   Bin 0 -> 108120 bytes
+ clearsans-1.00/EOT/ClearSans-Medium.eot         |   Bin 0 -> 122888 bytes
+ clearsans-1.00/EOT/ClearSans-MediumItalic.eot   |   Bin 0 -> 126081 bytes
+ clearsans-1.00/EOT/ClearSans-Regular.eot        |   Bin 0 -> 113875 bytes
+ clearsans-1.00/EOT/ClearSans-Thin.eot           |   Bin 0 -> 106121 bytes
+ clearsans-1.00/LICENSE-2.0.txt                  |   202 +
+ clearsans-1.00/SVG/ClearSans-Bold.svg           | 22646 +++++++++++++++++
+ clearsans-1.00/SVG/ClearSans-BoldItalic.svg     | 23072 +++++++++++++++++
+ clearsans-1.00/SVG/ClearSans-Italic.svg         | 22411 +++++++++++++++++
+ clearsans-1.00/SVG/ClearSans-Light.svg          | 22411 +++++++++++++++++
+ clearsans-1.00/SVG/ClearSans-Medium.svg         | 28626 ++++++++++++++++++++++
+ clearsans-1.00/SVG/ClearSans-MediumItalic.svg   | 27990 +++++++++++++++++++++
+ clearsans-1.00/SVG/ClearSans-Regular.svg        | 28060 +++++++++++++++++++++
+ clearsans-1.00/SVG/ClearSans-Thin.svg           | 22180 +++++++++++++++++
+ clearsans-1.00/TTF/ClearSans-BoldItalic.ttf     |   Bin 0 -> 287460 bytes
+ clearsans-1.00/TTF/ClearSans-Italic.ttf         |   Bin 0 -> 282800 bytes
+ clearsans-1.00/TTF/ClearSans-Light.ttf          |   Bin 0 -> 272724 bytes
+ clearsans-1.00/TTF/ClearSans-Medium.ttf         |   Bin 0 -> 313308 bytes
+ clearsans-1.00/TTF/ClearSans-MediumItalic.ttf   |   Bin 0 -> 315792 bytes
+ clearsans-1.00/TTF/ClearSans-Regular.ttf        |   Bin 0 -> 304516 bytes
+ clearsans-1.00/TTF/ClearSans-Thin.ttf           |   Bin 0 -> 272304 bytes
+ clearsans-1.00/WOFF/ClearSans-Bold.woff         |   Bin 0 -> 116584 bytes
+ clearsans-1.00/WOFF/ClearSans-BoldItalic.woff   |   Bin 0 -> 128760 bytes
+ clearsans-1.00/WOFF/ClearSans-Italic.woff       |   Bin 0 -> 126128 bytes
+ clearsans-1.00/WOFF/ClearSans-Light.woff        |   Bin 0 -> 121346 bytes
+ clearsans-1.00/WOFF/ClearSans-Medium.woff       |   Bin 0 -> 137305 bytes
+ clearsans-1.00/WOFF/ClearSans-MediumItalic.woff |   Bin 0 -> 141040 bytes
+ clearsans-1.00/WOFF/ClearSans-Regular.woff      |   Bin 0 -> 130846 bytes
+ clearsans-1.00/WOFF/ClearSans-Thin.woff         |   Bin 0 -> 119542 bytes
+ index.html                                      |    20 +-
+ main.ml                                         |     6 +-
+ 35 files changed, 197613 insertions(+), 11 deletions(-)
+
+commit cbfcde361ea3b7b0f90fbf504e00812ecd0a086d
+Author: Jerica Huang <jerica.huang@gmail.com>
+Date:   Wed Nov 30 20:07:45 2016 -0500
+
+    added favicon
+
+ favicon.ico | Bin 0 -> 1150 bytes
+ index.html  |   2 ++
+ 2 files changed, 2 insertions(+)
+
+commit 549393a3d35855cf40c432650e13da57749b42b2
+Author: Lillyan <ldp54@cornell.edu>
+Date:   Wed Nov 30 16:23:22 2016 -0500
+
+    styling
+
+ index.html | 7 +++++++
+ 1 file changed, 7 insertions(+)
+
+commit ff02790ec8ac51a08d78a0ac5b073fbdc650cad8
+Merge: 549f04a 3fd1cdd
+Author: Lillyan <ldp54@cornell.edu>
+Date:   Wed Nov 30 16:18:16 2016 -0500
+
+    Merge branch 'master' of https://github.com/jericahuang/cs3110-2048
+
+commit 549f04a7795aa0f3003b2b38e432789d0cdcdac8
+Author: Lillyan <ldp54@cornell.edu>
+Date:   Wed Nov 30 16:18:10 2016 -0500
+
+    styling
+
+ gameplay.ml |  4 ++--
+ main.ml     | 55 +++++++++++++++++++++++++++++++++++--------------------
+ 2 files changed, 37 insertions(+), 22 deletions(-)
+
+commit 3fd1cdd9a76ba0c3461718cd1baedcc65b85bf39
+Merge: a37212a f4002bf
+Author: Michael Velez <MichaelVelez@dhcp-ccc-4203.eduroam.cornell.edu>
+Date:   Wed Nov 30 01:07:05 2016 -0500
+
+    Merge branch 'master' of https://github.com/jericahuang/cs3110-2048
+
+commit a37212ac2a1aaa6833c86fdfdd63ea5a66b323c1
+Author: Michael Velez <MichaelVelez@dhcp-ccc-4203.eduroam.cornell.edu>
+Date:   Wed Nov 30 01:06:57 2016 -0500
+
+    win
+
+ gameplay.ml  | 10 ++++------
+ gameplay.mli |  5 +++++
+ main.ml      | 10 ++++------
+ 3 files changed, 13 insertions(+), 12 deletions(-)
+
+commit f4002bfebec3c9aedcd9fb18584a812b4ecef943
+Author: Lillyan <ldp54@cornell.edu>
+Date:   Wed Nov 30 00:05:33 2016 -0500
+
+    centering text
+
+ gameplay.ml |  4 ++++
+ main.ml     | 31 ++++++++++++++++++++++++-------
+ 2 files changed, 28 insertions(+), 7 deletions(-)
+
+commit 045a6b0130d207d4354b2623d89e8c9c0f18c4df
+Merge: 5ff83d4 344ec5c
+Author: Lillyan <ldp54@cornell.edu>
+Date:   Tue Nov 29 23:38:39 2016 -0500
+
+    Merge branch 'master' of https://github.com/jericahuang/cs3110-2048
+    
+     Please enter a commit message to explain why this merge is necessary,
+
+commit 5ff83d41a06c94fb6426e7b406497bb9d983a1d5
+Author: Lillyan <ldp54@cornell.edu>
+Date:   Tue Nov 29 23:38:17 2016 -0500
+
+    cleaning
+
+ gameplay.ml |  5 ++---
+ main.ml     | 16 +++++-----------
+ 2 files changed, 7 insertions(+), 14 deletions(-)
+
+commit 344ec5c4db4364acdbd408e6bdf8ef66c1b74f47
+Merge: 6e52bff 01262ff
+Author: Jerica Huang <jerica.huang@gmail.com>
+Date:   Tue Nov 29 23:31:58 2016 -0500
+
+    Merge remote-tracking branch 'origin/master'
+
+commit 6e52bffdb55ece538c31d842d06655fa219d1dda
+Author: Jerica Huang <jerica.huang@gmail.com>
+Date:   Tue Nov 29 23:31:55 2016 -0500
+
+    numbers centered in tile
+
+ main.ml | 1 +
+ 1 file changed, 1 insertion(+)
+
+commit 01262ffc8481a54423537d6799214184a106ca33
+Author: Lillyan <ldp54@cornell.edu>
+Date:   Tue Nov 29 23:23:21 2016 -0500
+
+    score
+
+ gameplay.ml  | 13 ++++++++++---
+ gameplay.mli |  2 +-
+ index.html   |  1 +
+ main.ml      | 35 ++++++++++++++++++++++++++++++-----
+ 4 files changed, 42 insertions(+), 9 deletions(-)
+
+commit ba5a96a44212923b65ba13b84947943732a16469
+Merge: 7d956f8 3456c8d
+Author: Lillyan <ldp54@cornell.edu>
+Date:   Tue Nov 29 22:08:11 2016 -0500
+
+    erge branch 'master' of https://github.com/jericahuang/cs3110-2048
+
+commit 3456c8dd6a6d32efe650e8c8a9d290d5608d7261
+Author: Michael Velez <MichaelVelez@dhcp-ccc-4203.eduroam.cornell.edu>
+Date:   Tue Nov 29 21:36:15 2016 -0500
+
+    bug fixed
+
+ gameplay.ml | 8 ++++----
+ main.ml     | 1 +
+ 2 files changed, 5 insertions(+), 4 deletions(-)
+
+commit 7d956f8061bd52b0fa901d6b5b98bbe329121cdb
+Merge: 77f3776 3f448a4
+Author: Lillyan <ldp54@cornell.edu>
+Date:   Tue Nov 29 21:05:56 2016 -0500
+
+    Merge branch 'master' of https://github.com/jericahuang/cs3110-2048
+
+commit 77f377612e8147c4d9d241708f8ba26ccd2158c9
+Author: Lillyan <ldp54@cornell.edu>
+Date:   Tue Nov 29 21:05:48 2016 -0500
+
+    patch fix
+
+ main.ml | 16 ++++------------
+ 1 file changed, 4 insertions(+), 12 deletions(-)
+
+commit c94ee5ea99c8989a573456186f80c13e78299e35
+Author: Lillyan <ldp54@cornell.edu>
+Date:   Tue Nov 29 21:04:19 2016 -0500
+
+    patch fix
+
+ main.ml | 18 +++++++++++++-----
+ 1 file changed, 13 insertions(+), 5 deletions(-)
+
+commit 3f448a478a6dbff75900fbbdc1ddc1fda5394aaf
+Author: Michael Velez <MichaelVelez@dhcp-ccc-4203.eduroam.cornell.edu>
+Date:   Tue Nov 29 21:02:43 2016 -0500
+
+    correct moves
+
+ .ocamlinit  | 6 ++++++
+ gameplay.ml | 9 +++++----
+ main.ml     | 2 +-
+ 3 files changed, 12 insertions(+), 5 deletions(-)
+
+commit 53c99829384013277bc59627dfb348086f19a039
+Merge: 4ceabb9 622a164
+Author: Lillyan <ldp54@cornell.edu>
+Date:   Tue Nov 29 20:55:55 2016 -0500
+
+    erge branch 'master' of https://github.com/jericahuang/cs3110-2048
+
+commit 4ceabb9a8e02d987a47921fe4ab27d68eb58ec16
+Author: Lillyan <ldp54@cornell.edu>
+Date:   Tue Nov 29 20:55:49 2016 -0500
+
+    merge
+
+ gameplay.ml | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
+
+commit 622a1648d5c8db6345cd7f428425da316201d316
+Author: Michael Velez <MichaelVelez@dhcp-ccc-4203.eduroam.cornell.edu>
+Date:   Tue Nov 29 20:40:09 2016 -0500
+
+    web move
+
+ main.ml | 24 ++++++++++++++++++++++--
+ 1 file changed, 22 insertions(+), 2 deletions(-)
+
+commit 1c7fbb1d94e7874b1d08439c4cc7f158c87710e3
+Author: Michael Velez <MichaelVelez@dhcp-ccc-4203.eduroam.cornell.edu>
+Date:   Tue Nov 29 19:49:25 2016 -0500
+
+    fix
+
+ main.ml | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
+
+commit cbe76005d3994757e84853f2c5e0ad1b6ebdcc13
+Author: Michael Velez <MichaelVelez@dhcp-ccc-4203.eduroam.cornell.edu>
+Date:   Tue Nov 29 19:42:11 2016 -0500
+
+    score
+
+ gameLogic.mli |  2 +-
+ gamelogic.ml  |  7 ++++---
+ gameplay.ml   | 43 +++++++++++++++++++------------------------
+ gameplay.mli  |  6 +++---
+ 4 files changed, 27 insertions(+), 31 deletions(-)
+
+commit 1b2774726bb0d23c9e19649254e06fbac061444a
+Author: Lillyan <ldp54@cornell.edu>
+Date:   Tue Nov 29 19:32:05 2016 -0500
+
+    colors and position
+
+ main.ml | 8 ++++----
+ 1 file changed, 4 insertions(+), 4 deletions(-)
+
+commit 8189479ce5ed6105fd65897a747a6aa23537dd28
+Author: Lillyan <ldp54@cornell.edu>
+Date:   Tue Nov 29 19:26:31 2016 -0500
+
+    cleaning
+
+ main.ml | 30 +++++++++++++++---------------
+ 1 file changed, 15 insertions(+), 15 deletions(-)
+
+commit fb59ce675584ef70d917768717acd4c5c69d0a3f
+Merge: 8fc1c12 320a0cc
+Author: Lillyan <ldp54@cornell.edu>
+Date:   Tue Nov 29 19:25:30 2016 -0500
+
+    Merge branch 'Lillyan'
+
+commit 320a0cc32e46bb24699f65f5f9feec02d8f87ca7
+Author: Lillyan <ldp54@cornell.edu>
+Date:   Tue Nov 29 17:57:29 2016 -0500
+
+    board
+
+ main.ml | 11 ++++++-----
+ 1 file changed, 6 insertions(+), 5 deletions(-)
+
+commit 8fc1c12eb270a3c7b1e72bd35cca20d2038a717f
+Author: Michael Velez <MichaelVelez@dhcp-ccc-4203.eduroam.cornell.edu>
+Date:   Tue Nov 29 17:38:51 2016 -0500
+
+    move
+
+ gameplay.ml | 5 -----
+ 1 file changed, 5 deletions(-)
+
+commit 9004aab23b4b97e57f75c91e25456c3962961fc9
+Merge: 15ba886 6542254
+Author: Michael Velez <MichaelVelez@dhcp-ccc-4203.eduroam.cornell.edu>
+Date:   Tue Nov 29 17:36:36 2016 -0500
+
+    move
+
+commit 15ba8867bcee614e253857cc67e6b454ad113578
+Author: Michael Velez <MichaelVelez@dhcp-ccc-4203.eduroam.cornell.edu>
+Date:   Tue Nov 29 17:35:01 2016 -0500
+
+    moving
+
+ gameLogic.mli |  2 +-
+ gamelogic.ml  |  4 ++--
+ gameplay.ml   | 31 +++++++++++++++++--------------
+ gameplay.mli  |  6 ++++--
+ main.ml       |  1 -
+ main.mli      |  2 +-
+ 6 files changed, 25 insertions(+), 21 deletions(-)
+
+commit 792c3e27d775d684c2a0cc297a3a1def075a95a8
+Author: Lillyan <ldp54@cornell.edu>
+Date:   Tue Nov 29 17:33:14 2016 -0500
+
+    board
+
+ main.ml | 36 +++++++++++++-----------------------
+ 1 file changed, 13 insertions(+), 23 deletions(-)
+
+commit 69600ebcbc14f80e6ca7d7f50523a662e8488f1f
+Author: Lillyan <ldp54@cornell.edu>
+Date:   Tue Nov 29 17:20:48 2016 -0500
+
+    js_of_ocaml
+
+ main.ml | 121 +++++++++++++++++++++++++++++++++++++++++++++++++++++++---------
+ 1 file changed, 104 insertions(+), 17 deletions(-)
+
+commit 654225453a9b030fa4acbcf6bd1b5cc48b8971bc
+Merge: 14c0951 c93d784
+Author: Jerica Huang <jerica.huang@gmail.com>
+Date:   Tue Nov 29 16:54:51 2016 -0500
+
+    Merge remote-tracking branch 'origin/master'
+
+commit 14c0951d68ed73182510110523e00f79a871c424
+Author: Jerica Huang <jerica.huang@gmail.com>
+Date:   Tue Nov 29 16:54:45 2016 -0500
+
+    random_avail correction and precondition
+
+ gameplay.ml | 11 ++++++-----
+ 1 file changed, 6 insertions(+), 5 deletions(-)
+
+commit c93d78499d521568a2246ad20c81cf9cfdd62bd9
+Author: Michael Velez <MichaelVelez@dhcp-ccc-4203.eduroam.cornell.edu>
+Date:   Tue Nov 29 14:55:36 2016 -0500
+
+    fix tests
+
+ main.ml   |  7 +------
+ test.byte |  1 +
+ test.ml   | 12 ++++++------
+ 3 files changed, 8 insertions(+), 12 deletions(-)
+
+commit 0ce3cefc4790ac533ce0ba64fbdbbbcffd4a8fbb
+Author: swaggie <amandac188@gmail.com>
+Date:   Tue Nov 29 13:50:50 2016 -0500
+
+    remove input.ml
+
+ input.ml  | 12 ------------
+ input.mli |  5 -----
+ 2 files changed, 17 deletions(-)
+
+commit 2baaceef232cd4f4110c1d1ce5268229db77a745
+Merge: 70f4e41 fd8024b
+Author: Michael Velez <MichaelVelez@dhcp-ccc-4203.eduroam.cornell.edu>
+Date:   Tue Nov 29 13:05:53 2016 -0500
+
+    make
+
+commit 70f4e41416d92f382309901f3d732e945b630e7b
+Author: Michael Velez <MichaelVelez@dhcp-ccc-4203.eduroam.cornell.edu>
+Date:   Tue Nov 29 13:03:14 2016 -0500
+
+    make works
+
+ gameLogic.mli | 4 ++--
+ gamelogic.ml  | 3 +++
+ gameplay.mli  | 8 ++++----
+ main.ml       | 2 +-
+ main.mli      | 2 +-
+ 5 files changed, 11 insertions(+), 8 deletions(-)
+
+commit fd8024b0a6beb28ac0b9192d93f8eaca3996608d
+Author: Lillyan <ldp54@cornell.edu>
+Date:   Tue Nov 29 12:38:29 2016 -0500
+
+    merge
+
+ main.ml | 5 +++++
+ 1 file changed, 5 insertions(+)
+
+commit 24add0cbef22242dd1694ff5fe3dc83199af1628
+Merge: c1d7f36 85125c6
+Author: Lillyan <ldp54@cornell.edu>
+Date:   Tue Nov 29 12:37:23 2016 -0500
+
+    merge
+
+commit c1d7f366667d731a70662c935fef53f3c41d0890
+Author: Lillyan <ldp54@cornell.edu>
+Date:   Tue Nov 29 12:36:28 2016 -0500
+
+    js of ocaml
+
+ _tags        |  2 ++
+ gameplay.ml  | 22 ++++++++++------------
+ gameplay.mli |  8 ++++----
+ main.ml      | 42 ++++++++++++++++++++++++++++++++++++++++++
+ render.ml    | 37 +++++++++++++++++++++++++++++++++++++
+ render.mli   |  7 ++++---
+ test.byte    |  1 -
+ test.ml      | 12 +++++++++++-
+ 8 files changed, 110 insertions(+), 21 deletions(-)
+
+commit 85125c6b65106eb1fcdecd08dd3decb9c8a6da94
+Merge: 4501d2a 4d71f60
+Author: Michael Velez <MichaelVelez@dhcp-ccc-4203.eduroam.cornell.edu>
+Date:   Tue Nov 29 12:34:10 2016 -0500
+
+    types
+
+commit 4501d2af9c02a413ce37c5b2116988853b76246d
+Author: Michael Velez <MichaelVelez@dhcp-ccc-4203.eduroam.cornell.edu>
+Date:   Tue Nov 29 12:33:28 2016 -0500
+
+    all methods type check
+
+ gameplay.ml | 21 ++++++++++++---------
+ 1 file changed, 12 insertions(+), 9 deletions(-)
+
+commit 4d71f60aff3739669620ef188f1f9077fdb12196
+Author: swaggie <amandac188@gmail.com>
+Date:   Tue Nov 29 12:26:46 2016 -0500
+
+    Keyboard input files
+
+ input.ml  | 12 ++++++++++++
+ input.mli |  5 +++++
+ 2 files changed, 17 insertions(+)
+
+commit 38fdda84cfd74c7a4467749fd4edbe18cefce851
+Author: Michael Velez <MichaelVelez@dhcp-ccc-4203.eduroam.cornell.edu>
+Date:   Tue Nov 29 02:53:24 2016 -0500
+
+    shifts work
+
+ gameplay.ml | 19 ++++++++++---------
+ 1 file changed, 10 insertions(+), 9 deletions(-)
+
+commit 39724466bba69c2c6f22abd2ab6e86122d77b156
+Author: Michael Velez <MichaelVelez@dhcp-ccc-4203.eduroam.cornell.edu>
+Date:   Mon Nov 28 23:12:02 2016 -0500
+
+    fix shift
+
+ gameplay.ml | 29 +++++++++++++----------------
+ 1 file changed, 13 insertions(+), 16 deletions(-)
+
+commit 510ae4e4778297a39686d10b2caa270b26236090
+Merge: 54c4a2c 41ef516
+Author: Michael Velez <MichaelVelez@dhcp-ccc-4203.eduroam.cornell.edu>
+Date:   Mon Nov 28 22:47:00 2016 -0500
+
+    shifts
+
+commit 54c4a2ca7f0578f8091f34f33dc2b6cf74ff8e65
+Author: Michael Velez <MichaelVelez@dhcp-ccc-4203.eduroam.cornell.edu>
+Date:   Mon Nov 28 22:40:37 2016 -0500
+
+    other shifts
+
+ gameplay.ml | 84 ++++++++++++++++++++++++++++++++++---------------------------
+ 1 file changed, 47 insertions(+), 37 deletions(-)
+
+commit 41ef5166f4d2d1d49b9ab03527444d45f7426af3
+Author: Lillyan <ldp54@cornell.edu>
+Date:   Mon Nov 28 21:15:47 2016 -0500
+
+    cleaning
+
+ gameplay.ml | 17 -----------------
+ 1 file changed, 17 deletions(-)
+
+commit a5b2458ba24890933e0f7cf6a783618db8528b01
+Merge: 5acd67c 1d411d8
+Author: Lillyan <ldp54@cornell.edu>
+Date:   Mon Nov 28 21:15:09 2016 -0500
+
+    cleaning
+
+commit 5acd67c787d1b7a0aa2828f6a63957d48fd50101
+Author: Lillyan <ldp54@cornell.edu>
+Date:   Mon Nov 28 21:12:58 2016 -0500
+
+    comments
+
+ Makefile        |   8 +++-
+ gamelogic.ml    |   6 +--
+ gameplay.ml     | 114 +++++++++++++++++++++++++++++---------------------------
+ gameplay.mli    |  14 +++----
+ index.html      |  38 +++++++++++++++++++
+ myocamlbuild.ml |   1 +
+ samplejs.ml     |   7 ++++
+ test.byte       |   1 +
+ test.ml         |   7 +++-
+ 9 files changed, 129 insertions(+), 67 deletions(-)
+
+commit 1d411d899ef6440867233c340277436c9d3c4a27
+Author: Michael Velez <MichaelVelez@dhcp-ccc-4203.eduroam.cornell.edu>
+Date:   Mon Nov 28 16:00:29 2016 -0500
+
+    shift left almost done
+
+ gameplay.ml | 6 ++++--
+ 1 file changed, 4 insertions(+), 2 deletions(-)
+
+commit 5b1d1a72c1db7e321771a07d56ee828a34f51890
+Author: Michael Velez <MichaelVelez@dhcp-ccc-4203.eduroam.cornell.edu>
+Date:   Mon Nov 28 15:46:40 2016 -0500
+
+    shift left fix
+
+ gamelogic.ml | 12 ++++++++----
+ gameplay.ml  | 49 ++++++++++++++++++++++++++++---------------------
+ 2 files changed, 36 insertions(+), 25 deletions(-)
+
+commit e91ea13bfa92add5b46059d12bdf099d323b0d94
+Merge: dc87325 65707d0
+Author: Michael Velez <MichaelVelez@dhcp-ccc-4203.eduroam.cornell.edu>
+Date:   Mon Nov 28 14:57:07 2016 -0500
+
+    commit
+
+commit dc8732527793519e6512794bc4ec1a7a02a5b683
+Author: Michael Velez <MichaelVelez@dhcp-ccc-4203.eduroam.cornell.edu>
+Date:   Mon Nov 28 14:56:14 2016 -0500
+
+    shift left
+
+ gameplay.ml | 29 ++++++++++++++++++++++++-----
+ 1 file changed, 24 insertions(+), 5 deletions(-)
+
+commit 65707d02fe3a77f6ce42d610e2ad45afe0d51212
+Author: Jerica Huang <jerica.huang@gmail.com>
+Date:   Mon Nov 28 13:55:49 2016 -0500
+
+    Error fixes
+
+ gameplay.ml | 10 +++++-----
+ 1 file changed, 5 insertions(+), 5 deletions(-)
+
+commit 1db940e2a729e34b96b29645acba9d1c76d52db1
+Author: Jerica Huang <jerica.huang@gmail.com>
+Date:   Mon Nov 28 13:21:52 2016 -0500
+
+    quickfix
+
+ gameplay.mli | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
+
+commit d9560ae8d846ecb74ff6f8cee33ca9e3f021bf0d
+Author: Jerica Huang <jerica.huang@gmail.com>
+Date:   Mon Nov 28 13:17:56 2016 -0500
+
+    Random square insertion
+
+ gameplay.ml | 31 +++++++++++++++++++++++++++++++
+ 1 file changed, 31 insertions(+)
+
+commit e5300a1a281def0ee0a8c27f6a88b242272e9f26
+Merge: f69f11b bd5badd
+Author: Lillyan <ldp54@cornell.edu>
+Date:   Mon Nov 28 11:20:37 2016 -0500
+
+    Merge branch 'master' of https://github.com/jericahuang/cs3110-2048
+
+commit f69f11b8f32995dd81b702b6eb37ed427f05a23c
+Author: Lillyan <ldp54@cornell.edu>
+Date:   Mon Nov 28 11:20:35 2016 -0500
+
+    warning
+
+ gameplay.ml | 3 ++-
+ 1 file changed, 2 insertions(+), 1 deletion(-)
+
+commit bd5badde8fdd9e888753b89b6351d5cb4393cd98
+Merge: fd70256 5fee19a
+Author: Michael Velez <MichaelVelez@dhcp-ccc-4203.eduroam.cornell.edu>
+Date:   Mon Nov 28 04:10:59 2016 -0500
+
+    shift left
+
+commit fd70256fc3ef99881a395f2a98881b28b89e91c8
+Author: Michael Velez <MichaelVelez@dhcp-ccc-4203.eduroam.cornell.edu>
+Date:   Mon Nov 28 04:09:01 2016 -0500
+
+    shift left
+
+ gamelogic.ml |   8 +++++
+ gameplay.ml  | 107 +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+ 2 files changed, 115 insertions(+)
+
+commit 5fee19a43668d28f3113074ba27f98615b1e8ed1
+Author: Lillyan <ldp54@cornell.edu>
+Date:   Sun Nov 27 14:47:01 2016 -0500
+
+    end game but assumes functionality
+
+ gameplay.ml | 17 +++++++++++++++++
+ 1 file changed, 17 insertions(+)
+
+commit 64217eb4bdb2684b413e38ebaf2275098538c911
+Author: Lillyan <ldp54@cornell.edu>
+Date:   Sun Nov 27 13:03:15 2016 -0500
+
+    step 1 and tests
+
+ gameplay.ml | 7 +++++++
+ test.ml     | 8 ++++++++
+ 2 files changed, 15 insertions(+)
+
+commit 1cf9d6026e777c9542fe51bc60e533e849a42e73
+Author: Lillyan <ldp54@cornell.edu>
+Date:   Sun Nov 27 12:49:01 2016 -0500
+
+    step 1 but need to make ocamlbuild to run tests
+
+ gameplay.ml |  9 ++++++---
+ test.ml     | 10 ++++++++--
+ 2 files changed, 14 insertions(+), 5 deletions(-)
+
+commit c71bb426f26ab2133b16d978b4eb1586aa27ead2
+Author: Lillyan <ldp54@cornell.edu>
+Date:   Sun Nov 27 12:40:30 2016 -0500
+
+    board init
+
+ gameplay.ml  | 28 ++++++++++++++++++++++------
+ gameplay.mli | 18 +++++++++++-------
+ test.ml      | 12 ++++++++++++
+ 3 files changed, 45 insertions(+), 13 deletions(-)
+
+commit 05b87dd346e7004eb1ea30d00c98c39be94f881d
+Author: Lillyan <ldp54@cornell.edu>
+Date:   Sun Nov 27 10:38:23 2016 -0500
+
+    gameplay type changes
+
+ gameplay.ml | 22 ++++++++++++++--------
+ 1 file changed, 14 insertions(+), 8 deletions(-)
+
+commit 5a561b55e98b14aced3bc315ba92bdfd00d3a00e
+Author: Lillyan <ldp54@cornell.edu>
+Date:   Sun Nov 27 10:27:37 2016 -0500
+
+    gitignore
+
+ .gitignore | 2 ++
+ 1 file changed, 2 insertions(+)
+
+commit 3b8208588e9f1c7317ac49d81a89e617372c8879
+Merge: 58941dc 65c2b1f
+Author: Lillyan <ldp54@cornell.edu>
+Date:   Sun Nov 27 10:26:10 2016 -0500
+
+    .DS_Store removed
+
+commit 58941dc5d81cda1c2448878f2b8b933df56bc6d3
+Author: Lillyan <ldp54@cornell.edu>
+Date:   Sun Nov 27 10:21:17 2016 -0500
+
+    merge
+
+ .DS_Store | Bin 6148 -> 6148 bytes
+ 1 file changed, 0 insertions(+), 0 deletions(-)
+
+commit 65c2b1f9f3e233441d9dcc2bb73c391f070e6cc4
+Author: Michael Velez <MichaelVelez@dhcp-ccc-4203.eduroam.cornell.edu>
+Date:   Sun Nov 27 01:04:43 2016 -0500
+
+    one more fix
+
+ gameplay.ml | 19 -------------------
+ main.ml     |  4 +++-
+ 2 files changed, 3 insertions(+), 20 deletions(-)
+
+commit 566e6e845e7f8c2e5f26baaf74804abfcc3ea812
+Author: Michael Velez <MichaelVelez@dhcp-ccc-4203.eduroam.cornell.edu>
+Date:   Sun Nov 27 01:00:44 2016 -0500
+
+    fix
+
+ .DS_Store  | Bin 6148 -> 6148 bytes
+ render.mli |   2 +-
+ 2 files changed, 1 insertion(+), 1 deletion(-)
+
+commit 10116e767be46f7df3ef4be617711901bbf1c6f8
+Author: Michael Velez <MichaelVelez@dhcp-ccc-4203.eduroam.cornell.edu>
+Date:   Sun Nov 27 00:58:07 2016 -0500
+
+    clean
+
+ _build/_digests              |  13 -------
+ _build/_log                  |  20 -----------
+ _build/gameLogic.cmi         | Bin 496 -> 0 bytes
+ _build/gameLogic.mli         |  15 --------
+ _build/gameLogic.mli.depends |   1 -
+ _build/gameplay.cmi          | Bin 1369 -> 0 bytes
+ _build/gameplay.mli          |  82 -------------------------------------------
+ _build/gameplay.mli.depends  |   1 -
+ _build/main.cmi              | Bin 260 -> 0 bytes
+ _build/main.ml               |   3 --
+ _build/main.ml.depends       |   1 -
+ _build/main.mli              |   2 --
+ _build/main.mli.depends      |   1 -
+ _build/ocamlc.where          |   1 -
+ _build/render.mli            |   6 ----
+ _build/render.mli.depends    |   1 -
+ 16 files changed, 147 deletions(-)
+
+commit f3fc895e70e44f3b58bce09239178b8612a4e39c
+Author: Michael Velez <MichaelVelez@dhcp-ccc-4203.eduroam.cornell.edu>
+Date:   Sun Nov 27 00:57:50 2016 -0500
+
+    working on gameplay
+
+ .DS_Store                    | Bin 6148 -> 6148 bytes
+ _build/_digests              |  13 +++++++
+ _build/_log                  |  20 +++++++++++
+ _build/gameLogic.cmi         | Bin 0 -> 496 bytes
+ _build/gameLogic.mli         |  15 ++++++++
+ _build/gameLogic.mli.depends |   1 +
+ _build/gameplay.cmi          | Bin 0 -> 1369 bytes
+ _build/gameplay.mli          |  82 +++++++++++++++++++++++++++++++++++++++++++
+ _build/gameplay.mli.depends  |   1 +
+ _build/main.cmi              | Bin 0 -> 260 bytes
+ _build/main.ml               |   3 ++
+ _build/main.ml.depends       |   1 +
+ _build/main.mli              |   2 ++
+ _build/main.mli.depends      |   1 +
+ _build/ocamlc.where          |   1 +
+ _build/render.mli            |   6 ++++
+ _build/render.mli.depends    |   1 +
+ gameLogic.mli                |   2 +-
+ gameplay.ml                  |  41 ++++++++++++++++++++++
+ gameplay.mli                 |   4 +--
+ interfaces.zip               | Bin 0 -> 1776 bytes
+ main.ml                      |   3 ++
+ render.mli                   |   4 +--
+ 23 files changed, 196 insertions(+), 5 deletions(-)
+
+commit 83466309c97e5d00ef8185efe8a3473708b78a07
+Author: Jerica Huang <jerica.huang@gmail.com>
+Date:   Sat Nov 5 16:30:56 2016 -0400
+
+    fix to gameplay.mli
+
+ gameplay.mli | 4 ----
+ 1 file changed, 4 deletions(-)
+
+commit 340743b64cc532cf92998e43ad0e992be603de8a
+Author: Jerica Huang <jerica.huang@gmail.com>
+Date:   Sat Nov 5 16:28:01 2016 -0400
+
+    adding gameplay.mli
+
+ gameplay.mli | 86 ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+ 1 file changed, 86 insertions(+)
+
+commit 5db6ba826d604a110f40a9d642447963f4eccf82
+Author: Lillyan <ldp54@cornell.edu>
+Date:   Sat Nov 5 16:27:15 2016 -0400
+
+    adding gamelogic.mli
+
+ gameLogic.mli | 15 +++++++++++++++
+ 1 file changed, 15 insertions(+)
+
+commit ee8e83f8662971b8ab3364bdd32de80975f00afd
+Author: Michael Velez <MichaelVelez@dhcp-ccc-4203.eduroam.cornell.edu>
+Date:   Sat Nov 5 16:26:04 2016 -0400
+
+    main.mli to start the game
+
+ Makefile | 2 +-
+ main.mli | 2 ++
+ 2 files changed, 3 insertions(+), 1 deletion(-)
+
+commit 37e56c84e29d3d602b7918baf91b7ec29c3e84fe
+Author: Michael Velez <MichaelVelez@dhcp-ccc-4203.eduroam.cornell.edu>
+Date:   Sat Nov 5 16:14:09 2016 -0400
+
+    starting main
+
+ .DS_Store | Bin 6148 -> 6148 bytes
+ main.ml   |   0
+ main.mli  |   0
+ 3 files changed, 0 insertions(+), 0 deletions(-)
+
+commit 7cc169ac59543e7490752f71b2ebc537a04992f2
+Author: Michael Velez <MichaelVelez@dhcp-ccc-4203.eduroam.cornell.edu>
+Date:   Sat Nov 5 16:12:30 2016 -0400
+
+    fix
+
+ .DS_Store     | Bin 6148 -> 6148 bytes
+ Makefile.make |  14 --------------
+ 2 files changed, 14 deletions(-)
+
+commit 06042c309e410fa17e07d6341674dd8b645c685f
+Merge: 86e3692 4325d6c
+Author: Michael Velez <MichaelVelez@dhcp-ccc-4203.eduroam.cornell.edu>
+Date:   Sat Nov 5 16:11:51 2016 -0400
+
+    makefile
+
+commit 86e36920afc28c75fdd801f2b1b9a8527c54593e
+Author: Michael Velez <MichaelVelez@dhcp-ccc-4203.eduroam.cornell.edu>
+Date:   Sat Nov 5 16:08:43 2016 -0400
+
+    make
+
+ .DS_Store | Bin 0 -> 6148 bytes
+ Makefile  |  14 ++++++++++++++
+ 2 files changed, 14 insertions(+)
+
+commit 4325d6ca4d5f6a32f18f086b876eaae36068e9ad
+Author: Jerica Huang <jerica.huang@gmail.com>
+Date:   Sat Nov 5 16:04:05 2016 -0400
+
+    fixes to render.mli
+
+ render.mli | 4 ++--
+ 1 file changed, 2 insertions(+), 2 deletions(-)
+
+commit ef8d88de5a947fa8a992b7db875d52da080f943b
+Merge: d819fc4 efcf26b
+Author: Jerica Huang <jerica.huang@gmail.com>
+Date:   Sat Nov 5 16:02:18 2016 -0400
+
+    Merge remote-tracking branch 'origin/master'
+
+commit d819fc42421d23ca646ac925f942f1a9a409a03a
+Author: Jerica Huang <jerica.huang@gmail.com>
+Date:   Sat Nov 5 16:02:13 2016 -0400
+
+    Render .mli
+
+ render.mli | 6 ++++++
+ 1 file changed, 6 insertions(+)
+
+commit efcf26b65fb513c58abbd361d1f1f04cbabe04cd
+Author: Michael Velez <MichaelVelez@dhcp-ccc-4203.eduroam.cornell.edu>
+Date:   Sat Nov 5 15:59:56 2016 -0400
+
+    makefile and main
+
+ Makefile.make | 14 ++++++++++++++
+ main.ml       |  0
+ 2 files changed, 14 insertions(+)
+
+commit 8a1771787882850b4884e5c8b7aa27a81cf89ac8
+Author: Jerica Huang <jerica.huang@gmail.com>
+Date:   Sat Nov 5 15:39:27 2016 -0400
+
+    Initial commit
+
+ README.md | 1 +
+ 1 file changed, 1 insertion(+)

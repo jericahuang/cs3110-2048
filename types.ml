@@ -1,3 +1,4 @@
+(* [move] defines the types of moves within the game *)
 type move =
   | Regular
   | Evil
@@ -7,7 +8,7 @@ type move =
   | Down
   | Null
 
-(* key defines the types of actions within the game *)
+(* [key] defines the types of actions within the game *)
 type key =
   | Move of move
   | Regular
@@ -17,12 +18,19 @@ type key =
   | Corner
   | Random
 
+(* [square] defines a square in the board *)
 type square = int option
 
+(* [board] matrix of squares *)
 type board = square array array
 
+(* [score] current score in the game *)
 type score = int ref
 
+(* [state] is the current state of the game including
+ * evil: whether in Evil or Regular mode
+ * s: current score
+ * b: current board *)
 type state = {
   evil: bool ref;
   s: score;
