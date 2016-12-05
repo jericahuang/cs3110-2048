@@ -33,6 +33,7 @@ let rec is_empty_col b col size =
 
 (* [is_valid_move_left b row col] returns a bool true if 
  * a left move is valid. *)
+(* Helper function for [is_valid_move] *)
 let rec is_valid_move_left b row col =
   if row = 0 then false else
   if is_empty_row b (row-1) col then is_valid_move_left b (row-1) col else
@@ -48,6 +49,7 @@ let rec is_valid_move_left b row col =
 
 (* [is_valid_move_right b row col] returns a bool true if 
  * a right move is valid. *)
+(* Helper function for [is_valid_move] *)
 let rec is_valid_move_right b row col =
   if row = 0 then false else
   if is_empty_row b (row-1) col then is_valid_move_right b (row-1) col else
@@ -63,6 +65,7 @@ let rec is_valid_move_right b row col =
 
 (* [is_valid_move_up b row col] returns a bool true if 
  * a up move is valid. *)
+(* Helper function for [is_valid_move] *)
 let rec is_valid_move_up b row col =
   if col = 0 then false else
   if is_empty_col b (col-1) row then is_valid_move_up b row (col-1) else
@@ -78,6 +81,7 @@ let rec is_valid_move_up b row col =
 
 (* [is_valid_move_down b row col] returns a bool true if 
  * a down move is valid. *)
+(* Helper function for [is_valid_move] *)
 let rec is_valid_move_down b row col =
   if col = 0 then false else
   if is_empty_col b (col-1) row then is_valid_move_down b row (col-1) else

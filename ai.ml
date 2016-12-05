@@ -46,7 +46,13 @@ let move_result m b s evil: staticState =
 let sort_moveList_scores (l : score_to_moves) : score_to_moves =
   List.rev (List.sort compare_first l)
 
-(* [get_greedy_move st] gets the greedy move for the current static state *)
+(**
+  * [get_greedy_move st] gets the greedy move for the current static state 
+  *  The greedy algorithm calculates which series of two moves will result in the
+  * highest score, and then proceeds to make the first of those moves. It always 
+  * re-evaluates based on the new state, but will often proceed with the second 
+  * move it originally planned.
+  *)
 let get_greedy_move st =
   let score_moves = ref [] in
     let valid_moves_1 =
@@ -80,9 +86,9 @@ let get_greedy_move st =
 
 (* [random_ai b] returns a random move *)
 let random_ai (b : board) : move =
-  let valid_moves_1 =
+  let valid_moves =
       List.filter (fun m -> is_valid_move m b) moveList in
-  let rand_ind = Random.int (List.length valid_moves_1) in
-  List.nth valid_moves_1 rand_ind
+  let rand_ind = Random.int (List.length valid_moves) in
+  List.nth valid_moves rand_ind
 
 
