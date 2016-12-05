@@ -2,23 +2,39 @@ open Types
 open Gameplay
 open Gamelogic
 
-(* Corner AI *)
+(***********************************************
+   ____                                _    ___ 
+  / ___|___  _ __ _ __   ___ _ __     / \  |_ _|
+ | |   / _ \| '__| '_ \ / _ \ '__|   / _ \  | | 
+ | |__| (_) | |  | | | |  __/ |     / ___ \ | | 
+  \____\___/|_|  |_| |_|\___|_|    /_/   \_\___|
+
+************************************************)
+                                                
+(* [corner_ai b] uses the strategy of building up the tiles in the
+ * corner. It moves all the tiles to the bottom-right. *)
 let corner_ai b =
   if is_valid_move Right b then Right else
   if is_valid_move Down b then Down else
   if is_valid_move Left b then Left else Up
 
-
-(* Greedy AI *)
+(************************************************
+   ____                   _            _    ___ 
+  / ___|_ __ ___  ___  __| |_   _     / \  |_ _|
+ | |  _| '__/ _ \/ _ \/ _` | | | |   / _ \  | | 
+ | |_| | | |  __/  __/ (_| | |_| |  / ___ \ | | 
+  \____|_|  \___|\___|\__,_|\__, | /_/   \_\___|
+                            |___/               
+ ************************************************)
 
 let moveList = [Up;Down;Left;Right;]
 
-(*'compare' function to sort a 2-tup list based on the 1st tup value*)
+(* [compare_first item1 item2] sorts a 2-tup list based on the 1st tup value*)
 let compare_first (item1 : (score * movePair)) (item2 : (score * movePair)) =
   compare !(fst item1) !(fst item2)
 
-(*The state (evil, score, board) resulting from shifting
- * [b] in [m] direction with a score of [s] and [e] evil state*)
+(* [move_result m b s evil] results in state (evil, score, board) resulting 
+ * from shifting [b] in [m] direction with a score of [s] and [e] evil state *)
 let move_result m b s evil: staticState =
   let copy = Array.make_matrix 4 4 None in
   let new_score = ref !s in
@@ -26,12 +42,12 @@ let move_result m b s evil: staticState =
   move m copy new_score;
   {e = evil; score = new_score; board = copy}
 
-(*Sorts a scores_to_moves list [l] from the highest to lowest score*)
+(* Sorts a scores_to_moves list [l] from the highest to lowest score*)
 let sort_moveList_scores (l : score_to_moves) : score_to_moves =
   List.rev (List.sort compare_first l)
 
-(*Gets the greedy move for the current static state*)
-let get_greedy_move (st : staticState) : move =
+(* [get_greedy_move st] gets the greedy move for the current static state *)
+let get_greedy_move st =
   let score_moves = ref [] in
     let valid_moves_1 =
       List.filter (fun m -> is_valid_move m st.board) moveList in
@@ -53,7 +69,16 @@ let get_greedy_move (st : staticState) : move =
       fst (snd (List.nth (sort_moveList_scores !score_moves) 0))
     else Null
 
-(* Random AI *)
+(******************************************************
+  ____                 _                      _    ___ 
+ |  _ \ __ _ _ __   __| | ___  _ __ ___      / \  |_ _|
+ | |_) / _` | '_ \ / _` |/ _ \| '_ ` _ \    / _ \  | | 
+ |  _ < (_| | | | | (_| | (_) | | | | | |  / ___ \ | | 
+ |_| \_\__,_|_| |_|\__,_|\___/|_| |_| |_| /_/   \_\___|
+                                                       
+*******************************************************)
+
+(* [random_ai b] makes random moves *)
 let random_ai b =
   let valid_moves_1 =
       List.filter (fun m -> is_valid_move m b) moveList in
