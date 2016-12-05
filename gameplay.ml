@@ -56,7 +56,8 @@ let rec is_valid_move_right b row col =
   || b.(row-1).(0) <> None) then true else
   if b.(row-1).(3) <> None && b.(row-1).(2) <> None && b.(row-1).(1) = None
   && b.(row-1).(0) <> None then true else
-  if is_valid_merge_horizontal b (row-1) 0 1 || is_valid_merge_horizontal b (row-1) 1 2
+  if is_valid_merge_horizontal b (row-1) 0 1
+  || is_valid_merge_horizontal b (row-1) 1 2
   || is_valid_merge_horizontal b (row-1) 2 3
   then true else is_valid_move_right b (row-1) col
 
@@ -68,7 +69,8 @@ let rec is_valid_move_up b row col =
   || b.(3).(col-1) <> None) then true
   else if b.(0).(col-1) <> None && b.(1).(col-1) <> None
   && b.(2).(col-1) = None && b.(3).(col-1) <> None then true
-  else if is_valid_merge_vertical b (col-1) 0 1 || is_valid_merge_vertical b (col-1) 1 2
+  else if is_valid_merge_vertical b (col-1) 0 1
+  || is_valid_merge_vertical b (col-1) 1 2
   || is_valid_merge_vertical b (col-1) 2 3
   then true else is_valid_move_up b row (col-1)
 
@@ -80,7 +82,8 @@ let rec is_valid_move_down b row col =
   || b.(0).(col-1) <> None) then true
   else if b.(3).(col-1) <> None && b.(2).(col-1) <> None && b.(1).(col-1) = None
   && b.(0).(col-1) <> None then true
-  else if is_valid_merge_vertical b (col-1) 0 1 || is_valid_merge_vertical b (col-1) 1 2
+  else if is_valid_merge_vertical b (col-1) 0 1
+  || is_valid_merge_vertical b (col-1) 1 2
   || is_valid_merge_vertical b (col-1) 2 3
   then true else is_valid_move_down b row (col-1)
 
