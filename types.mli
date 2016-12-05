@@ -29,9 +29,17 @@ type state = {
   b: board;
 }
 
+(* movePair defines a 2-tup of two consecutive moves *)
 type movePair = move * move
+
+(*score_to_moves defines a list of score-movePair 2-tups.
+ * [score] is the resulting score of moving the two 
+ * moves in [movePair] *)
 type score_to_moves = (score * movePair) list
 
+(* staticState defines a static state in time, consisting
+ * of the current evil boolean flag, score (int ref), and
+  * static board. *)
 type staticState = {
   e: bool;
   score: score;
