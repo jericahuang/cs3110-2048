@@ -1,4 +1,4 @@
-##Build and run instructions
+## Build and run instructions
 
 1. cd into the project directory. 
 2. Install js_of_ocaml by running 
